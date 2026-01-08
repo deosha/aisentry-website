@@ -74,6 +74,7 @@
                         <ul class="docs-nav-items">
                             <li><a href="#architecture">Overview</a></li>
                             <li><a href="#static-analysis">Static Analysis</a></li>
+                            <li><a href="#security-audit">Security Posture Audit</a></li>
                             <li><a href="#live-testing">Live Testing</a></li>
                             <li><a href="#confidence-scoring">Confidence Scoring</a></li>
                         </ul>
@@ -753,6 +754,43 @@ def access_file(llm_output):
                     </ul>
                 </section>
 
+                <!-- Security Posture Audit -->
+                <section id="security-audit">
+                    <h2>Security Posture Audit</h2>
+                    <p>
+                        The security posture audit evaluates your codebase against 35 security controls
+                        across 6 categories, providing a maturity-based assessment of your AI security posture.
+                    </p>
+
+                    <h3>Control Categories</h3>
+                    <ul>
+                        <li><strong>Prompt Security (6 controls):</strong> Input validation, sanitization, injection prevention, template security</li>
+                        <li><strong>Model Security (6 controls):</strong> Access control, versioning, integrity checks, secure loading</li>
+                        <li><strong>Data Privacy (6 controls):</strong> PII detection, data encryption, retention policies, anonymization</li>
+                        <li><strong>OWASP LLM Top 10 (6 controls):</strong> Coverage of OWASP LLM security categories</li>
+                        <li><strong>Blue Team (5 controls):</strong> Logging, monitoring, alerting, incident response</li>
+                        <li><strong>Governance (6 controls):</strong> Policies, compliance, documentation, auditing</li>
+                    </ul>
+
+                    <h3>Maturity Levels</h3>
+                    <ul>
+                        <li><strong>Initial (0-20%):</strong> Ad-hoc security practices, minimal controls</li>
+                        <li><strong>Developing (20-40%):</strong> Basic controls emerging, inconsistent application</li>
+                        <li><strong>Defined (40-60%):</strong> Documented practices, consistent implementation</li>
+                        <li><strong>Managed (60-80%):</strong> Measured and controlled, continuous improvement</li>
+                        <li><strong>Optimizing (80-100%):</strong> Industry-leading practices, proactive security</li>
+                    </ul>
+
+                    <h3>HTML Report Features</h3>
+                    <ul>
+                        <li><strong>Tabbed Interface:</strong> Vulnerabilities and Security Posture in separate tabs</li>
+                        <li><strong>Dark Mode:</strong> Toggle between light and dark themes</li>
+                        <li><strong>Severity Filtering:</strong> Filter findings by Critical, High, Medium, Low</li>
+                        <li><strong>Pagination:</strong> "Show More" button for large result sets</li>
+                        <li><strong>Combined Scoring:</strong> Vulnerability score + Security posture score</li>
+                    </ul>
+                </section>
+
                 <!-- Live Testing -->
                 <section id="live-testing">
                     <h2>Live Testing Pipeline</h2>
@@ -823,8 +861,32 @@ Options:
   -s, --severity LEVEL    Minimum severity: critical, high, medium, low, info
   -c, --confidence FLOAT  Minimum confidence threshold (0.0-1.0, default: 0.7)
   --category TEXT         Filter by OWASP category (LLM01-LLM10)
+  --audit / --no-audit    Include security posture audit in HTML reports (default: --audit)
   -v, --verbose           Verbose output
   --help                  Show help message</code></pre>
+
+                    <h3>Audit Command</h3>
+                    <pre><code>ai-security-cli audit &lt;path&gt; [OPTIONS]
+
+Arguments:
+  path                    Path to audit (file or directory)
+
+Options:
+  -o, --output FORMAT     Output format: text, json, html (default: text)
+  -f, --output-file PATH  Write output to file
+  -v, --verbose           Verbose output
+  --help                  Show help message
+
+Security Control Categories (35 total):
+  • Prompt Security       - Input validation, injection prevention
+  • Model Security        - Model access, versioning, monitoring
+  • Data Privacy          - PII handling, data encryption, retention
+  • OWASP LLM Top 10      - Coverage of all 10 OWASP categories
+  • Blue Team             - Logging, alerting, incident response
+  • Governance            - Policies, compliance, documentation
+
+Maturity Levels:
+  Initial → Developing → Defined → Managed → Optimizing</code></pre>
 
                     <h3>Test Command</h3>
                     <pre><code>ai-security-cli test [OPTIONS]

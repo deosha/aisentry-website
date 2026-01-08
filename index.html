@@ -182,86 +182,112 @@
                     <!-- Connector line from main to split -->
                     <line x1="450" y1="70" x2="450" y2="100" stroke="#f97316" stroke-width="2"/>
 
-                    <!-- Split lines -->
-                    <path d="M 450 100 L 450 110 L 225 110 L 225 130" stroke="#f97316" stroke-width="2" fill="none" marker-end="url(#arrowOrange)"/>
-                    <path d="M 450 100 L 450 110 L 675 110 L 675 130" stroke="#f97316" stroke-width="2" fill="none" marker-end="url(#arrowOrange)"/>
+                    <!-- Split lines - three way -->
+                    <path d="M 450 100 L 450 110 L 150 110 L 150 130" stroke="#f97316" stroke-width="2" fill="none" marker-end="url(#arrowOrange)"/>
+                    <path d="M 450 100 L 450 130" stroke="#f97316" stroke-width="2" fill="none" marker-end="url(#arrowOrange)"/>
+                    <path d="M 450 100 L 450 110 L 750 110 L 750 130" stroke="#f97316" stroke-width="2" fill="none" marker-end="url(#arrowOrange)"/>
 
                     <!-- SCAN Command Box -->
-                    <rect x="100" y="140" width="250" height="60" rx="10" fill="white" stroke="#f97316" stroke-width="2" filter="url(#cardShadow)"/>
-                    <text x="225" y="165" text-anchor="middle" fill="#ea580c" font-family="JetBrains Mono, monospace" font-weight="600" font-size="14">ai-security-cli scan</text>
-                    <text x="225" y="185" text-anchor="middle" fill="#6b7280" font-family="Inter, sans-serif" font-size="12">Static Analysis</text>
+                    <rect x="25" y="140" width="250" height="60" rx="10" fill="white" stroke="#f97316" stroke-width="2" filter="url(#cardShadow)"/>
+                    <text x="150" y="165" text-anchor="middle" fill="#ea580c" font-family="JetBrains Mono, monospace" font-weight="600" font-size="14">ai-security-cli scan</text>
+                    <text x="150" y="185" text-anchor="middle" fill="#6b7280" font-family="Inter, sans-serif" font-size="12">Static Analysis</text>
+
+                    <!-- AUDIT Command Box (NEW) -->
+                    <rect x="325" y="140" width="250" height="60" rx="10" fill="white" stroke="#c2410c" stroke-width="2" filter="url(#cardShadow)"/>
+                    <text x="450" y="165" text-anchor="middle" fill="#ea580c" font-family="JetBrains Mono, monospace" font-weight="600" font-size="14">ai-security-cli audit</text>
+                    <text x="450" y="185" text-anchor="middle" fill="#6b7280" font-family="Inter, sans-serif" font-size="12">Security Posture</text>
 
                     <!-- TEST Command Box -->
-                    <rect x="550" y="140" width="250" height="60" rx="10" fill="white" stroke="#fb923c" stroke-width="2" filter="url(#cardShadow)"/>
-                    <text x="675" y="165" text-anchor="middle" fill="#ea580c" font-family="JetBrains Mono, monospace" font-weight="600" font-size="14">ai-security-cli test</text>
-                    <text x="675" y="185" text-anchor="middle" fill="#6b7280" font-family="Inter, sans-serif" font-size="12">Live Testing</text>
+                    <rect x="625" y="140" width="250" height="60" rx="10" fill="white" stroke="#fb923c" stroke-width="2" filter="url(#cardShadow)"/>
+                    <text x="750" y="165" text-anchor="middle" fill="#ea580c" font-family="JetBrains Mono, monospace" font-weight="600" font-size="14">ai-security-cli test</text>
+                    <text x="750" y="185" text-anchor="middle" fill="#6b7280" font-family="Inter, sans-serif" font-size="12">Live Testing</text>
 
                     <!-- Arrows to detector boxes -->
-                    <line x1="225" y1="200" x2="225" y2="230" stroke="#f97316" stroke-width="2" marker-end="url(#arrowOrange)"/>
-                    <line x1="675" y1="200" x2="675" y2="230" stroke="#fb923c" stroke-width="2" marker-end="url(#arrowOrange)"/>
+                    <line x1="150" y1="200" x2="150" y2="230" stroke="#f97316" stroke-width="2" marker-end="url(#arrowOrange)"/>
+                    <line x1="450" y1="200" x2="450" y2="230" stroke="#c2410c" stroke-width="2" marker-end="url(#arrowOrange)"/>
+                    <line x1="750" y1="200" x2="750" y2="230" stroke="#fb923c" stroke-width="2" marker-end="url(#arrowOrange)"/>
 
                     <!-- 10 OWASP Detectors Box -->
-                    <rect x="50" y="240" width="350" height="200" rx="12" fill="white" stroke="#e5e7eb" stroke-width="1" filter="url(#cardShadow)"/>
-                    <rect x="50" y="240" width="350" height="36" rx="12" fill="url(#orangeMainGradient)"/>
-                    <text x="225" y="264" text-anchor="middle" fill="white" font-family="Inter, sans-serif" font-weight="600" font-size="14">10 OWASP Detectors</text>
+                    <rect x="0" y="240" width="280" height="200" rx="12" fill="white" stroke="#e5e7eb" stroke-width="1" filter="url(#cardShadow)"/>
+                    <rect x="0" y="240" width="280" height="36" rx="12" fill="url(#orangeMainGradient)"/>
+                    <text x="140" y="264" text-anchor="middle" fill="white" font-family="Inter, sans-serif" font-weight="600" font-size="13">10 OWASP Detectors</text>
 
-                    <!-- Detector list - left column -->
-                    <text x="80" y="300" fill="#4b5563" font-family="Inter, sans-serif" font-size="12">• Prompt Injection</text>
-                    <text x="80" y="322" fill="#4b5563" font-family="Inter, sans-serif" font-size="12">• Insecure Output</text>
-                    <text x="80" y="344" fill="#4b5563" font-family="Inter, sans-serif" font-size="12">• Training Poisoning</text>
-                    <text x="80" y="366" fill="#4b5563" font-family="Inter, sans-serif" font-size="12">• Model DoS</text>
-                    <text x="80" y="388" fill="#4b5563" font-family="Inter, sans-serif" font-size="12">• Supply Chain</text>
+                    <!-- Detector list -->
+                    <text x="20" y="295" fill="#4b5563" font-family="Inter, sans-serif" font-size="11">• Prompt Injection</text>
+                    <text x="20" y="315" fill="#4b5563" font-family="Inter, sans-serif" font-size="11">• Insecure Output</text>
+                    <text x="20" y="335" fill="#4b5563" font-family="Inter, sans-serif" font-size="11">• Training Poisoning</text>
+                    <text x="20" y="355" fill="#4b5563" font-family="Inter, sans-serif" font-size="11">• Model DoS</text>
+                    <text x="20" y="375" fill="#4b5563" font-family="Inter, sans-serif" font-size="11">• Supply Chain</text>
+                    <text x="150" y="295" fill="#4b5563" font-family="Inter, sans-serif" font-size="11">• Secrets Exposure</text>
+                    <text x="150" y="315" fill="#4b5563" font-family="Inter, sans-serif" font-size="11">• Insecure Plugins</text>
+                    <text x="150" y="335" fill="#4b5563" font-family="Inter, sans-serif" font-size="11">• Excessive Agency</text>
+                    <text x="150" y="355" fill="#4b5563" font-family="Inter, sans-serif" font-size="11">• Overreliance</text>
+                    <text x="150" y="375" fill="#4b5563" font-family="Inter, sans-serif" font-size="11">• Model Theft</text>
 
-                    <!-- Detector list - right column -->
-                    <text x="240" y="300" fill="#4b5563" font-family="Inter, sans-serif" font-size="12">• Secrets Exposure</text>
-                    <text x="240" y="322" fill="#4b5563" font-family="Inter, sans-serif" font-size="12">• Insecure Plugins</text>
-                    <text x="240" y="344" fill="#4b5563" font-family="Inter, sans-serif" font-size="12">• Excessive Agency</text>
-                    <text x="240" y="366" fill="#4b5563" font-family="Inter, sans-serif" font-size="12">• Overreliance</text>
-                    <text x="240" y="388" fill="#4b5563" font-family="Inter, sans-serif" font-size="12">• Model Theft</text>
+                    <!-- 35 Security Controls Box (AUDIT - NEW) -->
+                    <rect x="310" y="240" width="280" height="200" rx="12" fill="white" stroke="#e5e7eb" stroke-width="1" filter="url(#cardShadow)"/>
+                    <rect x="310" y="240" width="280" height="36" rx="12" fill="url(#orangeDarkGradient)"/>
+                    <text x="450" y="264" text-anchor="middle" fill="white" font-family="Inter, sans-serif" font-weight="600" font-size="13">35 Security Controls</text>
+
+                    <!-- Control categories -->
+                    <text x="330" y="295" fill="#4b5563" font-family="Inter, sans-serif" font-size="11">• Prompt Security</text>
+                    <text x="330" y="315" fill="#4b5563" font-family="Inter, sans-serif" font-size="11">• Model Security</text>
+                    <text x="330" y="335" fill="#4b5563" font-family="Inter, sans-serif" font-size="11">• Data Privacy</text>
+                    <text x="460" y="295" fill="#4b5563" font-family="Inter, sans-serif" font-size="11">• OWASP LLM</text>
+                    <text x="460" y="315" fill="#4b5563" font-family="Inter, sans-serif" font-size="11">• Blue Team</text>
+                    <text x="460" y="335" fill="#4b5563" font-family="Inter, sans-serif" font-size="11">• Governance</text>
+                    <text x="330" y="375" fill="#9ca3af" font-family="Inter, sans-serif" font-size="10">Maturity Scoring:</text>
+                    <text x="330" y="395" fill="#4b5563" font-family="Inter, sans-serif" font-size="10">Initial → Developing → Defined</text>
+                    <text x="330" y="412" fill="#4b5563" font-family="Inter, sans-serif" font-size="10">→ Managed → Optimizing</text>
 
                     <!-- 11 Attack Vectors Box -->
-                    <rect x="500" y="240" width="350" height="200" rx="12" fill="white" stroke="#e5e7eb" stroke-width="1" filter="url(#cardShadow)"/>
-                    <rect x="500" y="240" width="350" height="36" rx="12" fill="url(#orangeLightGradient)"/>
-                    <text x="675" y="264" text-anchor="middle" fill="white" font-family="Inter, sans-serif" font-weight="600" font-size="14">11 Attack Vectors</text>
+                    <rect x="620" y="240" width="280" height="200" rx="12" fill="white" stroke="#e5e7eb" stroke-width="1" filter="url(#cardShadow)"/>
+                    <rect x="620" y="240" width="280" height="36" rx="12" fill="url(#orangeLightGradient)"/>
+                    <text x="760" y="264" text-anchor="middle" fill="white" font-family="Inter, sans-serif" font-weight="600" font-size="13">11 Attack Vectors</text>
 
-                    <!-- Attack list - left column -->
-                    <text x="530" y="300" fill="#4b5563" font-family="Inter, sans-serif" font-size="12">• Prompt Injection</text>
-                    <text x="530" y="322" fill="#4b5563" font-family="Inter, sans-serif" font-size="12">• Jailbreak</text>
-                    <text x="530" y="344" fill="#4b5563" font-family="Inter, sans-serif" font-size="12">• Data Leakage</text>
-                    <text x="530" y="366" fill="#4b5563" font-family="Inter, sans-serif" font-size="12">• Hallucination</text>
-                    <text x="530" y="388" fill="#4b5563" font-family="Inter, sans-serif" font-size="12">• Model Extraction</text>
-                    <text x="530" y="410" fill="#4b5563" font-family="Inter, sans-serif" font-size="12">• Bias Detection</text>
-
-                    <!-- Attack list - right column -->
-                    <text x="690" y="300" fill="#4b5563" font-family="Inter, sans-serif" font-size="12">• DoS</text>
-                    <text x="690" y="322" fill="#4b5563" font-family="Inter, sans-serif" font-size="12">• Supply Chain</text>
-                    <text x="690" y="344" fill="#4b5563" font-family="Inter, sans-serif" font-size="12">• Adversarial Inputs</text>
-                    <text x="690" y="366" fill="#4b5563" font-family="Inter, sans-serif" font-size="12">• Output Manipulation</text>
-                    <text x="690" y="388" fill="#4b5563" font-family="Inter, sans-serif" font-size="12">• Behavioral Anomaly</text>
+                    <!-- Attack list -->
+                    <text x="640" y="295" fill="#4b5563" font-family="Inter, sans-serif" font-size="11">• Prompt Injection</text>
+                    <text x="640" y="315" fill="#4b5563" font-family="Inter, sans-serif" font-size="11">• Jailbreak</text>
+                    <text x="640" y="335" fill="#4b5563" font-family="Inter, sans-serif" font-size="11">• Data Leakage</text>
+                    <text x="640" y="355" fill="#4b5563" font-family="Inter, sans-serif" font-size="11">• Hallucination</text>
+                    <text x="640" y="375" fill="#4b5563" font-family="Inter, sans-serif" font-size="11">• Model Extraction</text>
+                    <text x="640" y="395" fill="#4b5563" font-family="Inter, sans-serif" font-size="11">• Bias Detection</text>
+                    <text x="770" y="295" fill="#4b5563" font-family="Inter, sans-serif" font-size="11">• DoS</text>
+                    <text x="770" y="315" fill="#4b5563" font-family="Inter, sans-serif" font-size="11">• Supply Chain</text>
+                    <text x="770" y="335" fill="#4b5563" font-family="Inter, sans-serif" font-size="11">• Adversarial</text>
+                    <text x="770" y="355" fill="#4b5563" font-family="Inter, sans-serif" font-size="11">• Output Manip.</text>
+                    <text x="770" y="375" fill="#4b5563" font-family="Inter, sans-serif" font-size="11">• Behavioral</text>
 
                     <!-- Arrows to result boxes -->
-                    <line x1="225" y1="440" x2="225" y2="470" stroke="#f97316" stroke-width="2" marker-end="url(#arrowOrange)"/>
-                    <line x1="675" y1="440" x2="675" y2="470" stroke="#fb923c" stroke-width="2" marker-end="url(#arrowOrange)"/>
+                    <line x1="140" y1="440" x2="140" y2="470" stroke="#f97316" stroke-width="2" marker-end="url(#arrowOrange)"/>
+                    <line x1="450" y1="440" x2="450" y2="470" stroke="#c2410c" stroke-width="2" marker-end="url(#arrowOrange)"/>
+                    <line x1="760" y1="440" x2="760" y2="470" stroke="#fb923c" stroke-width="2" marker-end="url(#arrowOrange)"/>
 
                     <!-- Code Vulnerabilities Box -->
-                    <rect x="75" y="480" width="300" height="50" rx="8" fill="white" stroke="#f97316" stroke-width="1" filter="url(#cardShadow)"/>
-                    <text x="225" y="500" text-anchor="middle" fill="#ea580c" font-family="Inter, sans-serif" font-weight="600" font-size="13">Code Vulnerabilities</text>
-                    <text x="225" y="518" text-anchor="middle" fill="#9ca3af" font-family="Inter, sans-serif" font-size="11">Found in your codebase</text>
+                    <rect x="15" y="480" width="250" height="50" rx="8" fill="white" stroke="#f97316" stroke-width="1" filter="url(#cardShadow)"/>
+                    <text x="140" y="500" text-anchor="middle" fill="#ea580c" font-family="Inter, sans-serif" font-weight="600" font-size="12">Code Vulnerabilities</text>
+                    <text x="140" y="516" text-anchor="middle" fill="#9ca3af" font-family="Inter, sans-serif" font-size="10">Found in your codebase</text>
+
+                    <!-- Security Posture Box (NEW) -->
+                    <rect x="325" y="480" width="250" height="50" rx="8" fill="white" stroke="#c2410c" stroke-width="1" filter="url(#cardShadow)"/>
+                    <text x="450" y="500" text-anchor="middle" fill="#ea580c" font-family="Inter, sans-serif" font-weight="600" font-size="12">Security Posture Score</text>
+                    <text x="450" y="516" text-anchor="middle" fill="#9ca3af" font-family="Inter, sans-serif" font-size="10">Maturity level assessment</text>
 
                     <!-- Model Vulnerabilities Box -->
-                    <rect x="525" y="480" width="300" height="50" rx="8" fill="white" stroke="#fb923c" stroke-width="1" filter="url(#cardShadow)"/>
-                    <text x="675" y="500" text-anchor="middle" fill="#ea580c" font-family="Inter, sans-serif" font-weight="600" font-size="13">Model Vulnerabilities</text>
-                    <text x="675" y="518" text-anchor="middle" fill="#9ca3af" font-family="Inter, sans-serif" font-size="11">Found via live probes</text>
+                    <rect x="635" y="480" width="250" height="50" rx="8" fill="white" stroke="#fb923c" stroke-width="1" filter="url(#cardShadow)"/>
+                    <text x="760" y="500" text-anchor="middle" fill="#ea580c" font-family="Inter, sans-serif" font-weight="600" font-size="12">Model Vulnerabilities</text>
+                    <text x="760" y="516" text-anchor="middle" fill="#9ca3af" font-family="Inter, sans-serif" font-size="10">Found via live probes</text>
 
                     <!-- Merge lines to unified report -->
-                    <path d="M 225 530 L 225 550 L 450 550 L 450 565" stroke="#f97316" stroke-width="2" fill="none"/>
-                    <path d="M 675 530 L 675 550 L 450 550" stroke="#f97316" stroke-width="2" fill="none"/>
+                    <path d="M 140 530 L 140 550 L 450 550" stroke="#f97316" stroke-width="2" fill="none"/>
+                    <path d="M 450 530 L 450 550" stroke="#c2410c" stroke-width="2" fill="none"/>
+                    <path d="M 760 530 L 760 550 L 450 550" stroke="#fb923c" stroke-width="2" fill="none"/>
                     <line x1="450" y1="550" x2="450" y2="565" stroke="#f97316" stroke-width="2" marker-end="url(#arrowOrange)"/>
 
                     <!-- Unified Report Box -->
                     <rect x="275" y="575" width="350" height="45" rx="10" fill="url(#orangeDarkGradient)" filter="url(#shadow)"/>
-                    <text x="450" y="595" text-anchor="middle" fill="white" font-family="Inter, sans-serif" font-weight="600" font-size="14">Unified Report</text>
-                    <text x="450" y="612" text-anchor="middle" fill="rgba(255,255,255,0.9)" font-family="JetBrains Mono, monospace" font-size="11">JSON  |  HTML  |  SARIF</text>
+                    <text x="450" y="595" text-anchor="middle" fill="white" font-family="Inter, sans-serif" font-weight="600" font-size="14">Unified Tabbed Report</text>
+                    <text x="450" y="612" text-anchor="middle" fill="rgba(255,255,255,0.9)" font-family="JetBrains Mono, monospace" font-size="11">JSON  |  HTML (Dark Mode)  |  SARIF</text>
                 </svg>
             </div>
 
@@ -272,16 +298,16 @@
                     <div class="stat-label">Static Detectors</div>
                 </div>
                 <div class="stat-card">
+                    <div class="stat-number">35</div>
+                    <div class="stat-label">Security Controls</div>
+                </div>
+                <div class="stat-card">
                     <div class="stat-number">11</div>
                     <div class="stat-label">Live Attack Vectors</div>
                 </div>
                 <div class="stat-card">
                     <div class="stat-number">7</div>
                     <div class="stat-label">LLM Providers</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number">100%</div>
-                    <div class="stat-label">OWASP LLM Coverage</div>
                 </div>
             </div>
         </div>
@@ -363,12 +389,12 @@
                         <div class="step-number">2</div>
                         <div class="step-content">
                             <h4>Scan Your Code</h4>
-                            <p>Static analysis for code vulnerabilities</p>
+                            <p>Static analysis + security posture audit</p>
                             <div class="code-block">
-                                <span class="comment"># Scan a directory</span><br>
+                                <span class="comment"># Scan with audit (tabbed HTML report)</span><br>
                                 <span class="command">ai-security-cli scan</span> ./my-project <span class="flag">-o html</span><br><br>
-                                <span class="comment"># Filter by severity</span><br>
-                                <span class="command">ai-security-cli scan</span> ./src <span class="flag">--severity high</span>
+                                <span class="comment"># Standalone security posture audit</span><br>
+                                <span class="command">ai-security-cli audit</span> ./src <span class="flag">-o html</span>
                             </div>
                         </div>
                     </div>
@@ -402,6 +428,7 @@
 
 <span style="color: var(--success);">✓</span> Analyzed 47 files
 <span style="color: var(--success);">✓</span> Ran 10 OWASP detectors
+<span style="color: var(--success);">✓</span> Evaluated 35 security controls
 
 <span style="color: var(--warning);">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span>
 <span style="color: var(--text-primary);">FINDINGS SUMMARY</span>
@@ -410,11 +437,11 @@
 <span style="color: var(--error);">■ CRITICAL</span>  1   Prompt Injection (LLM01)
 <span style="color: #f97316;">■ HIGH</span>      2   Insecure Output (LLM02)
 <span style="color: var(--warning);">■ MEDIUM</span>    3   Secrets Exposure (LLM06)
-<span style="color: var(--info);">■ LOW</span>       1   Overreliance (LLM09)
 
 <span style="color: var(--text-muted);">─────────────────────────────────────</span>
-<span style="color: var(--text-primary);">Overall Score:</span> <span style="color: var(--warning);">67/100</span>
-<span style="color: var(--text-primary);">Confidence:</span>    <span style="color: var(--success);">0.85</span>
+<span style="color: var(--text-primary);">Vulnerability Score:</span> <span style="color: var(--warning);">67/100</span>
+<span style="color: var(--text-primary);">Security Posture:</span>   <span style="color: var(--success);">72/100</span>
+<span style="color: var(--text-primary);">Maturity Level:</span>     <span style="color: #f97316;">Developing</span>
 
 <span style="color: var(--success);">✓</span> Report saved to <span style="color: var(--accent-primary);">report.html</span>
 </pre>
