@@ -758,18 +758,22 @@ def access_file(llm_output):
                 <section id="security-audit">
                     <h2>Security Posture Audit</h2>
                     <p>
-                        The security posture audit evaluates your codebase against 35 security controls
-                        across 6 categories, providing a maturity-based assessment of your AI security posture.
+                        The security posture audit evaluates your codebase against 61 security controls
+                        across 10 categories, providing a maturity-based assessment of your AI security posture.
                     </p>
 
                     <h3>Control Categories</h3>
                     <ul>
-                        <li><strong>Prompt Security (6 controls):</strong> Input validation, sanitization, injection prevention, template security</li>
-                        <li><strong>Model Security (6 controls):</strong> Access control, versioning, integrity checks, secure loading</li>
-                        <li><strong>Data Privacy (6 controls):</strong> PII detection, data encryption, retention policies, anonymization</li>
-                        <li><strong>OWASP LLM Top 10 (6 controls):</strong> Coverage of OWASP LLM security categories</li>
-                        <li><strong>Blue Team (5 controls):</strong> Logging, monitoring, alerting, incident response</li>
-                        <li><strong>Governance (6 controls):</strong> Policies, compliance, documentation, auditing</li>
+                        <li><strong>Prompt Security (8 controls):</strong> Input validation, sanitization, injection prevention, red teaming</li>
+                        <li><strong>Model Security (8 controls):</strong> Access control, versioning, differential privacy, secure loading</li>
+                        <li><strong>Data Privacy (8 controls):</strong> PII detection, encryption, GDPR compliance, anonymization</li>
+                        <li><strong>OWASP LLM Top 10 (10 controls):</strong> Coverage of OWASP LLM security categories</li>
+                        <li><strong>Blue Team (7 controls):</strong> Logging, monitoring, alerting, drift detection</li>
+                        <li><strong>Governance (5 controls):</strong> Policies, compliance, documentation, auditing</li>
+                        <li><strong>Supply Chain (3 controls):</strong> Dependency scanning, model provenance, integrity verification</li>
+                        <li><strong>Hallucination Mitigation (5 controls):</strong> RAG implementation, confidence scoring, fact checking</li>
+                        <li><strong>Ethical AI (4 controls):</strong> Fairness metrics, explainability, bias testing, model cards</li>
+                        <li><strong>Incident Response (3 controls):</strong> Monitoring integration, audit logging, rollback capability</li>
                     </ul>
 
                     <h3>Maturity Levels</h3>
@@ -877,13 +881,17 @@ Options:
   -v, --verbose           Verbose output
   --help                  Show help message
 
-Security Control Categories (35 total):
-  • Prompt Security       - Input validation, injection prevention
-  • Model Security        - Model access, versioning, monitoring
-  • Data Privacy          - PII handling, data encryption, retention
-  • OWASP LLM Top 10      - Coverage of all 10 OWASP categories
-  • Blue Team             - Logging, alerting, incident response
-  • Governance            - Policies, compliance, documentation
+Security Control Categories (61 total across 10 categories):
+  • Prompt Security (8)   - Input validation, injection prevention, red teaming
+  • Model Security (8)    - Access control, versioning, differential privacy
+  • Data Privacy (8)      - PII handling, encryption, GDPR compliance
+  • OWASP LLM Top 10 (10) - Coverage of all 10 OWASP categories
+  • Blue Team (7)         - Logging, alerting, drift monitoring
+  • Governance (5)        - Policies, compliance, documentation
+  • Supply Chain (3)      - Dependency scanning, model provenance
+  • Hallucination (5)     - RAG, confidence scoring, fact checking
+  • Ethical AI (4)        - Fairness, explainability, bias testing
+  • Incident Response (3) - Monitoring, audit logging, rollback
 
 Maturity Levels:
   Initial → Developing → Defined → Managed → Optimizing</code></pre>
