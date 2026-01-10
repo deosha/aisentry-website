@@ -351,15 +351,15 @@
             <!-- Key Stats -->
             <div class="benchmark-stats">
                 <div class="benchmark-stat">
-                    <div class="benchmark-number">68.5%</div>
+                    <div class="benchmark-number">75.4%</div>
                     <div class="benchmark-label">Precision</div>
                 </div>
                 <div class="benchmark-stat">
-                    <div class="benchmark-number">50.7%</div>
+                    <div class="benchmark-number">63.0%</div>
                     <div class="benchmark-label">Recall</div>
                 </div>
                 <div class="benchmark-stat">
-                    <div class="benchmark-number">58.3%</div>
+                    <div class="benchmark-number">68.7%</div>
                     <div class="benchmark-label">F1 Score</div>
                 </div>
             </div>
@@ -374,19 +374,19 @@
                 <div class="unique-categories">
                     <div class="unique-category">
                         <span class="category-id">LLM01</span>
-                        <span class="category-name">Prompt Injection (60% F1)</span>
+                        <span class="category-name">Prompt Injection (73% F1)</span>
+                    </div>
+                    <div class="unique-category">
+                        <span class="category-id">LLM02</span>
+                        <span class="category-name">Insecure Output (74% F1)</span>
                     </div>
                     <div class="unique-category">
                         <span class="category-id">LLM04</span>
                         <span class="category-name">Model DoS (80% F1)</span>
                     </div>
                     <div class="unique-category">
-                        <span class="category-id">LLM06</span>
-                        <span class="category-name">Sensitive Info (63% F1)</span>
-                    </div>
-                    <div class="unique-category">
-                        <span class="category-id">LLM10</span>
-                        <span class="category-name">Model Theft (44% F1)</span>
+                        <span class="category-id">LLM07</span>
+                        <span class="category-name">Insecure Plugin (93% F1)</span>
                     </div>
                 </div>
                 <p style="margin-top: 12px; font-size: 14px; color: var(--text-muted);">
@@ -561,7 +561,7 @@
             <div class="benchmark-note">
                 <span class="note-icon">📊</span>
                 <div class="note-content">
-                    <strong>Transparency:</strong> Current metrics: <strong>68.5% precision</strong>, <strong>50.7% recall</strong>, <strong>58.3% F1</strong>.
+                    <strong>Transparency:</strong> Current metrics: <strong>75.4% precision</strong>, <strong>63.0% recall</strong>, <strong>68.7% F1</strong>.
                     Outperforms Semgrep (8.2% recall) and Bandit (48.9% F1) on LLM-specific vulnerabilities.
                     Best at detecting Insecure Plugin (85.7%), Sensitive Info (71.4%), and DoS (66.7%).
                 </div>
@@ -823,7 +823,7 @@ open report.html
                 <div class="faq-item" style="background: var(--bg-secondary); padding: 24px; border-radius: 12px; border: 1px solid var(--border-color);">
                     <h4 style="margin: 0 0 12px 0; color: var(--text-primary);">How accurate is the detection?</h4>
                     <p style="margin: 0; color: var(--text-secondary); font-size: 14px; line-height: 1.6;">
-                        Current metrics: <strong>68.5% precision</strong>, <strong>50.7% recall</strong>, <strong>58.3% F1 score</strong>.
+                        Current metrics: <strong>75.4% precision</strong>, <strong>63.0% recall</strong>, <strong>68.7% F1 score</strong>.
                         We outperform Semgrep and Bandit on LLM-specific vulnerabilities. Use <code style="background: var(--bg-primary); padding: 2px 6px; border-radius: 4px;">--mode strict</code> for fewer false positives.
                     </p>
                 </div>
@@ -975,7 +975,7 @@ open report.html
                     <div style="text-align: center; padding: 20px;">
                         <div style="width: 48px; height: 48px; border-radius: 50%; background: var(--success); color: white; display: flex; align-items: center; justify-content: center; margin: 0 auto 12px; font-weight: 600;">✓</div>
                         <h4 style="margin: 0 0 8px 0; color: var(--text-primary); font-size: 14px;">Q1 2026</h4>
-                        <p style="margin: 0; color: var(--text-muted); font-size: 13px;">v1.0 CLI Release<br>10 OWASP Detectors<br>58.3% F1 Score</p>
+                        <p style="margin: 0; color: var(--text-muted); font-size: 13px;">v1.0 CLI Release<br>10 OWASP Detectors<br>68.7% F1 Score</p>
                     </div>
                     <div style="text-align: center; padding: 20px;">
                         <div style="width: 48px; height: 48px; border-radius: 50%; background: var(--accent-primary); color: white; display: flex; align-items: center; justify-content: center; margin: 0 auto 12px; font-weight: 600;">Q2</div>
