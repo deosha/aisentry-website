@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Example Reports - AI Security CLI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
+    <style>
+        .examples-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 120px 24px 80px;
+        }
+        .examples-header {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+        .examples-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 16px;
+        }
+        .examples-header p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+        .example-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+        }
+        .example-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 24px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .example-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.3);
+        }
+        .example-card h3 {
+            margin: 0 0 8px 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .example-card p {
+            color: var(--text-secondary);
+            font-size: 14px;
+            margin: 0 0 16px 0;
+        }
+        .example-meta {
+            display: flex;
+            gap: 16px;
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-bottom: 16px;
+        }
+        .example-links {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .example-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 16px;
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: 13px;
+            transition: background 0.2s;
+        }
+        .example-link:hover {
+            background: var(--accent-primary);
+            color: white;
+        }
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--accent-primary);
+            text-decoration: none;
+            margin-bottom: 24px;
+        }
+        .coming-soon {
+            text-align: center;
+            padding: 48px;
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            border: 1px dashed var(--border-color);
+        }
+        .coming-soon h3 {
+            margin: 0 0 12px 0;
+            color: var(--text-muted);
+        }
+        .coming-soon p {
+            color: var(--text-muted);
+            margin: 0;
+        }
+        .generate-box {
+            background: linear-gradient(135deg, rgba(249, 115, 22, 0.1), rgba(234, 179, 8, 0.1));
+            border: 1px solid rgba(249, 115, 22, 0.3);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 48px;
+        }
+        .generate-box h3 {
+            margin: 0 0 12px 0;
+            color: var(--accent-primary);
+        }
+        .generate-box pre {
+            background: var(--bg-primary);
+            padding: 16px;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-size: 13px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="container">
+            <a href="/" class="nav-logo">
+                <div class="nav-logo-icon">🛡️</div>
+                <span>AI Security CLI</span>
+            </a>
+            <div class="nav-cta">
+                <a href="https://github.com/deosha/ai-security-cli" class="btn btn-ghost" target="_blank">GitHub</a>
+                <a href="https://pypi.org/project/ai-security-cli/" class="btn btn-primary" target="_blank">PyPI</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="examples-container">
+        <a href="/" class="back-link">← Back to Home</a>
+
+        <div class="examples-header">
+            <h1>Example Reports</h1>
+            <p>Sample outputs from real-world scans to help you understand what AI Security CLI produces.</p>
+        </div>
+
+        <!-- Generate Your Own -->
+        <div class="generate-box">
+            <h3>Generate Your Own Reports</h3>
+            <p style="margin: 0 0 16px 0; color: var(--text-secondary);">Try scanning any project to generate reports in multiple formats:</p>
+            <pre><code><span style="color: #6b7280;"># HTML report (interactive, with audit)</span>
+ai-security-cli scan ./your-project -o html -f report.html
+
+<span style="color: #6b7280;"># JSON report (machine-readable)</span>
+ai-security-cli scan ./your-project -o json -f report.json
+
+<span style="color: #6b7280;"># SARIF report (GitHub Code Scanning)</span>
+ai-security-cli scan ./your-project -o sarif -f report.sarif</code></pre>
+        </div>
+
+        <div class="example-grid">
+            <div class="example-card">
+                <h3>📊 LangChain Scan</h3>
+                <p>Static analysis of the LangChain Python library - a popular LLM framework.</p>
+                <div class="example-meta">
+                    <span>2,501 files</span>
+                    <span>268 findings</span>
+                    <span>v0.1.x</span>
+                </div>
+                <div class="example-links">
+                    <a href="langchain-report.html" class="example-link">HTML Report</a>
+                    <a href="langchain-report.json" class="example-link">JSON</a>
+                    <a href="langchain-report.sarif" class="example-link">SARIF</a>
+                </div>
+            </div>
+
+            <div class="example-card">
+                <h3>📊 LlamaIndex Scan</h3>
+                <p>Analysis of LlamaIndex - data framework for LLM applications.</p>
+                <div class="example-meta">
+                    <span>4,088 files</span>
+                    <span>1,454 findings</span>
+                    <span>v0.10.x</span>
+                </div>
+                <div class="example-links">
+                    <a href="llamaindex-report.html" class="example-link">HTML Report</a>
+                    <a href="llamaindex-report.json" class="example-link">JSON</a>
+                    <a href="llamaindex-report.sarif" class="example-link">SARIF</a>
+                </div>
+            </div>
+
+            <div class="example-card">
+                <h3>📊 OpenAI Python SDK</h3>
+                <p>Scan of the official OpenAI Python client library.</p>
+                <div class="example-meta">
+                    <span>1,134 files</span>
+                    <span>60 findings</span>
+                    <span>v1.x</span>
+                </div>
+                <div class="example-links">
+                    <a href="openai-python-report.html" class="example-link">HTML Report</a>
+                    <a href="openai-python-report.json" class="example-link">JSON</a>
+                    <a href="openai-python-report.sarif" class="example-link">SARIF</a>
+                </div>
+            </div>
+
+            <div class="example-card">
+                <h3>🔐 Security Audit Report</h3>
+                <p>Standalone security posture audit showing maturity assessment.</p>
+                <div class="example-meta">
+                    <span>61 controls</span>
+                    <span>10 categories</span>
+                    <span>Maturity scoring</span>
+                </div>
+                <div class="example-links">
+                    <a href="audit-report.html" class="example-link">HTML Report</a>
+                    <a href="audit-report.json" class="example-link">JSON</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="coming-soon" style="margin-top: 48px;">
+            <h3>More Examples Coming Soon</h3>
+            <p>We're adding more sample reports from different project types and configurations.</p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>Built with ❤️ for the AI Security Community</p>
+                <p>© 2025 AI Security CLI. MIT License.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

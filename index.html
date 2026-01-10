@@ -65,6 +65,25 @@
                 <button class="copy-btn" onclick="copyInstall()">Copy</button>
             </div>
 
+            <!-- CI Badges -->
+            <div class="ci-badges" style="display: flex; gap: 8px; justify-content: center; margin-bottom: 24px; flex-wrap: wrap;">
+                <a href="https://pypi.org/project/ai-security-cli/" target="_blank">
+                    <img src="https://img.shields.io/pypi/v/ai-security-cli?color=blue&label=PyPI" alt="PyPI Version">
+                </a>
+                <a href="https://github.com/deosha/ai-security-cli/actions" target="_blank">
+                    <img src="https://img.shields.io/github/actions/workflow/status/deosha/ai-security-cli/test.yml?label=Build" alt="Build Status">
+                </a>
+                <a href="https://github.com/deosha/ai-security-cli" target="_blank">
+                    <img src="https://img.shields.io/badge/coverage-85%25-brightgreen" alt="Coverage">
+                </a>
+                <a href="https://github.com/deosha/ai-security-cli/blob/main/LICENSE" target="_blank">
+                    <img src="https://img.shields.io/badge/license-MIT-green" alt="License">
+                </a>
+                <a href="https://pypi.org/project/ai-security-cli/" target="_blank">
+                    <img src="https://img.shields.io/pypi/pyversions/ai-security-cli" alt="Python Versions">
+                </a>
+            </div>
+
             <div class="hero-links">
                 <a href="https://github.com/deosha/ai-security-cli" class="hero-link" target="_blank">
                     ⭐ Star on GitHub
@@ -527,6 +546,26 @@
                     Actively improving Supply Chain and Insecure Output detection.
                 </div>
             </div>
+
+            <!-- Benchmark Methodology -->
+            <div class="methodology-box" style="margin-top: 32px; padding: 24px; background: rgba(34, 197, 94, 0.1); border: 1px solid rgba(34, 197, 94, 0.3); border-radius: 12px;">
+                <h4 style="margin: 0 0 12px 0; color: var(--success);">Benchmark Methodology</h4>
+                <p style="margin: 0 0 12px 0; color: var(--text-secondary); font-size: 14px;">
+                    All metrics are computed against a <strong>ground truth testbed</strong> with labeled vulnerabilities across 10 OWASP categories.
+                    Results are fully reproducible.
+                </p>
+                <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+                    <a href="https://github.com/deosha/llm-sec-eval" target="_blank" style="display: inline-flex; align-items: center; gap: 6px; color: var(--accent-primary); text-decoration: none; font-size: 14px;">
+                        <span>📁</span> View Testbed & Ground Truth
+                    </a>
+                    <a href="https://github.com/deosha/llm-sec-eval#running-the-evaluation" target="_blank" style="display: inline-flex; align-items: center; gap: 6px; color: var(--accent-primary); text-decoration: none; font-size: 14px;">
+                        <span>🔬</span> Reproduce Results
+                    </a>
+                    <a href="https://github.com/deosha/llm-sec-eval/tree/main/testbed" target="_blank" style="display: inline-flex; align-items: center; gap: 6px; color: var(--accent-primary); text-decoration: none; font-size: 14px;">
+                        <span>🏷️</span> Labels & Annotations
+                    </a>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -586,6 +625,37 @@
                 <h2 class="section-title">Up and Running in Minutes</h2>
                 <p class="section-subtitle">
                     Install, scan, test. It's that simple.
+                </p>
+            </div>
+
+            <!-- Try It Now Box -->
+            <div class="try-it-box" style="background: linear-gradient(135deg, rgba(249, 115, 22, 0.1), rgba(234, 179, 8, 0.1)); border: 1px solid rgba(249, 115, 22, 0.3); border-radius: 12px; padding: 24px; margin-bottom: 48px;">
+                <h3 style="margin: 0 0 16px 0; color: var(--accent-primary);">Try It Now - Scan a Real Project</h3>
+                <p style="margin: 0 0 16px 0; color: var(--text-secondary);">Clone any LLM project and generate reports in seconds:</p>
+                <div class="code-block" style="background: var(--bg-primary); padding: 16px; border-radius: 8px; overflow-x: auto;">
+<pre style="margin: 0; font-family: 'JetBrains Mono', monospace; font-size: 13px; line-height: 1.6;">
+<span class="comment"># Install</span>
+pip install ai-security-cli
+
+<span class="comment"># Clone a sample LLM project</span>
+git clone https://github.com/langchain-ai/langchain.git
+cd langchain
+
+<span class="comment"># Generate HTML report (interactive, with audit)</span>
+ai-security-cli scan ./libs/langchain -o html -f report.html
+
+<span class="comment"># Generate JSON report (for automation)</span>
+ai-security-cli scan ./libs/langchain -o json -f report.json
+
+<span class="comment"># Generate SARIF report (for GitHub Code Scanning)</span>
+ai-security-cli scan ./libs/langchain -o sarif -f report.sarif
+
+<span class="comment"># View the HTML report</span>
+open report.html
+</pre>
+                </div>
+                <p style="margin: 16px 0 0 0; color: var(--text-muted); font-size: 14px;">
+                    See <a href="examples/" style="color: var(--accent-primary);">example reports</a> from real-world scans.
                 </p>
             </div>
 
@@ -712,6 +782,65 @@
         </div>
     </section>
 
+    <!-- FAQ Section -->
+    <section id="faq" class="section section-dark">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">FAQ</span>
+                <h2 class="section-title">Frequently Asked Questions</h2>
+            </div>
+
+            <div class="faq-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 24px; max-width: 1000px; margin: 0 auto;">
+                <div class="faq-item" style="background: var(--bg-secondary); padding: 24px; border-radius: 12px; border: 1px solid var(--border-color);">
+                    <h4 style="margin: 0 0 12px 0; color: var(--text-primary);">What's the difference between scan, audit, and test?</h4>
+                    <p style="margin: 0; color: var(--text-secondary); font-size: 14px; line-height: 1.6;">
+                        <strong>scan</strong> - Static code analysis for OWASP LLM Top 10 vulnerabilities in your source code.<br>
+                        <strong>audit</strong> - Security posture assessment evaluating 61 controls across 10 categories.<br>
+                        <strong>test</strong> - Live runtime testing against actual LLM APIs (prompt injection, jailbreak, etc).
+                    </p>
+                </div>
+
+                <div class="faq-item" style="background: var(--bg-secondary); padding: 24px; border-radius: 12px; border: 1px solid var(--border-color);">
+                    <h4 style="margin: 0 0 12px 0; color: var(--text-primary);">Why is precision only 20%?</h4>
+                    <p style="margin: 0; color: var(--text-secondary); font-size: 14px; line-height: 1.6;">
+                        We optimize for <strong>recall</strong> (catching real vulnerabilities) over precision. Missing a prompt injection is worse than a false positive.
+                        Use <code style="background: var(--bg-primary); padding: 2px 6px; border-radius: 4px;">--mode strict</code> or higher confidence thresholds to reduce false positives.
+                    </p>
+                </div>
+
+                <div class="faq-item" style="background: var(--bg-secondary); padding: 24px; border-radius: 12px; border: 1px solid var(--border-color);">
+                    <h4 style="margin: 0 0 12px 0; color: var(--text-primary);">Does it support languages other than Python?</h4>
+                    <p style="margin: 0; color: var(--text-secondary); font-size: 14px; line-height: 1.6;">
+                        Currently Python-only. JavaScript/TypeScript support is planned. The architecture is extensible — see <a href="https://github.com/deosha/ai-security-cli/blob/main/CONTRIBUTING.md" style="color: var(--accent-primary);">CONTRIBUTING.md</a> if you want to help add new parsers.
+                    </p>
+                </div>
+
+                <div class="faq-item" style="background: var(--bg-secondary); padding: 24px; border-radius: 12px; border: 1px solid var(--border-color);">
+                    <h4 style="margin: 0 0 12px 0; color: var(--text-primary);">Can I use this in CI/CD?</h4>
+                    <p style="margin: 0; color: var(--text-secondary); font-size: 14px; line-height: 1.6;">
+                        Yes! Use <code style="background: var(--bg-primary); padding: 2px 6px; border-radius: 4px;">-o sarif</code> for GitHub Code Scanning, or <code style="background: var(--bg-primary); padding: 2px 6px; border-radius: 4px;">-o json</code> for custom integrations.
+                        See <a href="docs.html#ci-cd" style="color: var(--accent-primary);">CI/CD integration docs</a>.
+                    </p>
+                </div>
+
+                <div class="faq-item" style="background: var(--bg-secondary); padding: 24px; border-radius: 12px; border: 1px solid var(--border-color);">
+                    <h4 style="margin: 0 0 12px 0; color: var(--text-primary);">Is my code sent anywhere?</h4>
+                    <p style="margin: 0; color: var(--text-secondary); font-size: 14px; line-height: 1.6;">
+                        <strong>No.</strong> Static analysis runs 100% locally. Live testing (<code style="background: var(--bg-primary); padding: 2px 6px; border-radius: 4px;">test</code> command) sends prompts to the LLM provider you specify, but never your source code.
+                    </p>
+                </div>
+
+                <div class="faq-item" style="background: var(--bg-secondary); padding: 24px; border-radius: 12px; border: 1px solid var(--border-color);">
+                    <h4 style="margin: 0 0 12px 0; color: var(--text-primary);">How can I contribute?</h4>
+                    <p style="margin: 0; color: var(--text-secondary); font-size: 14px; line-height: 1.6;">
+                        We welcome contributions! Check out our <a href="https://github.com/deosha/ai-security-cli/blob/main/CONTRIBUTING.md" style="color: var(--accent-primary);">CONTRIBUTING.md</a> for guidelines.
+                        Good first issues are labeled <code style="background: var(--bg-primary); padding: 2px 6px; border-radius: 4px;">good-first-issue</code> on GitHub.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
@@ -731,6 +860,7 @@
                             <li><a href="docs.html">Documentation</a></li>
                             <li><a href="docs.html#owasp">OWASP LLM Top 10</a></li>
                             <li><a href="docs.html#cli-reference">CLI Reference</a></li>
+                            <li><a href="examples/">Example Reports</a></li>
                         </ul>
                     </div>
 
@@ -740,6 +870,7 @@
                             <li><a href="https://github.com/deosha/ai-security-cli" target="_blank">GitHub</a></li>
                             <li><a href="https://pypi.org/project/ai-security-cli/" target="_blank">PyPI</a></li>
                             <li><a href="https://github.com/deosha/ai-security-cli/issues" target="_blank">Issues</a></li>
+                            <li><a href="https://github.com/deosha/ai-security-cli/blob/main/CONTRIBUTING.md" target="_blank">Contributing</a></li>
                         </ul>
                     </div>
 
