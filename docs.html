@@ -173,6 +173,9 @@ aisentry scan ./my-project --category LLM01</code></pre>
 
                     <h3>Live Model Testing</h3>
                     <p>Test actual LLM deployments for vulnerabilities:</p>
+                    <p style="background: #fffbeb; border-left: 3px solid #f59e0b; padding: 8px 12px; margin: 12px 0; font-size: 13px; color: #92400e;">
+                        <strong>Note:</strong> For comprehensive live testing, we recommend <a href="https://github.com/NVIDIA/garak" target="_blank" style="color: #b45309;">garak</a> (NVIDIA's LLM vulnerability scanner).
+                    </p>
                     <pre><code># Test OpenAI model
 export OPENAI_API_KEY=sk-...
 aisentry test -p openai -m gpt-4
@@ -1051,6 +1054,29 @@ def access_file(llm_output):
                         and analyzes the responses for vulnerabilities.
                     </p>
 
+                    <!-- Garak Recommendation -->
+                    <div class="owasp-card" style="padding: 16px 20px; margin: 20px 0; border-left: 4px solid #f59e0b; background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);">
+                        <h4 style="margin: 0 0 8px 0; color: #b45309; font-size: 14px;">
+                            Recommendation: Use garak for Comprehensive Live Testing
+                        </h4>
+                        <p style="margin: 0 0 12px 0; color: #92400e; font-size: 13px;">
+                            For comprehensive LLM red-teaming and vulnerability scanning, we recommend
+                            <strong>garak</strong> — NVIDIA's dedicated LLM vulnerability scanner with 100+ probes
+                            across many attack categories and active development.
+                        </p>
+                        <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+                            <a href="https://github.com/NVIDIA/garak" target="_blank"
+                               style="display: inline-flex; align-items: center; gap: 6px; padding: 8px 16px; background: #1f2937; color: white; border-radius: 6px; text-decoration: none; font-size: 13px; font-weight: 500;">
+                                GitHub
+                            </a>
+                            <code style="padding: 8px 16px; background: white; border-radius: 6px; font-size: 13px; border: 1px solid #d1d5db;">pip install garak</code>
+                        </div>
+                        <p style="margin: 12px 0 0 0; color: #78716c; font-size: 12px;">
+                            aisentry's live testing provides basic coverage and is suitable for quick checks.
+                            For thorough security assessments, garak is the industry standard.
+                        </p>
+                    </div>
+
                     <!-- Live Testing Pipeline Diagram -->
                     <div class="owasp-card" style="padding: 24px; margin: 20px 0;">
                         <svg viewBox="0 0 880 400" xmlns="http://www.w3.org/2000/svg" style="width: 100%; max-width: 880px; margin: 0 auto; display: block;">
@@ -1270,6 +1296,9 @@ Maturity Levels:
   Initial → Developing → Defined → Managed → Optimizing</code></pre>
 
                     <h3>Test Command</h3>
+                    <p style="background: #fffbeb; border-left: 3px solid #f59e0b; padding: 8px 12px; margin: 0 0 12px 0; font-size: 13px; color: #92400e;">
+                        <strong>Recommendation:</strong> For comprehensive LLM red-teaming, use <a href="https://github.com/NVIDIA/garak" target="_blank" style="color: #b45309;">garak</a>. aisentry's test command provides basic coverage for quick checks.
+                    </p>
                     <pre><code>aisentry test [OPTIONS]
 
 Options:
