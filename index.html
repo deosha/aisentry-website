@@ -690,12 +690,12 @@ open report.html
                         <div class="step-number">3</div>
                         <div class="step-content">
                             <h4>Test Live Models</h4>
-                            <p>Runtime testing against actual LLMs</p>
+                            <p>For runtime testing, use <a href="https://github.com/leondz/garak" target="_blank" style="color: var(--accent-primary);">Garak</a></p>
                             <div class="code-block">
-                                <span class="comment"># Test OpenAI model</span><br>
-                                <span class="command">ai-security-cli test</span> <span class="flag">-p openai -m gpt-4</span><br><br>
-                                <span class="comment"># Test local Ollama model</span><br>
-                                <span class="command">ai-security-cli test</span> <span class="flag">-p ollama -m llama2</span>
+                                <span class="comment"># Install Garak (NVIDIA's LLM vulnerability scanner)</span><br>
+                                <span class="command">pip install</span> garak<br><br>
+                                <span class="comment"># Run probes against a model</span><br>
+                                <span class="command">garak</span> <span class="flag">--model_type openai --model_name gpt-4</span>
                             </div>
                         </div>
                     </div>
@@ -792,11 +792,11 @@ open report.html
 
             <div class="faq-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 24px; max-width: 1000px; margin: 0 auto;">
                 <div class="faq-item" style="background: var(--bg-secondary); padding: 24px; border-radius: 12px; border: 1px solid var(--border-color);">
-                    <h4 style="margin: 0 0 12px 0; color: var(--text-primary);">What's the difference between scan, audit, and test?</h4>
+                    <h4 style="margin: 0 0 12px 0; color: var(--text-primary);">What's the difference between scan and audit?</h4>
                     <p style="margin: 0; color: var(--text-secondary); font-size: 14px; line-height: 1.6;">
                         <strong>scan</strong> - Static code analysis for OWASP LLM Top 10 vulnerabilities in your source code.<br>
                         <strong>audit</strong> - Security posture assessment evaluating 61 controls across 10 categories.<br>
-                        <strong>test</strong> - Live runtime testing against actual LLM APIs (prompt injection, jailbreak, etc).
+                        For live runtime testing, we recommend <a href="https://github.com/leondz/garak" style="color: var(--accent-primary);">Garak</a>.
                     </p>
                 </div>
 
@@ -826,7 +826,7 @@ open report.html
                 <div class="faq-item" style="background: var(--bg-secondary); padding: 24px; border-radius: 12px; border: 1px solid var(--border-color);">
                     <h4 style="margin: 0 0 12px 0; color: var(--text-primary);">Is my code sent anywhere?</h4>
                     <p style="margin: 0; color: var(--text-secondary); font-size: 14px; line-height: 1.6;">
-                        <strong>No.</strong> Static analysis runs 100% locally. Live testing (<code style="background: var(--bg-primary); padding: 2px 6px; border-radius: 4px;">test</code> command) sends prompts to the LLM provider you specify, but never your source code.
+                        <strong>No.</strong> All analysis runs 100% locally. Your source code never leaves your machine.
                     </p>
                 </div>
 
