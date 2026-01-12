@@ -77,6 +77,7 @@
                             <li><a href="#security-audit">Security Posture Audit</a></li>
                             <li><a href="#live-testing">Live Testing</a></li>
                             <li><a href="#confidence-scoring">Confidence Scoring</a></li>
+                            <li><a href="#fp-reduction">False Positive Reduction</a></li>
                         </ul>
                     </div>
 
@@ -1240,6 +1241,175 @@ def access_file(llm_output):
                         Final confidence scores range from 0.0 to 1.0, with findings below the threshold
                         (default: 0.7) being filtered out to reduce noise.
                     </p>
+                </section>
+
+                <!-- False Positive Reduction -->
+                <section id="fp-reduction">
+                    <h2>False Positive Reduction</h2>
+                    <p>
+                        aisentry includes an ML-trained ensemble system that automatically filters common false positives,
+                        achieving 88% accuracy on labeled datasets. The system uses a three-tier approach combining
+                        rule-based heuristics, machine learning classification, and optional LLM verification.
+                    </p>
+
+                    <h3>Architecture</h3>
+                    <pre><code>                    FP Reduction Pipeline (Ensemble Approach)
+ ============================================================================
+
+                         +------------------+
+                         |   Raw Findings   |
+                         |   from Scanner   |
+                         +--------+---------+
+                                  |
+                                  v
+ +----------------------------------------------------------------------------+
+ |                         TIER 1: HEURISTICS                                 |
+ |                         (Always Active)                                    |
+ +----------------------------------------------------------------------------+
+ |                                                                            |
+ |   +------------------+    +------------------+    +------------------+      |
+ |   |  model.eval()    |    |  session.exec()  |    |  Base64 Images   |     |
+ |   |  (PyTorch mode,  |    |  (SQLAlchemy,    |    |  (data:image/,   |     |
+ |   |   not eval())    |    |   not exec())    |    |   not API keys)  |     |
+ |   +------------------+    +------------------+    +------------------+      |
+ |                                                                            |
+ |   +------------------+    +------------------+    +------------------+      |
+ |   | Placeholder Keys |    |  Test/Doc Files  |    | Known Patterns   |     |
+ |   | (YOUR_API_KEY,   |    | (reduced weight, |    | (safe function   |     |
+ |   |  sk-xxx...xxx)   |    |  not production) |    |  calls, etc.)    |     |
+ |   +------------------+    +------------------+    +------------------+      |
+ |                                                                            |
+ +----------------------------------------------------------------------------+
+                                  |
+                                  | Heuristic Score (0-40%)
+                                  v
+ +----------------------------------------------------------------------------+
+ |                      TIER 2: ML CLASSIFIER                                 |
+ |                      (Optional, requires scikit-learn)                     |
+ +----------------------------------------------------------------------------+
+ |                                                                            |
+ |   Input Features:                     RandomForest Classifier:             |
+ |   +------------------------+          +------------------------+           |
+ |   | - is_test_file         |          |  1000 labeled samples  |           |
+ |   | - is_example_file      |   -----> |  583 TPs, 417 FPs      |           |
+ |   | - file_path patterns   |          |  Top features:         |           |
+ |   | - code_snippet context |          |   - static_confidence  |           |
+ |   | - detector type        |          |   - detector patterns  |           |
+ |   | - severity level       |          |   - file context       |           |
+ |   +------------------------+          +------------------------+           |
+ |                                                                            |
+ +----------------------------------------------------------------------------+
+                                  |
+                                  | ML Score (0-40%)
+                                  v
+ +----------------------------------------------------------------------------+
+ |                      TIER 3: LLM VERIFICATION                              |
+ |                      (Optional, HIGH/CRITICAL only)                        |
+ +----------------------------------------------------------------------------+
+ |                                                                            |
+ |   +------------------------------------------------------------------+     |
+ |   |  Claude analyzes finding context and determines if it's a real   |     |
+ |   |  vulnerability. Only invoked for findings above LLM threshold.   |     |
+ |   +------------------------------------------------------------------+     |
+ |                                                                            |
+ +----------------------------------------------------------------------------+
+                                  |
+                                  | LLM Score (0-20%)
+                                  v
+                         +------------------+
+                         | Weighted Score   |
+                         | Heuristic: 40%   |
+                         | ML: 40%          |
+                         | LLM: 20%         |
+                         +--------+---------+
+                                  |
+                    +-------------+-------------+
+                    |                           |
+              Score > 0.5                 Score <= 0.5
+                    |                           |
+                    v                           v
+            +---------------+           +---------------+
+            |     KEEP      |           |    FILTER     |
+            | (True Pos.)   |           | (False Pos.)  |
+            +---------------+           +---------------+</code></pre>
+
+                    <h3>Common False Positive Patterns</h3>
+                    <div class="owasp-card" style="margin-bottom: 16px;">
+                        <h4 style="margin-top: 0;">PyTorch model.eval()</h4>
+                        <p style="margin: 8px 0;">
+                            <code>model.eval()</code> in PyTorch sets the model to evaluation mode - it's NOT Python's dangerous <code>eval()</code> function.
+                            The heuristic checks for <code>torch</code> imports and model context.
+                        </p>
+                        <pre style="margin: 0;"><code># FALSE POSITIVE - PyTorch evaluation mode
+model = torch.nn.Linear(10, 5)
+model.eval()  # Safe: sets model to eval mode, not eval()</code></pre>
+                    </div>
+
+                    <div class="owasp-card" style="margin-bottom: 16px;">
+                        <h4 style="margin-top: 0;">SQLAlchemy session.exec()</h4>
+                        <p style="margin: 8px 0;">
+                            <code>session.exec()</code> in SQLAlchemy/SQLModel executes queries - it's NOT Python's dangerous <code>exec()</code>.
+                            The heuristic checks for ORM session patterns.
+                        </p>
+                        <pre style="margin: 0;"><code># FALSE POSITIVE - SQLAlchemy query execution
+results = session.exec(select(User).where(User.id == 1))  # Safe</code></pre>
+                    </div>
+
+                    <div class="owasp-card" style="margin-bottom: 16px;">
+                        <h4 style="margin-top: 0;">Base64 Image Data</h4>
+                        <p style="margin: 8px 0;">
+                            Long base64-encoded strings that match API key entropy patterns are often embedded images, not leaked credentials.
+                        </p>
+                        <pre style="margin: 0;"><code># FALSE POSITIVE - Base64 encoded image
+img = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUg..."  # Safe</code></pre>
+                    </div>
+
+                    <div class="owasp-card" style="margin-bottom: 16px;">
+                        <h4 style="margin-top: 0;">Placeholder API Keys</h4>
+                        <p style="margin: 8px 0;">
+                            Documentation and example code often contains placeholder keys that aren't real credentials.
+                        </p>
+                        <pre style="margin: 0;"><code># FALSE POSITIVE - Placeholder values
+api_key = "YOUR_API_KEY_HERE"           # Safe: placeholder
+api_key = "sk-xxxxxxxxxxxxxxxxxxxxxxx"  # Safe: redacted format</code></pre>
+                    </div>
+
+                    <h3>Installation</h3>
+                    <p>
+                        The rule-based heuristics are always active. For ML-based classification, install the optional dependency:
+                    </p>
+                    <pre><code># Install with ML-based false positive reduction
+pip install aisentry[ml]</code></pre>
+
+                    <h3>CLI Flags</h3>
+                    <pre><code># Use ML model for FP reduction (requires aisentry[ml])
+aisentry scan ./project --use-ml
+
+# Disable all FP reduction (raw findings)
+aisentry scan ./project --no-fp-filter
+
+# Custom FP threshold (default: 0.4)
+aisentry scan ./project --fp-threshold 0.5</code></pre>
+
+                    <h3>Training Custom Models</h3>
+                    <p>
+                        You can train custom FP reduction models on your own labeled data for better accuracy on your specific codebase patterns.
+                    </p>
+                    <pre><code># Training data format (training_data.json)
+[
+  {
+    "finding": { "file_path": "...", "description": "...", ... },
+    "label": "TP"  # or "FP"
+  },
+  ...
+]
+
+# Train via Python API
+from aisentry.fp_reducer import FPReducer
+
+reducer = FPReducer(use_ml=True)
+reducer.train(labeled_findings)
+reducer.save_model("custom_fp_model.pkl")</code></pre>
                 </section>
 
                 <!-- CLI Reference -->

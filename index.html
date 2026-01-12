@@ -326,8 +326,8 @@
                     <div class="stat-label">Security Controls</div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-number">11</div>
-                    <div class="stat-label">Live Attack Vectors</div>
+                    <div class="stat-number">88%</div>
+                    <div class="stat-label">FP Reduction Accuracy</div>
                 </div>
                 <div class="stat-card">
                     <div class="stat-number">7</div>
@@ -584,6 +584,152 @@
                     <a href="https://github.com/deosha/llm-sec-eval/tree/main/testbed" target="_blank" style="display: inline-flex; align-items: center; gap: 6px; color: var(--accent-primary); text-decoration: none; font-size: 14px;">
                         <span>🏷️</span> Labels & Annotations
                     </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FP Reduction Section -->
+    <section id="fp-reduction" class="section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">False Positive Reduction</span>
+                <h2 class="section-title">ML-Powered Noise Reduction</h2>
+                <p class="section-subtitle">
+                    Automatically filter common false positives with 88% accuracy using ML-trained heuristics.
+                </p>
+            </div>
+
+            <!-- FP Reduction Architecture SVG -->
+            <div style="max-width: 900px; margin: 0 auto 48px;">
+                <svg viewBox="0 0 900 400" xmlns="http://www.w3.org/2000/svg" style="width: 100%; display: block;">
+                    <defs>
+                        <linearGradient id="fpGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#f97316"/>
+                            <stop offset="100%" style="stop-color:#ea580c"/>
+                        </linearGradient>
+                        <linearGradient id="mlGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#8b5cf6"/>
+                            <stop offset="100%" style="stop-color:#7c3aed"/>
+                        </linearGradient>
+                        <linearGradient id="successGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#22c55e"/>
+                            <stop offset="100%" style="stop-color:#16a34a"/>
+                        </linearGradient>
+                        <filter id="fpShadow" x="-5%" y="-5%" width="110%" height="115%">
+                            <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#000" flood-opacity="0.1"/>
+                        </filter>
+                        <marker id="fpArrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                            <polygon points="0 0, 10 3.5, 0 7" fill="#f97316"/>
+                        </marker>
+                        <marker id="mlArrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                            <polygon points="0 0, 10 3.5, 0 7" fill="#8b5cf6"/>
+                        </marker>
+                    </defs>
+
+                    <!-- Raw Findings Box -->
+                    <rect x="20" y="140" width="160" height="80" rx="10" fill="white" stroke="#e5e7eb" stroke-width="2" filter="url(#fpShadow)"/>
+                    <text x="100" y="170" text-anchor="middle" fill="#374151" font-family="Inter, sans-serif" font-weight="600" font-size="14">Raw Findings</text>
+                    <text x="100" y="195" text-anchor="middle" fill="#6b7280" font-family="Inter, sans-serif" font-size="12">From static scan</text>
+
+                    <!-- Arrow to FP Reducer -->
+                    <line x1="180" y1="180" x2="240" y2="180" stroke="#f97316" stroke-width="2" marker-end="url(#fpArrow)"/>
+
+                    <!-- FP Reducer Main Box -->
+                    <rect x="250" y="60" width="400" height="240" rx="12" fill="white" stroke="#f97316" stroke-width="2" filter="url(#fpShadow)"/>
+                    <rect x="250" y="60" width="400" height="40" rx="12" fill="url(#fpGradient)"/>
+                    <text x="450" y="87" text-anchor="middle" fill="white" font-family="Inter, sans-serif" font-weight="700" font-size="16">FP Reducer (Ensemble)</text>
+
+                    <!-- Three Components Inside -->
+                    <!-- Heuristics -->
+                    <rect x="270" y="120" width="110" height="70" rx="8" fill="#fef3c7" stroke="#f59e0b" stroke-width="1"/>
+                    <text x="325" y="150" text-anchor="middle" fill="#92400e" font-family="Inter, sans-serif" font-weight="600" font-size="11">Heuristics</text>
+                    <text x="325" y="168" text-anchor="middle" fill="#a16207" font-family="Inter, sans-serif" font-size="9">Pattern matching</text>
+
+                    <!-- ML Classifier -->
+                    <rect x="395" y="120" width="110" height="70" rx="8" fill="#ede9fe" stroke="#8b5cf6" stroke-width="1"/>
+                    <text x="450" y="150" text-anchor="middle" fill="#5b21b6" font-family="Inter, sans-serif" font-weight="600" font-size="11">ML Classifier</text>
+                    <text x="450" y="168" text-anchor="middle" fill="#7c3aed" font-family="Inter, sans-serif" font-size="9">RandomForest</text>
+
+                    <!-- LLM Verification -->
+                    <rect x="520" y="120" width="110" height="70" rx="8" fill="#dbeafe" stroke="#3b82f6" stroke-width="1"/>
+                    <text x="575" y="150" text-anchor="middle" fill="#1e40af" font-family="Inter, sans-serif" font-weight="600" font-size="11">LLM Verify</text>
+                    <text x="575" y="168" text-anchor="middle" fill="#3b82f6" font-family="Inter, sans-serif" font-size="9">Optional</text>
+
+                    <!-- Arrows from components to weighted score -->
+                    <line x1="325" y1="190" x2="325" y2="220" stroke="#f59e0b" stroke-width="1"/>
+                    <line x1="450" y1="190" x2="450" y2="220" stroke="#8b5cf6" stroke-width="1"/>
+                    <line x1="575" y1="190" x2="575" y2="220" stroke="#3b82f6" stroke-width="1"/>
+                    <line x1="325" y1="220" x2="450" y2="240" stroke="#f59e0b" stroke-width="1"/>
+                    <line x1="575" y1="220" x2="450" y2="240" stroke="#3b82f6" stroke-width="1"/>
+
+                    <!-- Weighted Score -->
+                    <rect x="380" y="240" width="140" height="45" rx="8" fill="url(#fpGradient)"/>
+                    <text x="450" y="260" text-anchor="middle" fill="white" font-family="Inter, sans-serif" font-weight="600" font-size="11">Weighted Score</text>
+                    <text x="450" y="276" text-anchor="middle" fill="rgba(255,255,255,0.9)" font-family="Inter, sans-serif" font-size="10">TP Probability</text>
+
+                    <!-- Arrow to filtered -->
+                    <line x1="650" y1="180" x2="710" y2="180" stroke="#22c55e" stroke-width="2" marker-end="url(#fpArrow)"/>
+
+                    <!-- Filtered Findings Box -->
+                    <rect x="720" y="140" width="160" height="80" rx="10" fill="white" stroke="#22c55e" stroke-width="2" filter="url(#fpShadow)"/>
+                    <text x="800" y="170" text-anchor="middle" fill="#166534" font-family="Inter, sans-serif" font-weight="600" font-size="14">Clean Findings</text>
+                    <text x="800" y="195" text-anchor="middle" fill="#22c55e" font-family="Inter, sans-serif" font-size="12">FPs filtered out</text>
+
+                    <!-- Stats Labels -->
+                    <text x="100" y="250" text-anchor="middle" fill="#6b7280" font-family="Inter, sans-serif" font-size="11">100+ findings</text>
+                    <text x="800" y="250" text-anchor="middle" fill="#22c55e" font-family="Inter, sans-serif" font-size="11">High-confidence TPs</text>
+
+                    <!-- FP Examples at bottom -->
+                    <rect x="150" y="320" width="600" height="60" rx="8" fill="#fef2f2" stroke="#fecaca" stroke-width="1"/>
+                    <text x="450" y="345" text-anchor="middle" fill="#991b1b" font-family="Inter, sans-serif" font-weight="600" font-size="12">Common False Positives Filtered:</text>
+                    <text x="450" y="365" text-anchor="middle" fill="#b91c1c" font-family="JetBrains Mono, monospace" font-size="11">model.eval() | session.exec() | base64 images | placeholder keys</text>
+                </svg>
+            </div>
+
+            <!-- FP Patterns Grid -->
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; max-width: 1000px; margin: 0 auto;">
+                <div style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 12px; padding: 20px;">
+                    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
+                        <span style="font-size: 24px;">🔥</span>
+                        <h4 style="margin: 0; color: var(--text-primary);">PyTorch model.eval()</h4>
+                    </div>
+                    <p style="margin: 0; color: var(--text-muted); font-size: 14px;">Not Python's dangerous <code style="background: var(--bg-primary); padding: 2px 6px; border-radius: 4px;">eval()</code>. Sets model to evaluation mode.</p>
+                </div>
+                <div style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 12px; padding: 20px;">
+                    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
+                        <span style="font-size: 24px;">🗄️</span>
+                        <h4 style="margin: 0; color: var(--text-primary);">SQLAlchemy session.exec()</h4>
+                    </div>
+                    <p style="margin: 0; color: var(--text-muted); font-size: 14px;">Not Python's dangerous <code style="background: var(--bg-primary); padding: 2px 6px; border-radius: 4px;">exec()</code>. Executes SQL queries safely.</p>
+                </div>
+                <div style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 12px; padding: 20px;">
+                    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
+                        <span style="font-size: 24px;">🖼️</span>
+                        <h4 style="margin: 0; color: var(--text-primary);">Base64 Images</h4>
+                    </div>
+                    <p style="margin: 0; color: var(--text-muted); font-size: 14px;">Data URIs like <code style="background: var(--bg-primary); padding: 2px 6px; border-radius: 4px;">data:image/png;base64,...</code> are not leaked secrets.</p>
+                </div>
+                <div style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 12px; padding: 20px;">
+                    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
+                        <span style="font-size: 24px;">🔑</span>
+                        <h4 style="margin: 0; color: var(--text-primary);">Placeholder Keys</h4>
+                    </div>
+                    <p style="margin: 0; color: var(--text-muted); font-size: 14px;">Example values like <code style="background: var(--bg-primary); padding: 2px 6px; border-radius: 4px;">your-api-key</code> or <code style="background: var(--bg-primary); padding: 2px 6px; border-radius: 4px;">sk-test-xxx</code>.</p>
+                </div>
+            </div>
+
+            <!-- ML Installation Note -->
+            <div style="max-width: 800px; margin: 32px auto 0; padding: 20px; background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(139, 92, 246, 0.05)); border: 1px solid rgba(139, 92, 246, 0.3); border-radius: 12px;">
+                <div style="display: flex; align-items: flex-start; gap: 16px;">
+                    <span style="font-size: 28px;">🧠</span>
+                    <div>
+                        <h4 style="margin: 0 0 8px 0; color: #8b5cf6;">Enhanced ML Reduction</h4>
+                        <p style="margin: 0 0 12px 0; color: var(--text-secondary); font-size: 14px;">
+                            For ML-based classification trained on 1,000 labeled findings, install with the <code style="background: var(--bg-primary); padding: 2px 6px; border-radius: 4px;">[ml]</code> extra:
+                        </p>
+                        <code style="display: block; background: var(--bg-primary); padding: 12px 16px; border-radius: 8px; font-family: 'JetBrains Mono', monospace; font-size: 14px;">pip install aisentry[ml]</code>
+                    </div>
                 </div>
             </div>
         </div>
