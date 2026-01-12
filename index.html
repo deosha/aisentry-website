@@ -866,36 +866,208 @@ open report.html
         <div class="container">
             <div class="section-header">
                 <span class="section-label">Roadmap</span>
-                <h2 class="section-title">What's Coming Next</h2>
+                <h2 class="section-title">Building the Future of AI Security</h2>
                 <p class="section-subtitle">
-                    aisentry is free, open-source, and actively developed. Here's what we're working on.
+                    Features you won't find anywhere else. Open-source and community-driven.
                 </p>
             </div>
 
-            <!-- Roadmap Timeline -->
-            <div class="roadmap-timeline" style="max-width: 800px; margin-left: auto; margin-right: auto;">
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 24px;">
-                    <div style="text-align: center; padding: 20px;">
-                        <div style="width: 48px; height: 48px; border-radius: 50%; background: var(--success); color: white; display: flex; align-items: center; justify-content: center; margin: 0 auto 12px; font-weight: 600;">✓</div>
-                        <h4 style="margin: 0 0 8px 0; color: var(--text-primary); font-size: 14px;">Q1 2026</h4>
-                        <p style="margin: 0; color: var(--text-muted); font-size: 13px;">v1.0 CLI Release<br>10 OWASP Detectors<br>68.7% F1 Score</p>
-                    </div>
-                    <div style="text-align: center; padding: 20px;">
-                        <div style="width: 48px; height: 48px; border-radius: 50%; background: var(--accent-primary); color: white; display: flex; align-items: center; justify-content: center; margin: 0 auto 12px; font-weight: 600;">Q2</div>
-                        <h4 style="margin: 0 0 8px 0; color: var(--text-primary); font-size: 14px;">Q2 2026</h4>
-                        <p style="margin: 0; color: var(--text-muted); font-size: 13px;">JS/TS support<br>VS Code extension<br>Improved LLM02 detection</p>
-                    </div>
-                    <div style="text-align: center; padding: 20px;">
-                        <div style="width: 48px; height: 48px; border-radius: 50%; background: var(--bg-tertiary); color: var(--text-secondary); display: flex; align-items: center; justify-content: center; margin: 0 auto 12px; font-weight: 600;">Q3</div>
-                        <h4 style="margin: 0 0 8px 0; color: var(--text-primary); font-size: 14px;">Q3 2026</h4>
-                        <p style="margin: 0; color: var(--text-muted); font-size: 13px;">Cloud dashboard beta<br>Team features<br>API access</p>
-                    </div>
-                    <div style="text-align: center; padding: 20px;">
-                        <div style="width: 48px; height: 48px; border-radius: 50%; background: var(--bg-tertiary); color: var(--text-secondary); display: flex; align-items: center; justify-content: center; margin: 0 auto 12px; font-weight: 600;">Q4</div>
-                        <h4 style="margin: 0 0 8px 0; color: var(--text-primary); font-size: 14px;">Q4 2026</h4>
-                        <p style="margin: 0; color: var(--text-muted); font-size: 13px;">Enterprise features<br>Compliance reports<br>Self-hosted option</p>
-                    </div>
+            <!-- Timeline Header -->
+            <div style="display: flex; justify-content: center; gap: 32px; margin-bottom: 48px; flex-wrap: wrap;">
+                <div style="display: flex; align-items: center; gap: 8px;">
+                    <div style="width: 12px; height: 12px; border-radius: 50%; background: var(--success);"></div>
+                    <span style="color: var(--text-muted); font-size: 13px;">Shipped</span>
                 </div>
+                <div style="display: flex; align-items: center; gap: 8px;">
+                    <div style="width: 12px; height: 12px; border-radius: 50%; background: var(--accent-primary);"></div>
+                    <span style="color: var(--text-muted); font-size: 13px;">In Progress</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 8px;">
+                    <div style="width: 12px; height: 12px; border-radius: 50%; background: var(--border-color);"></div>
+                    <span style="color: var(--text-muted); font-size: 13px;">Planned</span>
+                </div>
+            </div>
+
+            <!-- Roadmap Grid -->
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; max-width: 1200px; margin: 0 auto;">
+
+                <!-- Q1 2026 - Shipped -->
+                <div style="background: linear-gradient(135deg, rgba(34, 197, 94, 0.1), rgba(34, 197, 94, 0.05)); border: 1px solid rgba(34, 197, 94, 0.3); border-radius: 16px; padding: 28px; position: relative;">
+                    <div style="position: absolute; top: -10px; right: 20px; background: var(--success); color: white; padding: 4px 12px; border-radius: 20px; font-size: 11px; font-weight: 600;">SHIPPED</div>
+                    <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 20px;">
+                        <div style="width: 40px; height: 40px; border-radius: 10px; background: var(--success); color: white; display: flex; align-items: center; justify-content: center; font-weight: 700;">Q1</div>
+                        <div>
+                            <h3 style="margin: 0; color: var(--text-primary); font-size: 18px;">Foundation</h3>
+                            <span style="color: var(--text-muted); font-size: 12px;">January 2026</span>
+                        </div>
+                    </div>
+                    <ul style="list-style: none; padding: 0; margin: 0;">
+                        <li style="display: flex; align-items: flex-start; gap: 10px; margin-bottom: 14px;">
+                            <span style="color: var(--success); font-size: 14px;">&#10003;</span>
+                            <div>
+                                <span style="color: var(--text-primary); font-size: 14px; font-weight: 500;">10 OWASP LLM Detectors</span>
+                                <p style="margin: 4px 0 0 0; color: var(--text-muted); font-size: 12px;">Full coverage of OWASP LLM Top 10</p>
+                            </div>
+                        </li>
+                        <li style="display: flex; align-items: flex-start; gap: 10px; margin-bottom: 14px;">
+                            <span style="color: var(--success); font-size: 14px;">&#10003;</span>
+                            <div>
+                                <span style="color: var(--text-primary); font-size: 14px; font-weight: 500;">ML-based FP Reduction</span>
+                                <p style="margin: 4px 0 0 0; color: var(--text-muted); font-size: 12px;">88% accuracy filtering false positives</p>
+                            </div>
+                        </li>
+                        <li style="display: flex; align-items: flex-start; gap: 10px; margin-bottom: 14px;">
+                            <span style="color: var(--success); font-size: 14px;">&#10003;</span>
+                            <div>
+                                <span style="color: var(--text-primary); font-size: 14px; font-weight: 500;">Security Posture Audit</span>
+                                <p style="margin: 4px 0 0 0; color: var(--text-muted); font-size: 12px;">61 controls across 10 categories</p>
+                            </div>
+                        </li>
+                        <li style="display: flex; align-items: flex-start; gap: 10px;">
+                            <span style="color: var(--success); font-size: 14px;">&#10003;</span>
+                            <div>
+                                <span style="color: var(--text-primary); font-size: 14px; font-weight: 500;">HTML/JSON/SARIF Reports</span>
+                                <p style="margin: 4px 0 0 0; color: var(--text-muted); font-size: 12px;">CI/CD ready with GitHub integration</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Q2 2026 - In Progress -->
+                <div style="background: linear-gradient(135deg, rgba(249, 115, 22, 0.1), rgba(249, 115, 22, 0.05)); border: 1px solid rgba(249, 115, 22, 0.3); border-radius: 16px; padding: 28px; position: relative;">
+                    <div style="position: absolute; top: -10px; right: 20px; background: var(--accent-primary); color: white; padding: 4px 12px; border-radius: 20px; font-size: 11px; font-weight: 600;">IN PROGRESS</div>
+                    <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 20px;">
+                        <div style="width: 40px; height: 40px; border-radius: 10px; background: var(--accent-primary); color: white; display: flex; align-items: center; justify-content: center; font-weight: 700;">Q2</div>
+                        <div>
+                            <h3 style="margin: 0; color: var(--text-primary); font-size: 18px;">Agent Security</h3>
+                            <span style="color: var(--text-muted); font-size: 12px;">April 2026</span>
+                        </div>
+                    </div>
+                    <ul style="list-style: none; padding: 0; margin: 0;">
+                        <li style="display: flex; align-items: flex-start; gap: 10px; margin-bottom: 14px;">
+                            <span style="color: var(--accent-primary); font-size: 14px;">&#9679;</span>
+                            <div>
+                                <span style="color: var(--text-primary); font-size: 14px; font-weight: 500;">MCP Server Scanning</span>
+                                <span style="background: rgba(249, 115, 22, 0.2); color: var(--accent-primary); padding: 2px 8px; border-radius: 10px; font-size: 10px; margin-left: 8px; font-weight: 600;">FIRST</span>
+                                <p style="margin: 4px 0 0 0; color: var(--text-muted); font-size: 12px;">Scan Model Context Protocol servers for over-permissioned tools</p>
+                            </div>
+                        </li>
+                        <li style="display: flex; align-items: flex-start; gap: 10px; margin-bottom: 14px;">
+                            <span style="color: var(--accent-primary); font-size: 14px;">&#9679;</span>
+                            <div>
+                                <span style="color: var(--text-primary); font-size: 14px; font-weight: 500;">Agentic Flow Analysis</span>
+                                <p style="margin: 4px 0 0 0; color: var(--text-muted); font-size: 12px;">Trace agent chains in LangGraph, CrewAI, AutoGen</p>
+                            </div>
+                        </li>
+                        <li style="display: flex; align-items: flex-start; gap: 10px; margin-bottom: 14px;">
+                            <span style="color: var(--accent-primary); font-size: 14px;">&#9679;</span>
+                            <div>
+                                <span style="color: var(--text-primary); font-size: 14px; font-weight: 500;">RAG Pipeline Security</span>
+                                <p style="margin: 4px 0 0 0; color: var(--text-muted); font-size: 12px;">Vector DB injection, unsafe loaders, PII in embeddings</p>
+                            </div>
+                        </li>
+                        <li style="display: flex; align-items: flex-start; gap: 10px;">
+                            <span style="color: var(--accent-primary); font-size: 14px;">&#9679;</span>
+                            <div>
+                                <span style="color: var(--text-primary); font-size: 14px; font-weight: 500;">VS Code Extension</span>
+                                <p style="margin: 4px 0 0 0; color: var(--text-muted); font-size: 12px;">Real-time scanning in your editor</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Q3 2026 - Planned -->
+                <div style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 16px; padding: 28px; position: relative;">
+                    <div style="position: absolute; top: -10px; right: 20px; background: var(--bg-tertiary); color: var(--text-muted); padding: 4px 12px; border-radius: 20px; font-size: 11px; font-weight: 600;">PLANNED</div>
+                    <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 20px;">
+                        <div style="width: 40px; height: 40px; border-radius: 10px; background: var(--bg-tertiary); color: var(--text-secondary); display: flex; align-items: center; justify-content: center; font-weight: 700;">Q3</div>
+                        <div>
+                            <h3 style="margin: 0; color: var(--text-primary); font-size: 18px;">Deep Analysis</h3>
+                            <span style="color: var(--text-muted); font-size: 12px;">July 2026</span>
+                        </div>
+                    </div>
+                    <ul style="list-style: none; padding: 0; margin: 0;">
+                        <li style="display: flex; align-items: flex-start; gap: 10px; margin-bottom: 14px;">
+                            <span style="color: var(--text-muted); font-size: 14px;">&#9675;</span>
+                            <div>
+                                <span style="color: var(--text-primary); font-size: 14px; font-weight: 500;">Prompt Template Analyzer</span>
+                                <p style="margin: 4px 0 0 0; color: var(--text-muted); font-size: 12px;">Static analysis for injection vectors in prompts</p>
+                            </div>
+                        </li>
+                        <li style="display: flex; align-items: flex-start; gap: 10px; margin-bottom: 14px;">
+                            <span style="color: var(--text-muted); font-size: 14px;">&#9675;</span>
+                            <div>
+                                <span style="color: var(--text-primary); font-size: 14px; font-weight: 500;">Guardrails Scanner</span>
+                                <p style="margin: 4px 0 0 0; color: var(--text-muted); font-size: 12px;">Detect missing NeMo, LlamaGuard, Guardrails AI</p>
+                            </div>
+                        </li>
+                        <li style="display: flex; align-items: flex-start; gap: 10px; margin-bottom: 14px;">
+                            <span style="color: var(--text-muted); font-size: 14px;">&#9675;</span>
+                            <div>
+                                <span style="color: var(--text-primary); font-size: 14px; font-weight: 500;">Fine-tuning Data Security</span>
+                                <p style="margin: 4px 0 0 0; color: var(--text-muted); font-size: 12px;">PII detection, poisoning indicators in training data</p>
+                            </div>
+                        </li>
+                        <li style="display: flex; align-items: flex-start; gap: 10px;">
+                            <span style="color: var(--text-muted); font-size: 14px;">&#9675;</span>
+                            <div>
+                                <span style="color: var(--text-primary); font-size: 14px; font-weight: 500;">LLM Gateway Scanner</span>
+                                <p style="margin: 4px 0 0 0; color: var(--text-muted); font-size: 12px;">Audit LiteLLM, AI Gateway proxy configs</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Q4 2026 - Planned -->
+                <div style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 16px; padding: 28px; position: relative;">
+                    <div style="position: absolute; top: -10px; right: 20px; background: var(--bg-tertiary); color: var(--text-muted); padding: 4px 12px; border-radius: 20px; font-size: 11px; font-weight: 600;">PLANNED</div>
+                    <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 20px;">
+                        <div style="width: 40px; height: 40px; border-radius: 10px; background: var(--bg-tertiary); color: var(--text-secondary); display: flex; align-items: center; justify-content: center; font-weight: 700;">Q4</div>
+                        <div>
+                            <h3 style="margin: 0; color: var(--text-primary); font-size: 18px;">Advanced Features</h3>
+                            <span style="color: var(--text-muted); font-size: 12px;">October 2026</span>
+                        </div>
+                    </div>
+                    <ul style="list-style: none; padding: 0; margin: 0;">
+                        <li style="display: flex; align-items: flex-start; gap: 10px; margin-bottom: 14px;">
+                            <span style="color: var(--text-muted); font-size: 14px;">&#9675;</span>
+                            <div>
+                                <span style="color: var(--text-primary); font-size: 14px; font-weight: 500;">Multi-modal Security</span>
+                                <span style="background: rgba(139, 92, 246, 0.2); color: #a78bfa; padding: 2px 8px; border-radius: 10px; font-size: 10px; margin-left: 8px; font-weight: 600;">NEW</span>
+                                <p style="margin: 4px 0 0 0; color: var(--text-muted); font-size: 12px;">Image prompt injection, audio input sanitization</p>
+                            </div>
+                        </li>
+                        <li style="display: flex; align-items: flex-start; gap: 10px; margin-bottom: 14px;">
+                            <span style="color: var(--text-muted); font-size: 14px;">&#9675;</span>
+                            <div>
+                                <span style="color: var(--text-primary); font-size: 14px; font-weight: 500;">Runtime-Static Bridge</span>
+                                <p style="margin: 4px 0 0 0; color: var(--text-muted); font-size: 12px;">Generate Garak tests from static findings</p>
+                            </div>
+                        </li>
+                        <li style="display: flex; align-items: flex-start; gap: 10px; margin-bottom: 14px;">
+                            <span style="color: var(--text-muted); font-size: 14px;">&#9675;</span>
+                            <div>
+                                <span style="color: var(--text-primary); font-size: 14px; font-weight: 500;">JavaScript/TypeScript</span>
+                                <p style="margin: 4px 0 0 0; color: var(--text-muted); font-size: 12px;">Full support for JS/TS LLM applications</p>
+                            </div>
+                        </li>
+                        <li style="display: flex; align-items: flex-start; gap: 10px;">
+                            <span style="color: var(--text-muted); font-size: 14px;">&#9675;</span>
+                            <div>
+                                <span style="color: var(--text-primary); font-size: 14px; font-weight: 500;">Team Dashboard</span>
+                                <p style="margin: 4px 0 0 0; color: var(--text-muted); font-size: 12px;">Cloud dashboard with trend tracking</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <!-- CTA -->
+            <div style="text-align: center; margin-top: 48px;">
+                <p style="color: var(--text-muted); margin-bottom: 16px;">Have a feature request? We're building in the open.</p>
+                <a href="https://github.com/deosha/aisentry/issues" target="_blank" class="btn btn-ghost" style="margin-right: 12px;">Request Feature</a>
+                <a href="https://github.com/deosha/aisentry" target="_blank" class="btn btn-primary">Star on GitHub</a>
             </div>
 
         </div>
