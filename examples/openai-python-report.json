@@ -1,0 +1,305 @@
+{
+  "report_type": "static_scan",
+  "generated_at": "2026-01-12T12:46:22.558917Z",
+  "summary": {
+    "target": "/private/tmp/openai-python-test",
+    "files_scanned": 1034,
+    "overall_score": 2.5,
+    "confidence": 0.64,
+    "duration_seconds": 4.117,
+    "findings_count": 9,
+    "severity_breakdown": {
+      "CRITICAL": 1,
+      "HIGH": 7,
+      "MEDIUM": 0,
+      "LOW": 0,
+      "INFO": 1
+    }
+  },
+  "category_scores": [
+    {
+      "category_id": "1_prompt_security",
+      "category_name": "Prompt Security",
+      "score": 16,
+      "confidence": 0.45,
+      "subscores": {
+        "input_validation": 0,
+        "jailbreak_prevention": 30,
+        "monitoring_response": 25,
+        "prompt_injection_defense": 0,
+        "context_isolation": 75,
+        "prompt_templates": 0,
+        "output_filtering": 0,
+        "jailbreak_detection": 0
+      },
+      "detected_controls": [
+        "ML-based input validation detected",
+        "1 jailbreak prevention mechanisms active",
+        "Context protection: Sandboxing"
+      ],
+      "gaps": [
+        "Missing behavioral analysis/guardrails library",
+        "No red team testing detected",
+        "No attack detection tools found"
+      ]
+    },
+    {
+      "category_id": "2_model_security",
+      "category_name": "Model Security & Integrity",
+      "score": 1,
+      "confidence": 0.45,
+      "subscores": {
+        "model_protection": 58,
+        "extraction_defense": 45,
+        "supply_chain_security": 62,
+        "api_key_security": 0,
+        "model_access_control": 0,
+        "rate_limiting_defense": 0,
+        "model_encryption": 0,
+        "model_provenance": 0,
+        "supply_chain_verification": 0
+      },
+      "detected_controls": [
+        "Encryption at rest",
+        "Encryption in transit",
+        "Model registry",
+        "Rate limiting",
+        "Checksum verification",
+        "Signature verification"
+      ],
+      "gaps": []
+    },
+    {
+      "category_id": "3_data_privacy",
+      "category_name": "Data Privacy & PII Protection",
+      "score": 1,
+      "confidence": 0.44,
+      "subscores": {
+        "pii_handling": 0,
+        "consent_management": 0,
+        "compliance_auditing": 0,
+        "pii_detection": 0,
+        "pii_redaction": 0,
+        "data_encryption": 0,
+        "consent_management_comprehensive": 0,
+        "data_lifecycle": 0,
+        "gdpr_compliance": 0,
+        "audit_logging": 30
+      },
+      "detected_controls": [
+        "PII pattern matching",
+        "PII encryption",
+        "PII masking",
+        "Audit logging"
+      ],
+      "gaps": [
+        "PII detection and handling needs improvement",
+        "Consider implementing PII detection tools (Presidio, spaCy NER)",
+        "Consent management is weak",
+        "Implement user consent mechanisms and user rights endpoints",
+        "Regulatory compliance controls missing",
+        "Add audit logging and compliance documentation"
+      ]
+    },
+    {
+      "category_id": "4_hallucination_mitigation",
+      "category_name": "Hallucination Detection & Mitigation",
+      "score": 1,
+      "confidence": 0.35,
+      "subscores": {
+        "factual_consistency": 0,
+        "output_validation": 50,
+        "user_feedback": 0,
+        "rag_integration": 0,
+        "citation_tracking": 0,
+        "confidence_scoring": 0,
+        "fact_checking": 0,
+        "consistency_checks": 0,
+        "grounding": 0
+      },
+      "detected_controls": [],
+      "gaps": [
+        "Missing controls: Citation tracking / RAG, Confidence scoring,  Consistency checks, Constraint checking, Cross-validation",
+        "Plus 9 more controls need implementation"
+      ]
+    },
+    {
+      "category_id": "5_ethical_ai",
+      "category_name": "Ethical AI & Bias Detection",
+      "score": 0,
+      "confidence": 0.4,
+      "subscores": {
+        "bias_testing": 0,
+        "fairness_metrics": 0,
+        "explainability": 0,
+        "harmful_content_filtering": 0,
+        "diverse_training": 0,
+        "transparency": 0,
+        "legacy_bias_detection": 0,
+        "legacy_fairness": 0
+      },
+      "detected_controls": [],
+      "gaps": []
+    },
+    {
+      "category_id": "6_governance",
+      "category_name": "Governance & Compliance",
+      "score": 0,
+      "confidence": 0.4,
+      "subscores": {
+        "plugin_security": 0,
+        "authorization_controls": 0,
+        "audit_logging": 0,
+        "incident_response": 0,
+        "model_documentation": 0,
+        "risk_assessment": 0,
+        "user_consent": 0,
+        "legacy_governance": 0
+      },
+      "detected_controls": [],
+      "gaps": []
+    },
+    {
+      "category_id": "0_owasp_vulnerabilities",
+      "category_name": "OWASP LLM Vulnerabilities",
+      "score": 0,
+      "confidence": 0.87,
+      "subscores": {
+        "LLM01": 100,
+        "LLM02": 62,
+        "LLM03": 100,
+        "LLM04": 100,
+        "LLM05": 100,
+        "LLM06": 100,
+        "LLM07": 0,
+        "LLM08": 100,
+        "LLM09": 100,
+        "LLM10": 100
+      },
+      "detected_controls": [
+        "Prompt Injection (no vulnerabilities found)",
+        "Training Data Poisoning (no vulnerabilities found)",
+        "Model Denial of Service (no vulnerabilities found)",
+        "Supply Chain Vulnerabilities (no vulnerabilities found)",
+        "Sensitive Information Disclosure (no vulnerabilities found)",
+        "Excessive Agency (no vulnerabilities found)",
+        "Model Theft (no vulnerabilities found)"
+      ],
+      "gaps": [
+        "Insecure Output Handling: 1 critical",
+        "Insecure Plugin Design: 7 high"
+      ]
+    }
+  ],
+  "findings": [
+    {
+      "id": "LLM09_/private/tmp/openai-python-test/examples/azure_ad.py_17_critical_decision ",
+      "category": "LLM09: Overreliance",
+      "severity": "INFO",
+      "confidence": 0.9,
+      "title": "Critical decision without oversight in 'sync_main'",
+      "description": "Function 'sync_main' on line 17 makes critical security  decisions based on LLM output without human oversight or verification. No action edges detected - advisory only.",
+      "file_path": "/private/tmp/openai-python-test/examples/azure_ad.py",
+      "line_number": 17,
+      "code_snippet": "\n\ndef sync_main() -> None:\n    from azure.identity  import DefaultAzureCredential, get_bearer_token_provider\n\n    token_provider:  AzureADTokenProvider = get_bearer_token_provider(DefaultAzureCredential(),  scopes)",
+      "recommendation": "Critical security decision requires human  oversight:\n\n1. Implement human-in-the-loop review:\n   - Add review queue for  high-stakes decisions\n   - Require explicit human approval before execution\n   - Log all decisions for audit trail\n\n2. Add verification mechanisms:\n   -  Cross-reference with trusted sources\n   - Implement multi-step verification\n   - Use confidence thresholds\n\n3. Include safety checks:\n   - Set limits on  transaction amounts\n   - Require secondary confirmation\n   - Implement  rollback mechanisms\n\n4. Add disclaimers:\n   - Inform users output may be  incorrect\n   - Recommend professional consultation\n   - Document limitations  clearly\n\n5. Monitor and review:\n   - Track decision outcomes\n   - Review  failures and near-misses\n   - Continuously improve safeguards"
+    },
+    {
+      "id": "LLM02_/private/tmp/openai-python-test/src/openai/resources/beta/threads/threads .py_792",
+      "category": "LLM02: Insecure Output Handling",
+      "severity": "CRITICAL",
+      "confidence": 0.95,
+      "title": "LLM output flows to command_injection sink",
+      "description": "LLM output variable 'run' flows to 'self.runs.poll' on  line 792 via direct flow. This creates a command_injection vulnerability.",
+      "file_path": "/private/tmp/openai-python-test/src/openai/resources/beta/threads/threads.py",
+      "line_number": 792,
+      "code_snippet": "        )\n        return self.runs.poll(run.id,  run.thread_id, extra_headers, extra_query, extra_body, timeout,  poll_interval_ms)  # pyright: ignore\n\n    @overload",
+      "recommendation": "Mitigations for Command Injection:\n1. Never pass LLM  output to shell commands\n2. Use subprocess with shell=False and list  arguments\n3. Apply allowlist validation for expected values\n4. Use  shlex.quote() if shell execution is unavoidable"
+    },
+    {
+      "id": "LLM07_/private/tmp/openai-python-test/src/openai/resources/beta/threads/threads .py_739_tool",
+      "category": "LLM07: Insecure Plugin Design",
+      "severity": "HIGH",
+      "confidence": 0.85,
+      "title": "Insecure tool function 'create_and_run_poll' executes dangerous  operations",
+      "description": "Tool function 'create_and_run_poll' on line 739 takes LLM  output as a parameter and performs dangerous operations (http_request) without  proper validation. Attackers can craft malicious LLM outputs to execute  arbitrary commands, access files, or perform SQL injection.",
+      "file_path": "/private/tmp/openai-python-test/src/openai/resources/beta/threads/threads.py",
+      "line_number": 739,
+      "code_snippet": "            stream=stream or False,\n             stream_cls=Stream[AssistantStreamEvent],\n        )\n\n    def  create_and_run_poll(\n        self,\n        *,\n        assistant_id: str,\n    instructions: Optional | Omit = omit,\n        max_completion_tokens: Optional | Omit = omit,",
+      "recommendation": "Secure Tool/Plugin Implementation:\n1. NEVER execute  shell commands from LLM output directly\n2. Use allowlists for permitted  commands/operations\n3. Validate all file paths against allowed directories\n4.  Use parameterized queries - never raw SQL from LLM\n5. Validate URLs against  allowlist before HTTP requests\n6. Implement strict input schemas (JSON Schema,  Pydantic)\n7. Add rate limiting and request throttling\n8. Log all tool  invocations for audit\n9. Use principle of least privilege\n10. Implement  human-in-the-loop for destructive operations"
+    },
+    {
+      "id": "LLM07_/private/tmp/openai-python-test/src/openai/resources/beta/threads/threads .py_795_tool",
+      "category": "LLM07: Insecure Plugin Design",
+      "severity": "HIGH",
+      "confidence": 0.85,
+      "title": "Insecure tool function 'create_and_run_stream' executes  dangerous operations",
+      "description": "Tool function 'create_and_run_stream' on line 795 takes  LLM output as a parameter and performs dangerous operations (http_request)  without proper validation. Attackers can craft malicious LLM outputs to execute  arbitrary commands, access files, or perform SQL injection.",
+      "file_path": "/private/tmp/openai-python-test/src/openai/resources/beta/threads/threads.py",
+      "line_number": 795,
+      "code_snippet": "        )\n        return self.runs.poll(run.id,  run.thread_id, extra_headers, extra_query, extra_body, timeout,  poll_interval_ms)  # pyright: ignore\n\n    @overload\n    def  create_and_run_stream(\n        self,\n        *,\n        assistant_id: str,\n  instructions: Optional | Omit = omit,\n        max_completion_tokens: Optional | Omit = omit,",
+      "recommendation": "Secure Tool/Plugin Implementation:\n1. NEVER execute  shell commands from LLM output directly\n2. Use allowlists for permitted  commands/operations\n3. Validate all file paths against allowed directories\n4.  Use parameterized queries - never raw SQL from LLM\n5. Validate URLs against  allowlist before HTTP requests\n6. Implement strict input schemas (JSON Schema,  Pydantic)\n7. Add rate limiting and request throttling\n8. Log all tool  invocations for audit\n9. Use principle of least privilege\n10. Implement  human-in-the-loop for destructive operations"
+    },
+    {
+      "id": "LLM07_/private/tmp/openai-python-test/src/openai/resources/beta/threads/threads .py_824_tool",
+      "category": "LLM07: Insecure Plugin Design",
+      "severity": "HIGH",
+      "confidence": 0.85,
+      "title": "Insecure tool function 'create_and_run_stream' executes  dangerous operations",
+      "description": "Tool function 'create_and_run_stream' on line 824 takes  LLM output as a parameter and performs dangerous operations (http_request)  without proper validation. Attackers can craft malicious LLM outputs to execute  arbitrary commands, access files, or perform SQL injection.",
+      "file_path": "/private/tmp/openai-python-test/src/openai/resources/beta/threads/threads.py",
+      "line_number": 824,
+      "code_snippet": "        \"\"\"Create a thread and stream the run  back\"\"\"\n        ...\n\n    @overload\n    def create_and_run_stream(\n       self,\n        *,\n        assistant_id: str,\n        instructions: Optional |  Omit = omit,\n        max_completion_tokens: Optional | Omit = omit,",
+      "recommendation": "Secure Tool/Plugin Implementation:\n1. NEVER execute  shell commands from LLM output directly\n2. Use allowlists for permitted  commands/operations\n3. Validate all file paths against allowed directories\n4.  Use parameterized queries - never raw SQL from LLM\n5. Validate URLs against  allowlist before HTTP requests\n6. Implement strict input schemas (JSON Schema,  Pydantic)\n7. Add rate limiting and request throttling\n8. Log all tool  invocations for audit\n9. Use principle of least privilege\n10. Implement  human-in-the-loop for destructive operations"
+    },
+    {
+      "id": "LLM07_/private/tmp/openai-python-test/src/openai/resources/beta/threads/threads .py_853_tool",
+      "category": "LLM07: Insecure Plugin Design",
+      "severity": "HIGH",
+      "confidence": 0.85,
+      "title": "Insecure tool function 'create_and_run_stream' executes  dangerous operations",
+      "description": "Tool function 'create_and_run_stream' on line 853 takes  LLM output as a parameter and performs dangerous operations (http_request)  without proper validation. Attackers can craft malicious LLM outputs to execute  arbitrary commands, access files, or perform SQL injection.",
+      "file_path": "/private/tmp/openai-python-test/src/openai/resources/beta/threads/threads.py",
+      "line_number": 853,
+      "code_snippet": "    ) ->  AssistantStreamManager[AssistantEventHandlerT]:\n        \"\"\"Create a thread  and stream the run back\"\"\"\n        ...\n\n    def create_and_run_stream(\n   self,\n        *,\n        assistant_id: str,\n        instructions: Optional |  Omit = omit,\n        max_completion_tokens: Optional | Omit = omit,",
+      "recommendation": "Secure Tool/Plugin Implementation:\n1. NEVER execute  shell commands from LLM output directly\n2. Use allowlists for permitted  commands/operations\n3. Validate all file paths against allowed directories\n4.  Use parameterized queries - never raw SQL from LLM\n5. Validate URLs against  allowlist before HTTP requests\n6. Implement strict input schemas (JSON Schema,  Pydantic)\n7. Add rate limiting and request throttling\n8. Log all tool  invocations for audit\n9. Use principle of least privilege\n10. Implement  human-in-the-loop for destructive operations"
+    },
+    {
+      "id": "LLM07_/private/tmp/openai-python-test/src/openai/resources/beta/threads/threads .py_1655_tool",
+      "category": "LLM07: Insecure Plugin Design",
+      "severity": "HIGH",
+      "confidence": 0.85,
+      "title": "Insecure tool function 'create_and_run_stream' executes  dangerous operations",
+      "description": "Tool function 'create_and_run_stream' on line 1655 takes  LLM output as a parameter and performs dangerous operations (http_request)  without proper validation. Attackers can craft malicious LLM outputs to execute  arbitrary commands, access files, or perform SQL injection.",
+      "file_path": "/private/tmp/openai-python-test/src/openai/resources/beta/threads/threads.py",
+      "line_number": 1655,
+      "code_snippet": "            run.id, run.thread_id, extra_headers,  extra_query, extra_body, timeout, poll_interval_ms\n        )\n\n    @overload\n def create_and_run_stream(\n        self,\n        *,\n        assistant_id:  str,\n        instructions: Optional | Omit = omit,\n         max_completion_tokens: Optional | Omit = omit,",
+      "recommendation": "Secure Tool/Plugin Implementation:\n1. NEVER execute  shell commands from LLM output directly\n2. Use allowlists for permitted  commands/operations\n3. Validate all file paths against allowed directories\n4.  Use parameterized queries - never raw SQL from LLM\n5. Validate URLs against  allowlist before HTTP requests\n6. Implement strict input schemas (JSON Schema,  Pydantic)\n7. Add rate limiting and request throttling\n8. Log all tool  invocations for audit\n9. Use principle of least privilege\n10. Implement  human-in-the-loop for destructive operations"
+    },
+    {
+      "id": "LLM07_/private/tmp/openai-python-test/src/openai/resources/beta/threads/threads .py_1684_tool",
+      "category": "LLM07: Insecure Plugin Design",
+      "severity": "HIGH",
+      "confidence": 0.85,
+      "title": "Insecure tool function 'create_and_run_stream' executes  dangerous operations",
+      "description": "Tool function 'create_and_run_stream' on line 1684 takes  LLM output as a parameter and performs dangerous operations (http_request)  without proper validation. Attackers can craft malicious LLM outputs to execute  arbitrary commands, access files, or perform SQL injection.",
+      "file_path": "/private/tmp/openai-python-test/src/openai/resources/beta/threads/threads.py",
+      "line_number": 1684,
+      "code_snippet": "        \"\"\"Create a thread and stream the run  back\"\"\"\n        ...\n\n    @overload\n    def create_and_run_stream(\n       self,\n        *,\n        assistant_id: str,\n        instructions: Optional |  Omit = omit,\n        max_completion_tokens: Optional | Omit = omit,",
+      "recommendation": "Secure Tool/Plugin Implementation:\n1. NEVER execute  shell commands from LLM output directly\n2. Use allowlists for permitted  commands/operations\n3. Validate all file paths against allowed directories\n4.  Use parameterized queries - never raw SQL from LLM\n5. Validate URLs against  allowlist before HTTP requests\n6. Implement strict input schemas (JSON Schema,  Pydantic)\n7. Add rate limiting and request throttling\n8. Log all tool  invocations for audit\n9. Use principle of least privilege\n10. Implement  human-in-the-loop for destructive operations"
+    },
+    {
+      "id": "LLM07_/private/tmp/openai-python-test/src/openai/resources/beta/threads/threads .py_1713_tool",
+      "category": "LLM07: Insecure Plugin Design",
+      "severity": "HIGH",
+      "confidence": 0.85,
+      "title": "Insecure tool function 'create_and_run_stream' executes  dangerous operations",
+      "description": "Tool function 'create_and_run_stream' on line 1713 takes  LLM output as a parameter and performs dangerous operations (http_request)  without proper validation. Attackers can craft malicious LLM outputs to execute  arbitrary commands, access files, or perform SQL injection.",
+      "file_path": "/private/tmp/openai-python-test/src/openai/resources/beta/threads/threads.py",
+      "line_number": 1713,
+      "code_snippet": "    ) ->  AsyncAssistantStreamManager[AsyncAssistantEventHandlerT]:\n        \"\"\"Create  a thread and stream the run back\"\"\"\n        ...\n\n    def  create_and_run_stream(\n        self,\n        *,\n        assistant_id: str,\n  instructions: Optional | Omit = omit,\n        max_completion_tokens: Optional | Omit = omit,",
+      "recommendation": "Secure Tool/Plugin Implementation:\n1. NEVER execute  shell commands from LLM output directly\n2. Use allowlists for permitted  commands/operations\n3. Validate all file paths against allowed directories\n4.  Use parameterized queries - never raw SQL from LLM\n5. Validate URLs against  allowlist before HTTP requests\n6. Implement strict input schemas (JSON Schema,  Pydantic)\n7. Add rate limiting and request throttling\n8. Log all tool  invocations for audit\n9. Use principle of least privilege\n10. Implement  human-in-the-loop for destructive operations"
+    }
+  ],
+  "metadata": {}
+}

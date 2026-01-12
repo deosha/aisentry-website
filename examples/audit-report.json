@@ -1,0 +1,2349 @@
+{
+  "audit_id": "ed1584f4",
+  "project_path": "/tmp/langchain-test",
+  "timestamp": "2026-01-12T18:16:47.019396",
+  "overall_score": 19.5,
+  "maturity_level": "Initial",
+  "files_scanned": 2660,
+  "scan_duration_seconds": 2.26,
+  "detected_controls": 25,
+  "total_controls": 61,
+  "categories": {
+    "prompt_security": {
+      "category_id": "prompt_security",
+      "category_name": "Prompt Security",
+      "score": 28.1,
+      "max_score": 100.0,
+      "percentage": 28.1,
+      "detected_count": 3,
+      "total_count": 8,
+      "controls": [
+        {
+          "control_id": "PS-01",
+          "control_name": "Prompt Sanitization",
+          "category": "prompt_security",
+          "detected": true,
+          "level": "advanced",
+          "confidence": 0.8000000000000002,
+          "score": 75,
+          "evidence": [
+            {
+              "type": "ast",
+              "file_path": "/tmp/langchain-test/libs/langchain_v1/langchain/agents/middleware/shell_tool.py ",
+              "line_number": 805,
+              "snippet": "f\"{sanitized_output.rstrip()}\\n\\n\"",
+              "description": "Sanitization function call:  sanitized_output.rstrip",
+              "confidence": 0.8
+            },
+            {
+              "type": "ast",
+              "file_path": "/tmp/langchain-test/libs/langchain_v1/langchain/agents/middleware/shell_tool.py ",
+              "line_number": 811,
+              "snippet": "f\"{sanitized_output.rstrip()}\\n\\n\"",
+              "description": "Sanitization function call:  sanitized_output.rstrip",
+              "confidence": 0.8
+            },
+            {
+              "type": "ast",
+              "file_path": "/tmp/langchain-test/libs/langchain_v1/langchain/agents/middleware/shell_tool.py ",
+              "line_number": 817,
+              "snippet": "sanitized_output =  f\"{sanitized_output.rstrip()}\\n\\nExit code: {result.exit_code}\"",
+              "description": "Sanitization function call:  sanitized_output.rstrip",
+              "confidence": 0.8
+            },
+            {
+              "type": "ast",
+              "file_path": "/tmp/langchain-test/libs/partners/anthropic/langchain_anthropic/chat_models.py",
+              "line_number": 541,
+              "snippet": "cleaned_citations.append(cleaned_citation)",
+              "description": "Sanitization function call:  cleaned_citations.append",
+              "confidence": 0.8
+            },
+            {
+              "type": "ast",
+              "file_path": "/tmp/langchain-test/libs/partners/mistralai/langchain_mistralai/chat_models.py",
+              "line_number": 426,
+              "snippet": "_clean_block(block)",
+              "description": "Sanitization function call: _clean_block",
+              "confidence": 0.8
+            },
+            {
+              "type": "ast",
+              "file_path": "/tmp/langchain-test/libs/langchain_v1/langchain/agents/middleware/shell_tool.py ",
+              "line_number": 71,
+              "snippet": "tempdir.cleanup()",
+              "description": "Sanitization function call: tempdir.cleanup",
+              "confidence": 0.8
+            },
+            {
+              "type": "ast",
+              "file_path": "/tmp/langchain-test/libs/standard-tests/langchain_tests/conftest.py",
+              "line_number": 109,
+              "snippet": "\"filter_headers\": _BASE_FILTER_HEADERS.copy(),",
+              "description": "Sanitization function call:  _BASE_FILTER_HEADERS.copy",
+              "confidence": 0.8
+            },
+            {
+              "type": "ast",
+              "file_path": "/tmp/langchain-test/libs/partners/openai/langchain_openai/chat_models/base.py",
+              "line_number": 2091,
+              "snippet": "bind_kwargs = self._filter_disabled_params(",
+              "description": "Sanitization function call:  self._filter_disabled_params",
+              "confidence": 0.8
+            },
+            {
+              "type": "ast",
+              "file_path": "/tmp/langchain-test/libs/partners/openai/tests/unit_tests/chat_models/test_base .py",
+              "line_number": 1267,
+              "snippet": "warnings.simplefilter(\"error\")  # Treat warnings as  errors",
+              "description": "Sanitization function call:  warnings.simplefilter",
+              "confidence": 0.8
+            },
+            {
+              "type": "ast",
+              "file_path": "/tmp/langchain-test/libs/langchain_v1/tests/unit_tests/agents/middleware/implem entations/test_human_in_the_loop.py",
+              "line_number": 314,
+              "snippet": "match=re.escape(",
+              "description": "Sanitization function call: re.escape",
+              "confidence": 0.8
+            },
+            {
+              "type": "ast",
+              "file_path": "/tmp/langchain-test/libs/langchain_v1/tests/unit_tests/agents/middleware/implem entations/test_human_in_the_loop.py",
+              "line_number": 358,
+              "snippet": "match=re.escape(",
+              "description": "Sanitization function call: re.escape",
+              "confidence": 0.8
+            },
+            {
+              "type": "ast",
+              "file_path": "/tmp/langchain-test/libs/langchain_v1/tests/unit_tests/agents/middleware/implem entations/test_human_in_the_loop.py",
+              "line_number": 511,
+              "snippet": "match=re.escape(",
+              "description": "Sanitization function call: re.escape",
+              "confidence": 0.8
+            }
+          ],
+          "recommendations": []
+        },
+        {
+          "control_id": "PS-02",
+          "control_name": "Rate Limiting",
+          "category": "prompt_security",
+          "detected": false,
+          "level": "none",
+          "confidence": 0.0,
+          "score": 0,
+          "evidence": [],
+          "recommendations": [
+            "Detection failed: 'bool' object has no attribute 'lower'"
+          ]
+        },
+        {
+          "control_id": "PS-03",
+          "control_name": "Input Validation",
+          "category": "prompt_security",
+          "detected": true,
+          "level": "advanced",
+          "confidence": 0.8500000000000001,
+          "score": 75,
+          "evidence": [
+            {
+              "type": "import",
+              "file_path": "/tmp/langchain-test/libs/standard-tests/tests/unit_tests/custom_chat_model.py",
+              "line_number": 9,
+              "snippet": "pydantic",
+              "description": "Pydantic validation library imported",
+              "confidence": 0.9
+            },
+            {
+              "type": "ast",
+              "file_path": "/tmp/langchain-test/libs/standard-tests/langchain_tests/unit_tests/chat_models. py",
+              "line_number": 42,
+              "snippet": "class ChatModelTests(BaseStandardTests):",
+              "description": "Validation model class: ChatModelTests",
+              "confidence": 0.8
+            },
+            {
+              "type": "ast",
+              "file_path": "/tmp/langchain-test/libs/standard-tests/langchain_tests/unit_tests/chat_models. py",
+              "line_number": 276,
+              "snippet": "class ChatModelUnitTests(ChatModelTests):",
+              "description": "Validation model class: ChatModelUnitTests",
+              "confidence": 0.8
+            },
+            {
+              "type": "ast",
+              "file_path": "/tmp/langchain-test/libs/standard-tests/langchain_tests/integration_tests/chat_ models.py",
+              "line_number": 173,
+              "snippet": "class ChatModelIntegrationTests(ChatModelTests):",
+              "description": "Validation model class:  ChatModelIntegrationTests",
+              "confidence": 0.8
+            },
+            {
+              "type": "decorator",
+              "file_path": "/tmp/langchain-test/libs/partners/openai/langchain_openai/embeddings/azure.py",
+              "line_number": 162,
+              "snippet": "@model_validator",
+              "description": "Pydantic validator decorator",
+              "confidence": 0.9
+            },
+            {
+              "type": "decorator",
+              "file_path": "/tmp/langchain-test/libs/partners/openai/langchain_openai/embeddings/base.py",
+              "line_number": 302,
+              "snippet": "@model_validator",
+              "description": "Pydantic validator decorator",
+              "confidence": 0.9
+            }
+          ],
+          "recommendations": []
+        },
+        {
+          "control_id": "PS-04",
+          "control_name": "Output Filtering",
+          "category": "prompt_security",
+          "detected": true,
+          "level": "advanced",
+          "confidence": 0.8000000000000002,
+          "score": 75,
+          "evidence": [
+            {
+              "type": "ast",
+              "file_path": "/tmp/langchain-test/libs/langchain/langchain_classic/chains/base.py",
+              "line_number": 489,
+              "snippet": "self._validate_outputs(outputs)",
+              "description": "Output filtering function:  self._validate_outputs",
+              "confidence": 0.8
+            },
+            {
+              "type": "ast",
+              "file_path": "/tmp/langchain-test/libs/langchain/langchain_classic/chains/base.py",
+              "line_number": 514,
+              "snippet": "self._validate_outputs(outputs)",
+              "description": "Output filtering function:  self._validate_outputs",
+              "confidence": 0.8
+            },
+            {
+              "type": "ast",
+              "file_path": "/tmp/langchain-test/libs/langchain/langchain_classic/chains/router/llm_router.p y",
+              "line_number": 125,
+              "snippet": "super()._validate_outputs(outputs)",
+              "description": "Output filtering function: _validate_outputs",
+              "confidence": 0.8
+            },
+            {
+              "type": "ast",
+              "file_path": "/tmp/langchain-test/libs/partners/openai/langchain_openai/middleware/openai_mod eration.py",
+              "line_number": 110,
+              "snippet": "return self._moderate_inputs(messages)",
+              "description": "Output filtering function: self._moderate_inputs",
+              "confidence": 0.8
+            },
+            {
+              "type": "ast",
+              "file_path": "/tmp/langchain-test/libs/partners/openai/langchain_openai/middleware/openai_mod eration.py",
+              "line_number": 132,
+              "snippet": "return self._moderate_output(messages)",
+              "description": "Output filtering function: self._moderate_output",
+              "confidence": 0.8
+            },
+            {
+              "type": "ast",
+              "file_path": "/tmp/langchain-test/libs/partners/openai/langchain_openai/middleware/openai_mod eration.py",
+              "line_number": 244,
+              "snippet": "result = self._moderate(text)",
+              "description": "Output filtering function: self._moderate",
+              "confidence": 0.8
+            }
+          ],
+          "recommendations": []
+        },
+        {
+          "control_id": "PS-05",
+          "control_name": "Context Window Protection",
+          "category": "prompt_security",
+          "detected": false,
+          "level": "none",
+          "confidence": 0.0,
+          "score": 0,
+          "evidence": [],
+          "recommendations": [
+            "Detection failed: 'bool' object has no attribute 'lower'"
+          ]
+        },
+        {
+          "control_id": "PS-06",
+          "control_name": "Red Team Testing",
+          "category": "prompt_security",
+          "detected": false,
+          "level": "none",
+          "confidence": 0.0,
+          "score": 0,
+          "evidence": [],
+          "recommendations": [
+            "Detection failed: 'ConfigAnalyzer' object has no attribute  'file_exists'"
+          ]
+        },
+        {
+          "control_id": "PS-07",
+          "control_name": "Prompt Anomaly Detection",
+          "category": "prompt_security",
+          "detected": false,
+          "level": "none",
+          "confidence": 0.0,
+          "score": 0,
+          "evidence": [],
+          "recommendations": [
+            "Implement statistical analysis on prompt patterns",
+            "Use ML-based anomaly detection for unusual inputs",
+            "Set up alerts for prompt anomaly detection"
+          ]
+        },
+        {
+          "control_id": "PS-08",
+          "control_name": "System Prompt Protection",
+          "category": "prompt_security",
+          "detected": false,
+          "level": "none",
+          "confidence": 0.0,
+          "score": 0,
+          "evidence": [],
+          "recommendations": [
+            "Detection failed: 'bool' object has no attribute 'lower'"
+          ]
+        }
+      ]
+    },
+    "model_security": {
+      "category_id": "model_security",
+      "category_name": "Model Security",
+      "score": 25.0,
+      "max_score": 100.0,
+      "percentage": 25.0,
+      "detected_count": 3,
+      "total_count": 8,
+      "controls": [
+        {
+          "control_id": "MS-01",
+          "control_name": "Access Control",
+          "category": "model_security",
+          "detected": false,
+          "level": "none",
+          "confidence": 0.0,
+          "score": 0,
+          "evidence": [],
+          "recommendations": [
+            "Detection failed: 'bool' object has no attribute 'lower'"
+          ]
+        },
+        {
+          "control_id": "MS-02",
+          "control_name": "Model Versioning",
+          "category": "model_security",
+          "detected": false,
+          "level": "none",
+          "confidence": 0.0,
+          "score": 0,
+          "evidence": [],
+          "recommendations": [
+            "Detection failed: 'bool' object has no attribute 'lower'"
+          ]
+        },
+        {
+          "control_id": "MS-03",
+          "control_name": "Dependency Scanning",
+          "category": "model_security",
+          "detected": false,
+          "level": "none",
+          "confidence": 0.0,
+          "score": 0,
+          "evidence": [],
+          "recommendations": [
+            "Detection failed: 'bool' object has no attribute 'lower'"
+          ]
+        },
+        {
+          "control_id": "MS-04",
+          "control_name": "API Security",
+          "category": "model_security",
+          "detected": false,
+          "level": "none",
+          "confidence": 0.0,
+          "score": 0,
+          "evidence": [],
+          "recommendations": [
+            "Detection failed: 'bool' object has no attribute 'lower'"
+          ]
+        },
+        {
+          "control_id": "MS-05",
+          "control_name": "Model Source Verification",
+          "category": "model_security",
+          "detected": true,
+          "level": "advanced",
+          "confidence": 0.8666666666666667,
+          "score": 75,
+          "evidence": [
+            {
+              "type": "import",
+              "file_path": "/tmp/langchain-test/libs/partners/mistralai/langchain_mistralai/chat_models.py",
+              "line_number": 3,
+              "snippet": "hashlib",
+              "description": "Hash verification library: hashlib",
+              "confidence": 0.9
+            },
+            {
+              "type": "import",
+              "file_path": "/tmp/langchain-test/libs/cli/langchain_cli/utils/git.py",
+              "line_number": 5,
+              "snippet": "hashlib",
+              "description": "Hash verification library: hashlib",
+              "confidence": 0.9
+            },
+            {
+              "type": "import",
+              "file_path": "/tmp/langchain-test/libs/langchain/langchain_classic/cache.py",
+              "line_number": 6,
+              "snippet": "langchain_community.cache.FullMd5LLMCache",
+              "description": "Hash verification library:  langchain_community.cache.FullMd5LLMCache",
+              "confidence": 0.9
+            },
+            {
+              "type": "import",
+              "file_path": "/tmp/langchain-test/libs/langchain/langchain_classic/cache.py",
+              "line_number": 6,
+              "snippet": "langchain_community.cache.FullMd5LLMCache",
+              "description": "Hash verification library:  langchain_community.cache.FullMd5LLMCache",
+              "confidence": 0.9
+            },
+            {
+              "type": "ast",
+              "file_path": "/tmp/langchain-test/libs/partners/ollama/langchain_ollama/chat_models.py",
+              "line_number": 809,
+              "snippet": "validate_model(self._client, self.model)",
+              "description": "Verification function: validate_model",
+              "confidence": 0.8
+            },
+            {
+              "type": "ast",
+              "file_path": "/tmp/langchain-test/libs/partners/ollama/langchain_ollama/embeddings.py",
+              "line_number": 294,
+              "snippet": "validate_model(self._client, self.model)",
+              "description": "Verification function: validate_model",
+              "confidence": 0.8
+            }
+          ],
+          "recommendations": []
+        },
+        {
+          "control_id": "MS-06",
+          "control_name": "Differential Privacy",
+          "category": "model_security",
+          "detected": true,
+          "level": "intermediate",
+          "confidence": 0.8,
+          "score": 50,
+          "evidence": [
+            {
+              "type": "ast",
+              "file_path": "/tmp/langchain-test/libs/langchain/langchain_classic/chains/natbot/crawler.py",
+              "line_number": 90,
+              "snippet": "self.client =  self.page.context.new_cdp_session(self.page)",
+              "description": "Differential privacy:  self.page.context.new_cdp_session",
+              "confidence": 0.8
+            }
+          ],
+          "recommendations": []
+        },
+        {
+          "control_id": "MS-07",
+          "control_name": "Model Watermarking",
+          "category": "model_security",
+          "detected": false,
+          "level": "none",
+          "confidence": 0.0,
+          "score": 0,
+          "evidence": [],
+          "recommendations": [
+            "Implement watermarking for model outputs",
+            "Use cryptographic watermarks for model weights",
+            "Track watermark verification for model theft detection"
+          ]
+        },
+        {
+          "control_id": "MS-08",
+          "control_name": "Secure Model Loading",
+          "category": "model_security",
+          "detected": true,
+          "level": "advanced",
+          "confidence": 0.8,
+          "score": 75,
+          "evidence": [
+            {
+              "type": "ast",
+              "file_path": "/tmp/langchain-test/libs/standard-tests/langchain_tests/conftest.py",
+              "line_number": 50,
+              "snippet": "cassette = cast(\"dict\",  yaml.safe_load(decoded_yaml))",
+              "description": "Safe loading: yaml.safe_load",
+              "confidence": 0.8
+            },
+            {
+              "type": "ast",
+              "file_path": "/tmp/langchain-test/libs/partners/prompty/langchain_prompty/core.py",
+              "line_number": 323,
+              "snippet": "\"attributes\": yaml.safe_load(fmatter),",
+              "description": "Safe loading: yaml.safe_load",
+              "confidence": 0.8
+            }
+          ],
+          "recommendations": []
+        }
+      ]
+    },
+    "data_privacy": {
+      "category_id": "data_privacy",
+      "category_name": "Data Privacy",
+      "score": 31.2,
+      "max_score": 100.0,
+      "percentage": 31.2,
+      "detected_count": 4,
+      "total_count": 8,
+      "controls": [
+        {
+          "control_id": "DP-01",
+          "control_name": "PII Detection",
+          "category": "data_privacy",
+          "detected": true,
+          "level": "intermediate",
+          "confidence": 0.9,
+          "score": 50,
+          "evidence": [
+            {
+              "type": "import",
+              "file_path": "/tmp/langchain-test/libs/langchain_v1/tests/unit_tests/agents/middleware/implem entations/test_pii.py",
+              "line_number": 11,
+              "snippet": "langchain.agents.middleware.pii.PIIDetectionError",
+              "description": "PII library imported:  langchain.agents.middleware.pii.PIIDetectionError",
+              "confidence": 0.9
+            },
+            {
+              "type": "import",
+              "file_path": "/tmp/langchain-test/libs/langchain_v1/langchain/agents/middleware/__init__.py",
+              "line_number": 12,
+              "snippet": "langchain.agents.middleware.pii.PIIDetectionError",
+              "description": "PII library imported:  langchain.agents.middleware.pii.PIIDetectionError",
+              "confidence": 0.9
+            }
+          ],
+          "recommendations": []
+        },
+        {
+          "control_id": "DP-02",
+          "control_name": "Data Redaction",
+          "category": "data_privacy",
+          "detected": true,
+          "level": "advanced",
+          "confidence": 0.8,
+          "score": 75,
+          "evidence": [
+            {
+              "type": "ast",
+              "file_path": "/tmp/langchain-test/libs/langchain_v1/tests/unit_tests/agents/middleware/implem entations/test_shell_tool.py",
+              "line_number": 113,
+              "snippet": "redaction_rules=(RedactionRule(pii_type=\"email\",  strategy=\"redact\"),),",
+              "description": "Redaction function: RedactionRule",
+              "confidence": 0.8
+            },
+            {
+              "type": "ast",
+              "file_path": "/tmp/langchain-test/libs/langchain_v1/langchain/agents/middleware/pii.py",
+              "line_number": 141,
+              "snippet": "self._resolved_rule: ResolvedRedactionRule =  RedactionRule(",
+              "description": "Redaction function: RedactionRule",
+              "confidence": 0.8
+            },
+            {
+              "type": "ast",
+              "file_path": "/tmp/langchain-test/libs/langchain_v1/langchain/agents/middleware/_redaction.py ",
+              "line_number": 328,
+              "snippet": "return _apply_redact_strategy(content, matches)",
+              "description": "Redaction function: _apply_redact_strategy",
+              "confidence": 0.8
+            },
+            {
+              "type": "ast",
+              "file_path": "/tmp/langchain-test/libs/langchain_v1/langchain/agents/middleware/_redaction.py ",
+              "line_number": 330,
+              "snippet": "return _apply_mask_strategy(content, matches)",
+              "description": "Redaction function: _apply_mask_strategy",
+              "confidence": 0.8
+            },
+            {
+              "type": "ast",
+              "file_path": "/tmp/langchain-test/libs/partners/openai/langchain_openai/embeddings/base.py",
+              "line_number": 553,
+              "snippet": "_iter, tokens, indices, token_counts =  self._tokenize(texts, _chunk_size)",
+              "description": "Redaction function: self._tokenize",
+              "confidence": 0.8
+            },
+            {
+              "type": "ast",
+              "file_path": "/tmp/langchain-test/libs/partners/openai/langchain_openai/embeddings/base.py",
+              "line_number": 467,
+              "snippet": "tokenizer = AutoTokenizer.from_pretrained(",
+              "description": "Redaction function:  AutoTokenizer.from_pretrained",
+              "confidence": 0.8
+            },
+            {
+              "type": "ast",
+              "file_path": "/tmp/langchain-test/libs/partners/huggingface/langchain_huggingface/chat_models /huggingface.py",
+              "line_number": 1010,
+              "snippet": "AutoTokenizer.from_pretrained(self.model_id)",
+              "description": "Redaction function:  AutoTokenizer.from_pretrained",
+              "confidence": 0.8
+            }
+          ],
+          "recommendations": []
+        },
+        {
+          "control_id": "DP-03",
+          "control_name": "Data Encryption",
+          "category": "data_privacy",
+          "detected": true,
+          "level": "intermediate",
+          "confidence": 0.9,
+          "score": 50,
+          "evidence": [
+            {
+              "type": "import",
+              "file_path": "/tmp/langchain-test/libs/langchain/langchain_classic/__init__.py",
+              "line_number": 67,
+              "snippet": "langchain_classic.chains.ConversationChain",
+              "description": "Encryption module imported:  langchain_classic.chains.ConversationChain",
+              "confidence": 0.9
+            },
+            {
+              "type": "import",
+              "file_path": "/tmp/langchain-test/libs/langchain/langchain_classic/chains/router/multi_prompt .py",
+              "line_number": 12,
+              "snippet": "langchain_classic.chains.ConversationChain",
+              "description": "Encryption module imported:  langchain_classic.chains.ConversationChain",
+              "confidence": 0.9
+            }
+          ],
+          "recommendations": []
+        },
+        {
+          "control_id": "DP-04",
+          "control_name": "Audit Logging",
+          "category": "data_privacy",
+          "detected": true,
+          "level": "advanced",
+          "confidence": 0.8500000000000001,
+          "score": 75,
+          "evidence": [
+            {
+              "type": "import",
+              "file_path": "/tmp/langchain-test/libs/partners/openai/langchain_openai/embeddings/base.py",
+              "line_number": 5,
+              "snippet": "logging",
+              "description": "Logging module imported: logging",
+              "confidence": 0.9
+            },
+            {
+              "type": "import",
+              "file_path": "/tmp/langchain-test/libs/partners/openai/langchain_openai/chat_models/azure.py",
+              "line_number": 5,
+              "snippet": "logging",
+              "description": "Logging module imported: logging",
+              "confidence": 0.9
+            },
+            {
+              "type": "ast",
+              "file_path": "/tmp/langchain-test/libs/langchain_v1/tests/unit_tests/agents/middleware/core/t est_wrap_model_call.py",
+              "line_number": 533,
+              "snippet": "model = TrackingModel(",
+              "description": "Audit logging: TrackingModel",
+              "confidence": 0.8
+            },
+            {
+              "type": "ast",
+              "file_path": "/tmp/langchain-test/libs/langchain_v1/tests/unit_tests/agents/middleware/core/t est_wrap_model_call.py",
+              "line_number": 979,
+              "snippet": "model = TrackingModel(",
+              "description": "Audit logging: TrackingModel",
+              "confidence": 0.8
+            }
+          ],
+          "recommendations": []
+        },
+        {
+          "control_id": "DP-05",
+          "control_name": "Consent Management",
+          "category": "data_privacy",
+          "detected": false,
+          "level": "none",
+          "confidence": 0.0,
+          "score": 0,
+          "evidence": [],
+          "recommendations": [
+            "Detection failed: 'bool' object has no attribute 'lower'"
+          ]
+        },
+        {
+          "control_id": "DP-06",
+          "control_name": "NER PII Detection",
+          "category": "data_privacy",
+          "detected": false,
+          "level": "none",
+          "confidence": 0.0,
+          "score": 0,
+          "evidence": [],
+          "recommendations": [
+            "Use Presidio or SpaCy for NER-based PII detection",
+            "Implement custom NER models for domain-specific PII",
+            "Run PII detection on all inputs and outputs"
+          ]
+        },
+        {
+          "control_id": "DP-07",
+          "control_name": "Data Retention Policy",
+          "category": "data_privacy",
+          "detected": false,
+          "level": "none",
+          "confidence": 0.0,
+          "score": 0,
+          "evidence": [],
+          "recommendations": [
+            "Detection failed: 'bool' object has no attribute 'lower'"
+          ]
+        },
+        {
+          "control_id": "DP-08",
+          "control_name": "GDPR Compliance",
+          "category": "data_privacy",
+          "detected": false,
+          "level": "none",
+          "confidence": 0.0,
+          "score": 0,
+          "evidence": [],
+          "recommendations": [
+            "Detection failed: 'bool' object has no attribute 'lower'"
+          ]
+        }
+      ]
+    },
+    "owasp_llm": {
+      "category_id": "owasp_llm",
+      "category_name": "OWASP LLM Top 10",
+      "score": 45.0,
+      "max_score": 100.0,
+      "percentage": 45.0,
+      "detected_count": 8,
+      "total_count": 10,
+      "controls": [
+        {
+          "control_id": "OWASP-01",
+          "control_name": "LLM01: Prompt Injection Defense",
+          "category": "owasp_llm",
+          "detected": true,
+          "level": "advanced",
+          "confidence": 0.8,
+          "score": 75,
+          "evidence": [
+            {
+              "type": "ast",
+              "file_path": "/tmp/langchain-test/libs/langchain_v1/langchain/agents/middleware/shell_tool.py ",
+              "line_number": 805,
+              "snippet": "f\"{sanitized_output.rstrip()}\\n\\n\"",
+              "description": "Input sanitization: sanitized_output.rstrip",
+              "confidence": 0.8
+            },
+            {
+              "type": "ast",
+              "file_path": "/tmp/langchain-test/libs/langchain_v1/langchain/agents/middleware/shell_tool.py ",
+              "line_number": 811,
+              "snippet": "f\"{sanitized_output.rstrip()}\\n\\n\"",
+              "description": "Input sanitization: sanitized_output.rstrip",
+              "confidence": 0.8
+            },
+            {
+              "type": "ast",
+              "file_path": "/tmp/langchain-test/libs/langchain_v1/tests/unit_tests/agents/middleware/implem entations/test_human_in_the_loop.py",
+              "line_number": 314,
+              "snippet": "match=re.escape(",
+              "description": "Input sanitization: re.escape",
+              "confidence": 0.8
+            },
+            {
+              "type": "ast",
+              "file_path": "/tmp/langchain-test/libs/langchain_v1/tests/unit_tests/agents/middleware/implem entations/test_human_in_the_loop.py",
+              "line_number": 358,
+              "snippet": "match=re.escape(",
+              "description": "Input sanitization: re.escape",
+              "confidence": 0.8
+            },
+            {
+              "type": "ast",
+              "file_path": "/tmp/langchain-test/libs/standard-tests/langchain_tests/conftest.py",
+              "line_number": 109,
+              "snippet": "\"filter_headers\": _BASE_FILTER_HEADERS.copy(),",
+              "description": "Input sanitization: _BASE_FILTER_HEADERS.copy",
+              "confidence": 0.8
+            },
+            {
+              "type": "ast",
+              "file_path": "/tmp/langchain-test/libs/partners/openai/langchain_openai/chat_models/base.py",
+              "line_number": 2091,
+              "snippet": "bind_kwargs = self._filter_disabled_params(",
+              "description": "Input sanitization: self._filter_disabled_params",
+              "confidence": 0.8
+            },
+            {
+              "type": "ast",
+              "file_path": "/tmp/langchain-test/libs/partners/anthropic/langchain_anthropic/chat_models.py",
+              "line_number": 541,
+              "snippet": "cleaned_citations.append(cleaned_citation)",
+              "description": "Input sanitization: cleaned_citations.append",
+              "confidence": 0.8
+            },
+            {
+              "type": "ast",
+              "file_path": "/tmp/langchain-test/libs/partners/mistralai/langchain_mistralai/chat_models.py",
+              "line_number": 426,
+              "snippet": "_clean_block(block)",
+              "description": "Input sanitization: _clean_block",
+              "confidence": 0.8
+            },
+            {
+              "type": "ast",
+              "file_path": "/tmp/langchain-test/libs/standard-tests/langchain_tests/integration_tests/chat_ models.py",
+              "line_number": 1689,
+              "snippet": "prompt = ChatPromptTemplate.from_messages(",
+              "description": "Prompt template usage:  ChatPromptTemplate.from_messages",
+              "confidence": 0.8
+            },
+            {
+              "type": "ast",
+              "file_path": "/tmp/langchain-test/libs/partners/openai/tests/unit_tests/test_load.py",
+              "line_number": 72,
+              "snippet": "prompt = ChatPromptTemplate.from_messages([(\"user\",  \"Hello, {name}!\")])",
+              "description": "Prompt template usage:  ChatPromptTemplate.from_messages",
+              "confidence": 0.8
+            },
+            {
+              "type": "ast",
+              "file_path": "/tmp/langchain-test/libs/standard-tests/langchain_tests/integration_tests/chat_ models.py",
+              "line_number": 1689,
+              "snippet": "prompt = ChatPromptTemplate.from_messages(",
+              "description": "Prompt template usage:  ChatPromptTemplate.from_messages",
+              "confidence": 0.8
+            },
+            {
+              "type": "ast",
+              "file_path": "/tmp/langchain-test/libs/partners/openai/tests/unit_tests/test_load.py",
+              "line_number": 72,
+              "snippet": "prompt = ChatPromptTemplate.from_messages([(\"user\",  \"Hello, {name}!\")])",
+              "description": "Prompt template usage:  ChatPromptTemplate.from_messages",
+              "confidence": 0.8
+            },
+            {
+              "type": "ast",
+              "file_path": "/tmp/langchain-test/libs/standard-tests/langchain_tests/integration_tests/chat_ models.py",
+              "line_number": 1689,
+              "snippet": "prompt = ChatPromptTemplate.from_messages(",
+              "description": "Prompt template usage:  ChatPromptTemplate.from_messages",
+              "confidence": 0.8
+            },
+            {
+              "type": "ast",
+              "file_path": "/tmp/langchain-test/libs/partners/openai/tests/unit_tests/test_load.py",
+              "line_number": 72,
+              "snippet": "prompt = ChatPromptTemplate.from_messages([(\"user\",  \"Hello, {name}!\")])",
+              "description": "Prompt template usage:  ChatPromptTemplate.from_messages",
+              "confidence": 0.8
+            }
+          ],
+          "recommendations": []
+        },
+        {
+          "control_id": "OWASP-02",
+          "control_name": "LLM02: Insecure Output Handling",
+          "category": "owasp_llm",
+          "detected": true,
+          "level": "intermediate",
+          "confidence": 0.8,
+          "score": 50,
+          "evidence": [
+            {
+              "type": "ast",
+              "file_path": "/tmp/langchain-test/libs/langchain_v1/tests/unit_tests/agents/middleware/implem entations/test_human_in_the_loop.py",
+              "line_number": 314,
+              "snippet": "match=re.escape(",
+              "description": "Output escaping: re.escape",
+              "confidence": 0.8
+            },
+            {
+              "type": "ast",
+              "file_path": "/tmp/langchain-test/libs/langchain_v1/tests/unit_tests/agents/middleware/implem entations/test_human_in_the_loop.py",
+              "line_number": 358,
+              "snippet": "match=re.escape(",
+              "description": "Output escaping: re.escape",
+              "confidence": 0.8
+            }
+          ],
+          "recommendations": []
+        },
+        {
+          "control_id": "OWASP-03",
+          "control_name": "LLM03: Training Data Poisoning",
+          "category": "owasp_llm",
+          "detected": true,
+          "level": "basic",
+          "confidence": 0.8,
+          "score": 25,
+          "evidence": [
+            {
+              "type": "ast",
+              "file_path": "/tmp/langchain-test/libs/model-profiles/langchain_model_profiles/cli.py",
+              "line_number": 221,
+              "snippet": "data_dir = _validate_data_dir(data_dir)",
+              "description": "Data validation: _validate_data_dir",
+              "confidence": 0.8
+            }
+          ],
+          "recommendations": []
+        },
+        {
+          "control_id": "OWASP-04",
+          "control_name": "LLM04: Model Denial of Service",
+          "category": "owasp_llm",
+          "detected": false,
+          "level": "none",
+          "confidence": 0.0,
+          "score": 0,
+          "evidence": [],
+          "recommendations": [
+            "Detection failed: 'bool' object has no attribute 'lower'"
+          ]
+        },
+        {
+          "control_id": "OWASP-05",
+          "control_name": "LLM05: Supply Chain Vulnerabilities",
+          "category": "owasp_llm",
+          "detected": true,
+          "level": "intermediate",
+          "confidence": 0.9,
+          "score": 50,
+          "evidence": [
+            {
+              "type": "import",
+              "file_path": "/tmp/langchain-test/libs/partners/mistralai/langchain_mistralai/chat_models.py",
+              "line_number": 3,
+              "snippet": "hashlib",
+              "description": "Integrity verification: hashlib",
+              "confidence": 0.9
+            },
+            {
+              "type": "import",
+              "file_path": "/tmp/langchain-test/libs/cli/langchain_cli/utils/git.py",
+              "line_number": 5,
+              "snippet": "hashlib",
+              "description": "Integrity verification: hashlib",
+              "confidence": 0.9
+            }
+          ],
+          "recommendations": []
+        },
+        {
+          "control_id": "OWASP-06",
+          "control_name": "LLM06: Sensitive Information Disclosure",
+          "category": "owasp_llm",
+          "detected": true,
+          "level": "advanced",
+          "confidence": 0.8,
+          "score": 75,
+          "evidence": [
+            {
+              "type": "ast",
+              "file_path": "/tmp/langchain-test/libs/langchain_v1/tests/unit_tests/agents/middleware/implem entations/test_shell_tool.py",
+              "line_number": 113,
+              "snippet": "redaction_rules=(RedactionRule(pii_type=\"email\",  strategy=\"redact\"),),",
+              "description": "Data filtering: RedactionRule",
+              "confidence": 0.8
+            },
+            {
+              "type": "ast",
+              "file_path": "/tmp/langchain-test/libs/langchain_v1/langchain/agents/middleware/pii.py",
+              "line_number": 141,
+              "snippet": "self._resolved_rule: ResolvedRedactionRule =  RedactionRule(",
+              "description": "Data filtering: RedactionRule",
+              "confidence": 0.8
+            },
+            {
+              "type": "ast",
+              "file_path": "/tmp/langchain-test/libs/langchain_v1/langchain/agents/middleware/_redaction.py ",
+              "line_number": 330,
+              "snippet": "return _apply_mask_strategy(content, matches)",
+              "description": "Data filtering: _apply_mask_strategy",
+              "confidence": 0.8
+            },
+            {
+              "type": "ast",
+              "file_path": "/tmp/langchain-test/libs/langchain_v1/langchain/agents/middleware/shell_tool.py ",
+              "line_number": 805,
+              "snippet": "f\"{sanitized_output.rstrip()}\\n\\n\"",
+              "description": "Data filtering: sanitized_output.rstrip",
+              "confidence": 0.8
+            },
+            {
+              "type": "ast",
+              "file_path": "/tmp/langchain-test/libs/langchain_v1/langchain/agents/middleware/shell_tool.py ",
+              "line_number": 811,
+              "snippet": "f\"{sanitized_output.rstrip()}\\n\\n\"",
+              "description": "Data filtering: sanitized_output.rstrip",
+              "confidence": 0.8
+            }
+          ],
+          "recommendations": []
+        },
+        {
+          "control_id": "OWASP-07",
+          "control_name": "LLM07: Insecure Plugin Design",
+          "category": "owasp_llm",
+          "detected": true,
+          "level": "advanced",
+          "confidence": 0.8,
+          "score": 75,
+          "evidence": [
+            {
+              "type": "ast",
+              "file_path": "/tmp/langchain-test/libs/model-profiles/langchain_model_profiles/cli.py",
+              "line_number": 221,
+              "snippet": "data_dir = _validate_data_dir(data_dir)",
+              "description": "Plugin validation: _validate_data_dir",
+              "confidence": 0.8
+            },
+            {
+              "type": "ast",
+              "file_path": "/tmp/langchain-test/libs/standard-tests/langchain_tests/integration_tests/chat_ models.py",
+              "line_number": 1575,
+              "snippet": "_validate_tool_call_message(result)",
+              "description": "Plugin validation: _validate_tool_call_message",
+              "confidence": 0.8
+            },
+            {
+              "type": "ast",
+              "file_path": "/tmp/langchain-test/libs/langchain_v1/tests/unit_tests/agents/middleware/implem entations/test_shell_execution_policies.py",
+              "line_number": 214,
+              "snippet": "policy = CodexSandboxExecutionPolicy(",
+              "description": "Sandboxing: CodexSandboxExecutionPolicy",
+              "confidence": 0.8
+            },
+            {
+              "type": "ast",
+              "file_path": "/tmp/langchain-test/libs/langchain_v1/tests/unit_tests/agents/middleware/implem entations/test_shell_execution_policies.py",
+              "line_number": 236,
+              "snippet": "policy =  CodexSandboxExecutionPolicy(platform=\"auto\")",
+              "description": "Sandboxing: CodexSandboxExecutionPolicy",
+              "confidence": 0.8
+            }
+          ],
+          "recommendations": []
+        },
+        {
+          "control_id": "OWASP-08",
+          "control_name": "LLM08: Excessive Agency",
+          "category": "owasp_llm",
+          "detected": true,
+          "level": "basic",
+          "confidence": 0.8,
+          "score": 25,
+          "evidence": [
+            {
+              "type": "ast",
+              "file_path": "/tmp/langchain-test/libs/cli/langchain_cli/namespaces/app.py",
+              "line_number": 94,
+              "snippet": "pip_bool = typer.confirm(",
+              "description": "Approval workflow: typer.confirm",
+              "confidence": 0.8
+            }
+          ],
+          "recommendations": []
+        },
+        {
+          "control_id": "OWASP-09",
+          "control_name": "LLM09: Overreliance",
+          "category": "owasp_llm",
+          "detected": true,
+          "level": "advanced",
+          "confidence": 0.8,
+          "score": 75,
+          "evidence": [
+            {
+              "type": "ast",
+              "file_path": "/tmp/langchain-test/libs/langchain/langchain_classic/chains/flare/base.py",
+              "line_number": 222,
+              "snippet": "low_confidence_spans = _low_confidence_spans(",
+              "description": "Confidence scoring: _low_confidence_spans",
+              "confidence": 0.8
+            },
+            {
+              "type": "ast",
+              "file_path": "/tmp/langchain-test/libs/partners/openai/langchain_openai/middleware/openai_mod eration.py",
+              "line_number": 452,
+              "snippet": "scores_json =  json.dumps(result.category_scores.model_dump(), sort_keys=True)",
+              "description": "Confidence scoring:  result.category_scores.model_dump",
+              "confidence": 0.8
+            },
+            {
+              "type": "ast",
+              "file_path": "/tmp/langchain-test/libs/partners/qdrant/langchain_qdrant/vectorstores.py",
+              "line_number": 271,
+              "snippet": "results = self.similarity_search_with_score(",
+              "description": "Confidence scoring:  self.similarity_search_with_score",
+              "confidence": 0.8
+            },
+            {
+              "type": "ast",
+              "file_path": "/tmp/langchain-test/libs/langchain/langchain_classic/chains/base.py",
+              "line_number": 489,
+              "snippet": "self._validate_outputs(outputs)",
+              "description": "Output verification: self._validate_outputs",
+              "confidence": 0.8
+            },
+            {
+              "type": "ast",
+              "file_path": "/tmp/langchain-test/libs/langchain/langchain_classic/chains/base.py",
+              "line_number": 514,
+              "snippet": "self._validate_outputs(outputs)",
+              "description": "Output verification: self._validate_outputs",
+              "confidence": 0.8
+            },
+            {
+              "type": "ast",
+              "file_path": "/tmp/langchain-test/libs/langchain_v1/langchain/agents/middleware/human_in_the_ loop.py",
+              "line_number": 233,
+              "snippet": "review_config = ReviewConfig(",
+              "description": "Output verification: ReviewConfig",
+              "confidence": 0.8
+            },
+            {
+              "type": "ast",
+              "file_path": "/tmp/langchain-test/libs/langchain_v1/langchain/agents/middleware/human_in_the_ loop.py",
+              "line_number": 317,
+              "snippet": "review_configs.append(review_config)",
+              "description": "Output verification: review_configs.append",
+              "confidence": 0.8
+            }
+          ],
+          "recommendations": []
+        },
+        {
+          "control_id": "OWASP-10",
+          "control_name": "LLM10: Model Theft",
+          "category": "owasp_llm",
+          "detected": false,
+          "level": "none",
+          "confidence": 0.0,
+          "score": 0,
+          "evidence": [],
+          "recommendations": [
+            "Implement rate limiting on API endpoints",
+            "Add query logging and anomaly detection",
+            "Monitor for extraction patterns"
+          ]
+        }
+      ]
+    },
+    "blue_team": {
+      "category_id": "blue_team",
+      "category_name": "Blue Team Operations",
+      "score": 21.4,
+      "max_score": 100.0,
+      "percentage": 21.4,
+      "detected_count": 2,
+      "total_count": 7,
+      "controls": [
+        {
+          "control_id": "BT-01",
+          "control_name": "Model Monitoring",
+          "category": "blue_team",
+          "detected": true,
+          "level": "advanced",
+          "confidence": 0.8000000000000002,
+          "score": 75,
+          "evidence": [
+            {
+              "type": "ast",
+              "file_path": "/tmp/langchain-test/libs/langchain_v1/tests/unit_tests/agents/middleware/core/t est_wrap_tool_call.py",
+              "line_number": 833,
+              "snippet": "metrics.append(",
+              "description": "Metrics tracking: metrics.append",
+              "confidence": 0.8
+            },
+            {
+              "type": "ast",
+              "file_path": "/tmp/langchain-test/libs/langchain/langchain_classic/evaluation/string_distance /base.py",
+              "line_number": 147,
+              "snippet": "return _RapidFuzzChainMixin._get_metric(",
+              "description": "Metrics tracking:  _RapidFuzzChainMixin._get_metric",
+              "confidence": 0.8
+            },
+            {
+              "type": "ast",
+              "file_path": "/tmp/langchain-test/libs/langchain_v1/tests/unit_tests/agents/middleware/implem entations/test_summarization.py",
+              "line_number": 991,
+              "snippet": "count_1 = middleware.token_counter()",
+              "description": "Metrics tracking: middleware.token_counter",
+              "confidence": 0.8
+            },
+            {
+              "type": "ast",
+              "file_path": "/tmp/langchain-test/libs/langchain_v1/tests/unit_tests/agents/middleware/implem entations/test_summarization.py",
+              "line_number": 999,
+              "snippet": "count_2 = middleware.token_counter()",
+              "description": "Metrics tracking: middleware.token_counter",
+              "confidence": 0.8
+            },
+            {
+              "type": "ast",
+              "file_path": "/tmp/langchain-test/libs/langchain_v1/tests/unit_tests/agents/middleware/core/t est_wrap_model_call.py",
+              "line_number": 533,
+              "snippet": "model = TrackingModel(",
+              "description": "Metrics tracking: TrackingModel",
+              "confidence": 0.8
+            },
+            {
+              "type": "ast",
+              "file_path": "/tmp/langchain-test/libs/langchain_v1/tests/unit_tests/agents/middleware/core/t est_wrap_model_call.py",
+              "line_number": 979,
+              "snippet": "model = TrackingModel(",
+              "description": "Metrics tracking: TrackingModel",
+              "confidence": 0.8
+            }
+          ],
+          "recommendations": []
+        },
+        {
+          "control_id": "BT-02",
+          "control_name": "Drift Detection",
+          "category": "blue_team",
+          "detected": false,
+          "level": "none",
+          "confidence": 0.0,
+          "score": 0,
+          "evidence": [],
+          "recommendations": [
+            "Implement drift detection with evidently or alibi-detect",
+            "Monitor input data distribution changes",
+            "Set up automated alerts for drift events"
+          ]
+        },
+        {
+          "control_id": "BT-03",
+          "control_name": "Anomaly Detection",
+          "category": "blue_team",
+          "detected": false,
+          "level": "none",
+          "confidence": 0.0,
+          "score": 0,
+          "evidence": [],
+          "recommendations": [
+            "Implement anomaly detection on model inputs",
+            "Monitor for unusual query patterns",
+            "Use statistical methods or ML-based detection"
+          ]
+        },
+        {
+          "control_id": "BT-04",
+          "control_name": "Adversarial Attack Detection",
+          "category": "blue_team",
+          "detected": false,
+          "level": "none",
+          "confidence": 0.0,
+          "score": 0,
+          "evidence": [],
+          "recommendations": [
+            "Implement adversarial input detection",
+            "Use adversarial robustness toolkits",
+            "Add input perturbation analysis"
+          ]
+        },
+        {
+          "control_id": "BT-05",
+          "control_name": "AI Incident Response",
+          "category": "blue_team",
+          "detected": false,
+          "level": "none",
+          "confidence": 0.0,
+          "score": 0,
+          "evidence": [],
+          "recommendations": [
+            "Detection failed: 'bool' object has no attribute 'lower'"
+          ]
+        },
+        {
+          "control_id": "BT-06",
+          "control_name": "Model Drift Monitoring",
+          "category": "blue_team",
+          "detected": false,
+          "level": "none",
+          "confidence": 0.0,
+          "score": 0,
+          "evidence": [],
+          "recommendations": [
+            "Use Evidently or alibi-detect for drift monitoring",
+            "Set up automated alerts for significant drift",
+            "Implement automatic retraining pipelines"
+          ]
+        },
+        {
+          "control_id": "BT-07",
+          "control_name": "Data Quality Monitoring",
+          "category": "blue_team",
+          "detected": true,
+          "level": "advanced",
+          "confidence": 0.8000000000000002,
+          "score": 75,
+          "evidence": [
+            {
+              "type": "ast",
+              "file_path": "/tmp/langchain-test/libs/model-profiles/langchain_model_profiles/cli.py",
+              "line_number": 221,
+              "snippet": "data_dir = _validate_data_dir(data_dir)",
+              "description": "Data quality check: _validate_data_dir",
+              "confidence": 0.8
+            },
+            {
+              "type": "ast",
+              "file_path": "/tmp/langchain-test/libs/langchain_v1/tests/unit_tests/agents/conftest.py",
+              "line_number": 151,
+              "snippet": "with _checkpointer_memory() as checkpointer:",
+              "description": "Great Expectations: _checkpointer_memory",
+              "confidence": 0.8
+            },
+            {
+              "type": "ast",
+              "file_path": "/tmp/langchain-test/libs/langchain_v1/tests/unit_tests/agents/conftest.py",
+              "line_number": 178,
+              "snippet": "with _checkpointer_memory() as checkpointer:",
+              "description": "Great Expectations: _checkpointer_memory",
+              "confidence": 0.8
+            }
+          ],
+          "recommendations": []
+        }
+      ]
+    },
+    "governance": {
+      "category_id": "governance",
+      "category_name": "AI Governance",
+      "score": 0.0,
+      "max_score": 100.0,
+      "percentage": 0.0,
+      "detected_count": 0,
+      "total_count": 5,
+      "controls": [
+        {
+          "control_id": "GV-01",
+          "control_name": "Model Explainability",
+          "category": "governance",
+          "detected": false,
+          "level": "none",
+          "confidence": 0.0,
+          "score": 0,
+          "evidence": [],
+          "recommendations": [
+            "Use SHAP or LIME for model explanations",
+            "Provide decision explanations in outputs",
+            "Implement feature attribution tracking"
+          ]
+        },
+        {
+          "control_id": "GV-02",
+          "control_name": "Bias Detection",
+          "category": "governance",
+          "detected": false,
+          "level": "none",
+          "confidence": 0.0,
+          "score": 0,
+          "evidence": [],
+          "recommendations": [
+            "Use Fairlearn or AIF360 for bias detection",
+            "Implement fairness metrics tracking",
+            "Test for demographic parity and equalized odds"
+          ]
+        },
+        {
+          "control_id": "GV-03",
+          "control_name": "Model Documentation",
+          "category": "governance",
+          "detected": false,
+          "level": "none",
+          "confidence": 0.0,
+          "score": 0,
+          "evidence": [],
+          "recommendations": [
+            "Detection failed: 'bool' object has no attribute 'lower'"
+          ]
+        },
+        {
+          "control_id": "GV-04",
+          "control_name": "Compliance Tracking",
+          "category": "governance",
+          "detected": false,
+          "level": "none",
+          "confidence": 0.0,
+          "score": 0,
+          "evidence": [],
+          "recommendations": [
+            "Detection failed: 'bool' object has no attribute 'lower'"
+          ]
+        },
+        {
+          "control_id": "GV-05",
+          "control_name": "Human Oversight",
+          "category": "governance",
+          "detected": false,
+          "level": "none",
+          "confidence": 0.0,
+          "score": 0,
+          "evidence": [],
+          "recommendations": [
+            "Detection failed: 'bool' object has no attribute 'lower'"
+          ]
+        }
+      ]
+    },
+    "supply_chain": {
+      "category_id": "supply_chain",
+      "category_name": "Supply Chain Security",
+      "score": 25.0,
+      "max_score": 100.0,
+      "percentage": 25.0,
+      "detected_count": 1,
+      "total_count": 3,
+      "controls": [
+        {
+          "control_id": "SC-01",
+          "control_name": "Dependency Scanning",
+          "category": "supply_chain",
+          "detected": false,
+          "level": "none",
+          "confidence": 0.0,
+          "score": 0,
+          "evidence": [],
+          "recommendations": [
+            "Detection failed: 'bool' object has no attribute 'lower'"
+          ]
+        },
+        {
+          "control_id": "SC-02",
+          "control_name": "Model Provenance Tracking",
+          "category": "supply_chain",
+          "detected": false,
+          "level": "none",
+          "confidence": 0.0,
+          "score": 0,
+          "evidence": [],
+          "recommendations": [
+            "Use MLflow, DVC, or Weights & Biases for model tracking",
+            "Implement model versioning with metadata",
+            "Maintain model registry with provenance information"
+          ]
+        },
+        {
+          "control_id": "SC-03",
+          "control_name": "Model Integrity Verification",
+          "category": "supply_chain",
+          "detected": true,
+          "level": "advanced",
+          "confidence": 0.8500000000000001,
+          "score": 75,
+          "evidence": [
+            {
+              "type": "import",
+              "file_path": "/tmp/langchain-test/libs/partners/mistralai/langchain_mistralai/chat_models.py",
+              "line_number": 3,
+              "snippet": "hashlib",
+              "description": "Hash library: hashlib",
+              "confidence": 0.9
+            },
+            {
+              "type": "import",
+              "file_path": "/tmp/langchain-test/libs/cli/langchain_cli/utils/git.py",
+              "line_number": 5,
+              "snippet": "hashlib",
+              "description": "Hash library: hashlib",
+              "confidence": 0.9
+            },
+            {
+              "type": "ast",
+              "file_path": "/tmp/langchain-test/libs/model-profiles/langchain_model_profiles/cli.py",
+              "line_number": 221,
+              "snippet": "data_dir = _validate_data_dir(data_dir)",
+              "description": "Verification: _validate_data_dir",
+              "confidence": 0.8
+            },
+            {
+              "type": "ast",
+              "file_path": "/tmp/langchain-test/libs/standard-tests/langchain_tests/integration_tests/chat_ models.py",
+              "line_number": 1575,
+              "snippet": "_validate_tool_call_message(result)",
+              "description": "Verification: _validate_tool_call_message",
+              "confidence": 0.8
+            }
+          ],
+          "recommendations": []
+        }
+      ]
+    },
+    "hallucination": {
+      "category_id": "hallucination",
+      "category_name": "Hallucination Mitigation",
+      "score": 35.0,
+      "max_score": 100.0,
+      "percentage": 35.0,
+      "detected_count": 3,
+      "total_count": 5,
+      "controls": [
+        {
+          "control_id": "HM-01",
+          "control_name": "RAG Implementation",
+          "category": "hallucination",
+          "detected": true,
+          "level": "advanced",
+          "confidence": 0.8000000000000002,
+          "score": 75,
+          "evidence": [
+            {
+              "type": "ast",
+              "file_path": "/tmp/langchain-test/libs/standard-tests/langchain_tests/integration_tests/retri evers.py",
+              "line_number": 44,
+              "snippet": "return  self.retriever_constructor(**self.retriever_constructor_params)",
+              "description": "Retrieval pattern: self.retriever_constructor",
+              "confidence": 0.8
+            },
+            {
+              "type": "ast",
+              "file_path": "/tmp/langchain-test/libs/standard-tests/langchain_tests/integration_tests/retri evers.py",
+              "line_number": 91,
+              "snippet": "retriever_3 = self.retriever_constructor(**params_3)",
+              "description": "Retrieval pattern: self.retriever_constructor",
+              "confidence": 0.8
+            },
+            {
+              "type": "ast",
+              "file_path": "/tmp/langchain-test/libs/standard-tests/langchain_tests/integration_tests/vecto rstores.py",
+              "line_number": 174,
+              "snippet": "documents = vectorstore.similarity_search(\"bar\",  k=2)",
+              "description": "Retrieval pattern: vectorstore.similarity_search",
+              "confidence": 0.8
+            },
+            {
+              "type": "ast",
+              "file_path": "/tmp/langchain-test/libs/standard-tests/langchain_tests/integration_tests/vecto rstores.py",
+              "line_number": 224,
+              "snippet": "documents = vectorstore.similarity_search(\"foo\",  k=1)",
+              "description": "Retrieval pattern: vectorstore.similarity_search",
+              "confidence": 0.8
+            },
+            {
+              "type": "ast",
+              "file_path": "/tmp/langchain-test/libs/langchain/langchain_classic/chains/loading.py",
+              "line_number": 485,
+              "snippet": "return RetrievalQA(",
+              "description": "Retrieval pattern: RetrievalQA",
+              "confidence": 0.8
+            },
+            {
+              "type": "ast",
+              "file_path": "/tmp/langchain-test/libs/langchain/langchain_classic/chains/loading.py",
+              "line_number": 518,
+              "snippet": "return RetrievalQAWithSourcesChain(",
+              "description": "Retrieval pattern: RetrievalQAWithSourcesChain",
+              "confidence": 0.8
+            }
+          ],
+          "recommendations": []
+        },
+        {
+          "control_id": "HM-02",
+          "control_name": "Confidence Scoring",
+          "category": "hallucination",
+          "detected": false,
+          "level": "none",
+          "confidence": 0.0,
+          "score": 0,
+          "evidence": [],
+          "recommendations": [
+            "Detection failed: 'bool' object has no attribute 'lower'"
+          ]
+        },
+        {
+          "control_id": "HM-03",
+          "control_name": "Source Attribution",
+          "category": "hallucination",
+          "detected": true,
+          "level": "intermediate",
+          "confidence": 0.8,
+          "score": 50,
+          "evidence": [
+            {
+              "type": "ast",
+              "file_path": "/tmp/langchain-test/libs/standard-tests/scripts/check_imports.py",
+              "line_number": 17,
+              "snippet": "SourceFileLoader(module_name, file).load_module()",
+              "description": "Citation pattern: SourceFileLoader",
+              "confidence": 0.8
+            },
+            {
+              "type": "ast",
+              "file_path": "/tmp/langchain-test/libs/partners/openai/scripts/check_imports.py",
+              "line_number": 12,
+              "snippet": "SourceFileLoader(\"x\", file).load_module()",
+              "description": "Citation pattern: SourceFileLoader",
+              "confidence": 0.8
+            }
+          ],
+          "recommendations": []
+        },
+        {
+          "control_id": "HM-04",
+          "control_name": "Temperature Control",
+          "category": "hallucination",
+          "detected": false,
+          "level": "none",
+          "confidence": 0.0,
+          "score": 0,
+          "evidence": [],
+          "recommendations": [
+            "Detection failed: 'bool' object has no attribute 'lower'"
+          ]
+        },
+        {
+          "control_id": "HM-05",
+          "control_name": "Fact Checking",
+          "category": "hallucination",
+          "detected": true,
+          "level": "intermediate",
+          "confidence": 0.8,
+          "score": 50,
+          "evidence": [
+            {
+              "type": "ast",
+              "file_path": "/tmp/langchain-test/libs/model-profiles/langchain_model_profiles/cli.py",
+              "line_number": 221,
+              "snippet": "data_dir = _validate_data_dir(data_dir)",
+              "description": "Fact checking: _validate_data_dir",
+              "confidence": 0.8
+            },
+            {
+              "type": "ast",
+              "file_path": "/tmp/langchain-test/libs/standard-tests/langchain_tests/integration_tests/chat_ models.py",
+              "line_number": 1575,
+              "snippet": "_validate_tool_call_message(result)",
+              "description": "Fact checking: _validate_tool_call_message",
+              "confidence": 0.8
+            }
+          ],
+          "recommendations": []
+        }
+      ]
+    },
+    "ethical_ai": {
+      "category_id": "ethical_ai",
+      "category_name": "Ethical AI & Bias",
+      "score": 12.5,
+      "max_score": 100.0,
+      "percentage": 12.5,
+      "detected_count": 1,
+      "total_count": 4,
+      "controls": [
+        {
+          "control_id": "EA-01",
+          "control_name": "Fairness Metrics",
+          "category": "ethical_ai",
+          "detected": false,
+          "level": "none",
+          "confidence": 0.0,
+          "score": 0,
+          "evidence": [],
+          "recommendations": [
+            "Use Fairlearn or AIF360 for fairness metrics",
+            "Implement demographic parity testing",
+            "Monitor fairness metrics in production"
+          ]
+        },
+        {
+          "control_id": "EA-02",
+          "control_name": "Model Explainability",
+          "category": "ethical_ai",
+          "detected": true,
+          "level": "intermediate",
+          "confidence": 0.8,
+          "score": 50,
+          "evidence": [
+            {
+              "type": "ast",
+              "file_path": "/tmp/langchain-test/libs/langchain/langchain_classic/evaluation/embedding_dista nce/base.py",
+              "line_number": 340,
+              "snippet": "score = metric(vectors[0].reshape(1, -1),  vectors[1].reshape(1, -1)).item()",
+              "description": "Explainability: reshape",
+              "confidence": 0.8
+            },
+            {
+              "type": "ast",
+              "file_path": "/tmp/langchain-test/libs/langchain/langchain_classic/evaluation/embedding_dista nce/base.py",
+              "line_number": 340,
+              "snippet": "score = metric(vectors[0].reshape(1, -1),  vectors[1].reshape(1, -1)).item()",
+              "description": "Explainability: reshape",
+              "confidence": 0.8
+            }
+          ],
+          "recommendations": []
+        },
+        {
+          "control_id": "EA-03",
+          "control_name": "Bias Testing",
+          "category": "ethical_ai",
+          "detected": false,
+          "level": "none",
+          "confidence": 0.0,
+          "score": 0,
+          "evidence": [],
+          "recommendations": [
+            "Implement adversarial testing for bias",
+            "Test across demographic groups",
+            "Use TextAttack or CheckList for NLP bias testing"
+          ]
+        },
+        {
+          "control_id": "EA-04",
+          "control_name": "Model Cards",
+          "category": "ethical_ai",
+          "detected": false,
+          "level": "none",
+          "confidence": 0.0,
+          "score": 0,
+          "evidence": [],
+          "recommendations": [
+            "Detection failed: 'ConfigAnalyzer' object has no attribute  'file_exists'"
+          ]
+        }
+      ]
+    },
+    "incident_response": {
+      "category_id": "incident_response",
+      "category_name": "Incident Response",
+      "score": 0.0,
+      "max_score": 100.0,
+      "percentage": 0.0,
+      "detected_count": 0,
+      "total_count": 3,
+      "controls": [
+        {
+          "control_id": "IR-01",
+          "control_name": "Monitoring Integration",
+          "category": "incident_response",
+          "detected": false,
+          "level": "none",
+          "confidence": 0.0,
+          "score": 0,
+          "evidence": [],
+          "recommendations": [
+            "Detection failed: 'bool' object has no attribute 'lower'"
+          ]
+        },
+        {
+          "control_id": "IR-02",
+          "control_name": "Audit Logging",
+          "category": "incident_response",
+          "detected": false,
+          "level": "none",
+          "confidence": 0.0,
+          "score": 0,
+          "evidence": [],
+          "recommendations": [
+            "Detection failed: 'bool' object has no attribute 'lower'"
+          ]
+        },
+        {
+          "control_id": "IR-03",
+          "control_name": "Rollback Capability",
+          "category": "incident_response",
+          "detected": false,
+          "level": "none",
+          "confidence": 0.0,
+          "score": 0,
+          "evidence": [],
+          "recommendations": [
+            "Detection failed: 'bool' object has no attribute 'lower'"
+          ]
+        }
+      ]
+    }
+  },
+  "recommendations": [
+    {
+      "priority": "critical",
+      "category": "prompt_security",
+      "control_id": "PS-02",
+      "title": "Rate Limiting",
+      "description": "Control not detected or below threshold",
+      "remediation": "Detection failed: 'bool' object has no attribute 'lower'",
+      "docs_url": null
+    },
+    {
+      "priority": "critical",
+      "category": "prompt_security",
+      "control_id": "PS-05",
+      "title": "Context Window Protection",
+      "description": "Control not detected or below threshold",
+      "remediation": "Detection failed: 'bool' object has no attribute 'lower'",
+      "docs_url": null
+    },
+    {
+      "priority": "critical",
+      "category": "prompt_security",
+      "control_id": "PS-06",
+      "title": "Red Team Testing",
+      "description": "Control not detected or below threshold",
+      "remediation": "Detection failed: 'ConfigAnalyzer' object has no attribute 'file_exists'",
+      "docs_url": null
+    },
+    {
+      "priority": "critical",
+      "category": "prompt_security",
+      "control_id": "PS-07",
+      "title": "Prompt Anomaly Detection",
+      "description": "Control not detected or below threshold",
+      "remediation": "Implement statistical analysis on prompt patterns",
+      "docs_url": null
+    },
+    {
+      "priority": "critical",
+      "category": "prompt_security",
+      "control_id": "PS-07",
+      "title": "Prompt Anomaly Detection",
+      "description": "Control not detected or below threshold",
+      "remediation": "Use ML-based anomaly detection for unusual inputs",
+      "docs_url": null
+    },
+    {
+      "priority": "critical",
+      "category": "prompt_security",
+      "control_id": "PS-07",
+      "title": "Prompt Anomaly Detection",
+      "description": "Control not detected or below threshold",
+      "remediation": "Set up alerts for prompt anomaly detection",
+      "docs_url": null
+    },
+    {
+      "priority": "critical",
+      "category": "prompt_security",
+      "control_id": "PS-08",
+      "title": "System Prompt Protection",
+      "description": "Control not detected or below threshold",
+      "remediation": "Detection failed: 'bool' object has no attribute 'lower'",
+      "docs_url": null
+    },
+    {
+      "priority": "critical",
+      "category": "model_security",
+      "control_id": "MS-01",
+      "title": "Access Control",
+      "description": "Control not detected or below threshold",
+      "remediation": "Detection failed: 'bool' object has no attribute 'lower'",
+      "docs_url": null
+    },
+    {
+      "priority": "critical",
+      "category": "model_security",
+      "control_id": "MS-02",
+      "title": "Model Versioning",
+      "description": "Control not detected or below threshold",
+      "remediation": "Detection failed: 'bool' object has no attribute 'lower'",
+      "docs_url": null
+    },
+    {
+      "priority": "critical",
+      "category": "model_security",
+      "control_id": "MS-03",
+      "title": "Dependency Scanning",
+      "description": "Control not detected or below threshold",
+      "remediation": "Detection failed: 'bool' object has no attribute 'lower'",
+      "docs_url": null
+    },
+    {
+      "priority": "critical",
+      "category": "model_security",
+      "control_id": "MS-04",
+      "title": "API Security",
+      "description": "Control not detected or below threshold",
+      "remediation": "Detection failed: 'bool' object has no attribute 'lower'",
+      "docs_url": null
+    },
+    {
+      "priority": "critical",
+      "category": "model_security",
+      "control_id": "MS-07",
+      "title": "Model Watermarking",
+      "description": "Control not detected or below threshold",
+      "remediation": "Implement watermarking for model outputs",
+      "docs_url": null
+    },
+    {
+      "priority": "critical",
+      "category": "model_security",
+      "control_id": "MS-07",
+      "title": "Model Watermarking",
+      "description": "Control not detected or below threshold",
+      "remediation": "Use cryptographic watermarks for model weights",
+      "docs_url": null
+    },
+    {
+      "priority": "critical",
+      "category": "model_security",
+      "control_id": "MS-07",
+      "title": "Model Watermarking",
+      "description": "Control not detected or below threshold",
+      "remediation": "Track watermark verification for model theft detection",
+      "docs_url": null
+    },
+    {
+      "priority": "critical",
+      "category": "data_privacy",
+      "control_id": "DP-05",
+      "title": "Consent Management",
+      "description": "Control not detected or below threshold",
+      "remediation": "Detection failed: 'bool' object has no attribute 'lower'",
+      "docs_url": null
+    },
+    {
+      "priority": "critical",
+      "category": "data_privacy",
+      "control_id": "DP-06",
+      "title": "NER PII Detection",
+      "description": "Control not detected or below threshold",
+      "remediation": "Use Presidio or SpaCy for NER-based PII detection",
+      "docs_url": null
+    },
+    {
+      "priority": "critical",
+      "category": "data_privacy",
+      "control_id": "DP-06",
+      "title": "NER PII Detection",
+      "description": "Control not detected or below threshold",
+      "remediation": "Implement custom NER models for domain-specific PII",
+      "docs_url": null
+    },
+    {
+      "priority": "critical",
+      "category": "data_privacy",
+      "control_id": "DP-06",
+      "title": "NER PII Detection",
+      "description": "Control not detected or below threshold",
+      "remediation": "Run PII detection on all inputs and outputs",
+      "docs_url": null
+    },
+    {
+      "priority": "critical",
+      "category": "data_privacy",
+      "control_id": "DP-07",
+      "title": "Data Retention Policy",
+      "description": "Control not detected or below threshold",
+      "remediation": "Detection failed: 'bool' object has no attribute 'lower'",
+      "docs_url": null
+    },
+    {
+      "priority": "critical",
+      "category": "data_privacy",
+      "control_id": "DP-08",
+      "title": "GDPR Compliance",
+      "description": "Control not detected or below threshold",
+      "remediation": "Detection failed: 'bool' object has no attribute 'lower'",
+      "docs_url": null
+    },
+    {
+      "priority": "critical",
+      "category": "owasp_llm",
+      "control_id": "OWASP-04",
+      "title": "LLM04: Model Denial of Service",
+      "description": "Control not detected or below threshold",
+      "remediation": "Detection failed: 'bool' object has no attribute 'lower'",
+      "docs_url": null
+    },
+    {
+      "priority": "critical",
+      "category": "owasp_llm",
+      "control_id": "OWASP-10",
+      "title": "LLM10: Model Theft",
+      "description": "Control not detected or below threshold",
+      "remediation": "Implement rate limiting on API endpoints",
+      "docs_url": null
+    },
+    {
+      "priority": "critical",
+      "category": "owasp_llm",
+      "control_id": "OWASP-10",
+      "title": "LLM10: Model Theft",
+      "description": "Control not detected or below threshold",
+      "remediation": "Add query logging and anomaly detection",
+      "docs_url": null
+    },
+    {
+      "priority": "critical",
+      "category": "owasp_llm",
+      "control_id": "OWASP-10",
+      "title": "LLM10: Model Theft",
+      "description": "Control not detected or below threshold",
+      "remediation": "Monitor for extraction patterns",
+      "docs_url": null
+    },
+    {
+      "priority": "critical",
+      "category": "blue_team",
+      "control_id": "BT-02",
+      "title": "Drift Detection",
+      "description": "Control not detected or below threshold",
+      "remediation": "Implement drift detection with evidently or alibi-detect",
+      "docs_url": null
+    },
+    {
+      "priority": "critical",
+      "category": "blue_team",
+      "control_id": "BT-02",
+      "title": "Drift Detection",
+      "description": "Control not detected or below threshold",
+      "remediation": "Monitor input data distribution changes",
+      "docs_url": null
+    },
+    {
+      "priority": "critical",
+      "category": "blue_team",
+      "control_id": "BT-02",
+      "title": "Drift Detection",
+      "description": "Control not detected or below threshold",
+      "remediation": "Set up automated alerts for drift events",
+      "docs_url": null
+    },
+    {
+      "priority": "critical",
+      "category": "blue_team",
+      "control_id": "BT-03",
+      "title": "Anomaly Detection",
+      "description": "Control not detected or below threshold",
+      "remediation": "Implement anomaly detection on model inputs",
+      "docs_url": null
+    },
+    {
+      "priority": "critical",
+      "category": "blue_team",
+      "control_id": "BT-03",
+      "title": "Anomaly Detection",
+      "description": "Control not detected or below threshold",
+      "remediation": "Monitor for unusual query patterns",
+      "docs_url": null
+    },
+    {
+      "priority": "critical",
+      "category": "blue_team",
+      "control_id": "BT-03",
+      "title": "Anomaly Detection",
+      "description": "Control not detected or below threshold",
+      "remediation": "Use statistical methods or ML-based detection",
+      "docs_url": null
+    },
+    {
+      "priority": "critical",
+      "category": "blue_team",
+      "control_id": "BT-04",
+      "title": "Adversarial Attack Detection",
+      "description": "Control not detected or below threshold",
+      "remediation": "Implement adversarial input detection",
+      "docs_url": null
+    },
+    {
+      "priority": "critical",
+      "category": "blue_team",
+      "control_id": "BT-04",
+      "title": "Adversarial Attack Detection",
+      "description": "Control not detected or below threshold",
+      "remediation": "Use adversarial robustness toolkits",
+      "docs_url": null
+    },
+    {
+      "priority": "critical",
+      "category": "blue_team",
+      "control_id": "BT-04",
+      "title": "Adversarial Attack Detection",
+      "description": "Control not detected or below threshold",
+      "remediation": "Add input perturbation analysis",
+      "docs_url": null
+    },
+    {
+      "priority": "critical",
+      "category": "blue_team",
+      "control_id": "BT-05",
+      "title": "AI Incident Response",
+      "description": "Control not detected or below threshold",
+      "remediation": "Detection failed: 'bool' object has no attribute 'lower'",
+      "docs_url": null
+    },
+    {
+      "priority": "critical",
+      "category": "blue_team",
+      "control_id": "BT-06",
+      "title": "Model Drift Monitoring",
+      "description": "Control not detected or below threshold",
+      "remediation": "Use Evidently or alibi-detect for drift monitoring",
+      "docs_url": null
+    },
+    {
+      "priority": "critical",
+      "category": "blue_team",
+      "control_id": "BT-06",
+      "title": "Model Drift Monitoring",
+      "description": "Control not detected or below threshold",
+      "remediation": "Set up automated alerts for significant drift",
+      "docs_url": null
+    },
+    {
+      "priority": "critical",
+      "category": "blue_team",
+      "control_id": "BT-06",
+      "title": "Model Drift Monitoring",
+      "description": "Control not detected or below threshold",
+      "remediation": "Implement automatic retraining pipelines",
+      "docs_url": null
+    },
+    {
+      "priority": "critical",
+      "category": "governance",
+      "control_id": "GV-01",
+      "title": "Model Explainability",
+      "description": "Control not detected or below threshold",
+      "remediation": "Use SHAP or LIME for model explanations",
+      "docs_url": null
+    },
+    {
+      "priority": "critical",
+      "category": "governance",
+      "control_id": "GV-01",
+      "title": "Model Explainability",
+      "description": "Control not detected or below threshold",
+      "remediation": "Provide decision explanations in outputs",
+      "docs_url": null
+    },
+    {
+      "priority": "critical",
+      "category": "governance",
+      "control_id": "GV-01",
+      "title": "Model Explainability",
+      "description": "Control not detected or below threshold",
+      "remediation": "Implement feature attribution tracking",
+      "docs_url": null
+    },
+    {
+      "priority": "critical",
+      "category": "governance",
+      "control_id": "GV-02",
+      "title": "Bias Detection",
+      "description": "Control not detected or below threshold",
+      "remediation": "Use Fairlearn or AIF360 for bias detection",
+      "docs_url": null
+    },
+    {
+      "priority": "critical",
+      "category": "governance",
+      "control_id": "GV-02",
+      "title": "Bias Detection",
+      "description": "Control not detected or below threshold",
+      "remediation": "Implement fairness metrics tracking",
+      "docs_url": null
+    },
+    {
+      "priority": "critical",
+      "category": "governance",
+      "control_id": "GV-02",
+      "title": "Bias Detection",
+      "description": "Control not detected or below threshold",
+      "remediation": "Test for demographic parity and equalized odds",
+      "docs_url": null
+    },
+    {
+      "priority": "critical",
+      "category": "governance",
+      "control_id": "GV-03",
+      "title": "Model Documentation",
+      "description": "Control not detected or below threshold",
+      "remediation": "Detection failed: 'bool' object has no attribute 'lower'",
+      "docs_url": null
+    },
+    {
+      "priority": "critical",
+      "category": "governance",
+      "control_id": "GV-04",
+      "title": "Compliance Tracking",
+      "description": "Control not detected or below threshold",
+      "remediation": "Detection failed: 'bool' object has no attribute 'lower'",
+      "docs_url": null
+    },
+    {
+      "priority": "critical",
+      "category": "governance",
+      "control_id": "GV-05",
+      "title": "Human Oversight",
+      "description": "Control not detected or below threshold",
+      "remediation": "Detection failed: 'bool' object has no attribute 'lower'",
+      "docs_url": null
+    },
+    {
+      "priority": "critical",
+      "category": "supply_chain",
+      "control_id": "SC-01",
+      "title": "Dependency Scanning",
+      "description": "Control not detected or below threshold",
+      "remediation": "Detection failed: 'bool' object has no attribute 'lower'",
+      "docs_url": null
+    },
+    {
+      "priority": "critical",
+      "category": "supply_chain",
+      "control_id": "SC-02",
+      "title": "Model Provenance Tracking",
+      "description": "Control not detected or below threshold",
+      "remediation": "Use MLflow, DVC, or Weights & Biases for model tracking",
+      "docs_url": null
+    },
+    {
+      "priority": "critical",
+      "category": "supply_chain",
+      "control_id": "SC-02",
+      "title": "Model Provenance Tracking",
+      "description": "Control not detected or below threshold",
+      "remediation": "Implement model versioning with metadata",
+      "docs_url": null
+    },
+    {
+      "priority": "critical",
+      "category": "supply_chain",
+      "control_id": "SC-02",
+      "title": "Model Provenance Tracking",
+      "description": "Control not detected or below threshold",
+      "remediation": "Maintain model registry with provenance information",
+      "docs_url": null
+    },
+    {
+      "priority": "critical",
+      "category": "hallucination",
+      "control_id": "HM-02",
+      "title": "Confidence Scoring",
+      "description": "Control not detected or below threshold",
+      "remediation": "Detection failed: 'bool' object has no attribute 'lower'",
+      "docs_url": null
+    },
+    {
+      "priority": "critical",
+      "category": "hallucination",
+      "control_id": "HM-04",
+      "title": "Temperature Control",
+      "description": "Control not detected or below threshold",
+      "remediation": "Detection failed: 'bool' object has no attribute 'lower'",
+      "docs_url": null
+    },
+    {
+      "priority": "critical",
+      "category": "ethical_ai",
+      "control_id": "EA-01",
+      "title": "Fairness Metrics",
+      "description": "Control not detected or below threshold",
+      "remediation": "Use Fairlearn or AIF360 for fairness metrics",
+      "docs_url": null
+    },
+    {
+      "priority": "critical",
+      "category": "ethical_ai",
+      "control_id": "EA-01",
+      "title": "Fairness Metrics",
+      "description": "Control not detected or below threshold",
+      "remediation": "Implement demographic parity testing",
+      "docs_url": null
+    },
+    {
+      "priority": "critical",
+      "category": "ethical_ai",
+      "control_id": "EA-01",
+      "title": "Fairness Metrics",
+      "description": "Control not detected or below threshold",
+      "remediation": "Monitor fairness metrics in production",
+      "docs_url": null
+    },
+    {
+      "priority": "critical",
+      "category": "ethical_ai",
+      "control_id": "EA-03",
+      "title": "Bias Testing",
+      "description": "Control not detected or below threshold",
+      "remediation": "Implement adversarial testing for bias",
+      "docs_url": null
+    },
+    {
+      "priority": "critical",
+      "category": "ethical_ai",
+      "control_id": "EA-03",
+      "title": "Bias Testing",
+      "description": "Control not detected or below threshold",
+      "remediation": "Test across demographic groups",
+      "docs_url": null
+    },
+    {
+      "priority": "critical",
+      "category": "ethical_ai",
+      "control_id": "EA-03",
+      "title": "Bias Testing",
+      "description": "Control not detected or below threshold",
+      "remediation": "Use TextAttack or CheckList for NLP bias testing",
+      "docs_url": null
+    },
+    {
+      "priority": "critical",
+      "category": "ethical_ai",
+      "control_id": "EA-04",
+      "title": "Model Cards",
+      "description": "Control not detected or below threshold",
+      "remediation": "Detection failed: 'ConfigAnalyzer' object has no attribute 'file_exists'",
+      "docs_url": null
+    },
+    {
+      "priority": "critical",
+      "category": "incident_response",
+      "control_id": "IR-01",
+      "title": "Monitoring Integration",
+      "description": "Control not detected or below threshold",
+      "remediation": "Detection failed: 'bool' object has no attribute 'lower'",
+      "docs_url": null
+    },
+    {
+      "priority": "critical",
+      "category": "incident_response",
+      "control_id": "IR-02",
+      "title": "Audit Logging",
+      "description": "Control not detected or below threshold",
+      "remediation": "Detection failed: 'bool' object has no attribute 'lower'",
+      "docs_url": null
+    },
+    {
+      "priority": "critical",
+      "category": "incident_response",
+      "control_id": "IR-03",
+      "title": "Rollback Capability",
+      "description": "Control not detected or below threshold",
+      "remediation": "Detection failed: 'bool' object has no attribute 'lower'",
+      "docs_url": null
+    }
+  ]
+}

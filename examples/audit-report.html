@@ -1,0 +1,1770 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>aisentry Audit Report</title>
+    <style>
+        
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f8fafc;
+            color: #1e293b;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .header h1 {
+            font-size: 2rem;
+            color: #0f172a;
+            margin-bottom: 8px;
+        }
+        .header .subtitle {
+            color: #64748b;
+            font-size: 1rem;
+        }
+        .summary {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .score-card {
+            text-align: center;
+        }
+        .score-value {
+            font-size: 3rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #f97316, #ea580c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .score-label {
+            color: #64748b;
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .maturity-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-top: 8px;
+        }
+        .maturity-initial { background: #fee2e2; color: #dc2626; }
+        .maturity-developing { background: #ffedd5; color: #ea580c; }
+        .maturity-defined { background: #fef3c7; color: #d97706; }
+        .maturity-managed { background: #d1fae5; color: #059669; }
+        .maturity-optimizing { background: #cffafe; color: #0891b2; }
+        .categories {
+            margin-bottom: 40px;
+        }
+        .categories h2 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: #0f172a;
+        }
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 20px;
+        }
+        .category-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        .category-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            cursor: pointer;
+            user-select: none;
+            transition: background 0.2s;
+        }
+        .category-header:hover {
+            background: #f8fafc;
+        }
+        .category-header-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .category-name {
+            font-weight: 600;
+            color: #0f172a;
+        }
+        .category-score {
+            font-weight: 700;
+            color: #f97316;
+        }
+        .accordion-icon {
+            width: 20px;
+            height: 20px;
+            transition: transform 0.3s ease;
+            color: #64748b;
+        }
+        .category-card.open .accordion-icon {
+            transform: rotate(180deg);
+        }
+        .progress-bar {
+            height: 4px;
+            background: #e2e8f0;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #f97316, #ea580c);
+            transition: width 0.3s ease;
+        }
+        .category-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+        .category-card.open .category-content {
+            max-height: 2000px;
+            transition: max-height 0.5s ease-in;
+        }
+        .controls-list {
+            list-style: none;
+            padding: 0 20px 20px;
+        }
+        .control-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 12px 0;
+            border-bottom: 1px solid #f1f5f9;
+        }
+        .control-item:last-child {
+            border-bottom: none;
+        }
+        .control-info {
+            flex: 1;
+        }
+        .control-name {
+            font-size: 0.875rem;
+            color: #0f172a;
+            font-weight: 500;
+        }
+        .control-description {
+            font-size: 0.75rem;
+            color: #64748b;
+            margin-top: 2px;
+        }
+        .control-status {
+            font-size: 0.75rem;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-weight: 500;
+            white-space: nowrap;
+            margin-left: 12px;
+        }
+        .status-detected { background: #d1fae5; color: #059669; }
+        .status-missing { background: #fee2e2; color: #dc2626; }
+        .status-partial { background: #fef3c7; color: #d97706; }
+        .category-stats {
+            display: flex;
+            gap: 16px;
+            padding: 12px 20px;
+            background: #f8fafc;
+            border-top: 1px solid #e2e8f0;
+            font-size: 0.75rem;
+            color: #64748b;
+        }
+        .stat-item {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .stat-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }
+        .stat-dot.detected { background: #059669; }
+        .stat-dot.partial { background: #d97706; }
+        .stat-dot.missing { background: #dc2626; }
+
+        /* Recommendations Accordion */
+        .recommendations {
+            margin-bottom: 40px;
+        }
+        .recommendations h2 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: #0f172a;
+        }
+        .rec-accordion {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            overflow: hidden;
+            margin-bottom: 12px;
+        }
+        .rec-accordion-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 20px;
+            cursor: pointer;
+            user-select: none;
+            border-left: 4px solid;
+            transition: background 0.2s;
+        }
+        .rec-accordion-header:hover {
+            background: #f8fafc;
+        }
+        .rec-accordion.critical .rec-accordion-header { border-color: #dc2626; }
+        .rec-accordion.high .rec-accordion-header { border-color: #ea580c; }
+        .rec-accordion.medium .rec-accordion-header { border-color: #d97706; }
+        .rec-accordion.low .rec-accordion-header { border-color: #059669; }
+        .rec-accordion-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .rec-accordion-title h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #0f172a;
+        }
+        .rec-count {
+            font-size: 0.75rem;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-weight: 500;
+        }
+        .rec-count.critical { background: #fee2e2; color: #dc2626; }
+        .rec-count.high { background: #ffedd5; color: #ea580c; }
+        .rec-count.medium { background: #fef3c7; color: #d97706; }
+        .rec-count.low { background: #d1fae5; color: #059669; }
+        .rec-accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+        .rec-accordion.open .rec-accordion-content {
+            max-height: 2000px;
+            transition: max-height 0.5s ease-in;
+        }
+        .rec-accordion.open .accordion-icon {
+            transform: rotate(180deg);
+        }
+        .rec-list {
+            padding: 0 20px 20px;
+        }
+        .rec-item {
+            padding: 16px;
+            background: #f8fafc;
+            border-radius: 8px;
+            margin-bottom: 12px;
+        }
+        .rec-item:last-child {
+            margin-bottom: 0;
+        }
+        .rec-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 8px;
+        }
+        .rec-title {
+            font-weight: 600;
+            color: #0f172a;
+            font-size: 0.9rem;
+        }
+        .rec-category {
+            font-size: 0.7rem;
+            padding: 2px 6px;
+            border-radius: 4px;
+            background: #e2e8f0;
+            color: #64748b;
+            white-space: nowrap;
+        }
+        .rec-description {
+            color: #64748b;
+            font-size: 0.85rem;
+            line-height: 1.5;
+        }
+
+        /* Evidence Section */
+        .evidence-section {
+            margin-top: 8px;
+            padding-top: 8px;
+            border-top: 1px solid #e2e8f0;
+        }
+        .evidence-toggle {
+            font-size: 0.75rem;
+            color: #f97316;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .evidence-toggle:hover {
+            text-decoration: underline;
+        }
+        .evidence-list {
+            display: none;
+            margin-top: 8px;
+        }
+        .evidence-list.show {
+            display: block;
+        }
+        .evidence-item {
+            font-size: 0.75rem;
+            color: #64748b;
+            padding: 4px 8px;
+            background: #f1f5f9;
+            border-radius: 4px;
+            margin-bottom: 4px;
+            font-family: monospace;
+        }
+
+        .footer {
+            text-align: center;
+            color: #94a3b8;
+            font-size: 0.875rem;
+            padding-top: 20px;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        /* Expand/Collapse All */
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .section-header h2 {
+            margin-bottom: 0;
+        }
+        .expand-toggle {
+            font-size: 0.8rem;
+            color: #f97316;
+            cursor: pointer;
+            padding: 4px 12px;
+            border: 1px solid #f97316;
+            border-radius: 6px;
+            background: white;
+            transition: all 0.2s;
+        }
+        .expand-toggle:hover {
+            background: #f97316;
+            color: white;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="container">
+        
+        <div class="header">
+            <h1>aisentry Audit Report</h1>
+            <p class="subtitle">Project: /tmp/langchain-test | 2026-01-12 18:10</p>
+        </div>
+        
+        
+        <div class="summary">
+            <div class="card score-card">
+                <div class="score-value">19</div>
+                <div class="score-label">Overall Score</div>
+                <span class="maturity-badge maturity-initial">Initial</span>
+            </div>
+            <div class="card score-card">
+                <div class="score-value">25</div>
+                <div class="score-label">Controls Detected</div>
+                <span class="maturity-badge" style="background: #f1f5f9; color: #64748b;">of 61</span>
+            </div>
+            <div class="card score-card">
+                <div class="score-value">2660</div>
+                <div class="score-label">Files Scanned</div>
+                <span class="maturity-badge" style="background: #f1f5f9; color: #64748b;">2.3s</span>
+            </div>
+            <div class="card score-card">
+                <div class="score-value">62</div>
+                <div class="score-label">Recommendations</div>
+            </div>
+        </div>
+        
+        
+        <div class="categories">
+            <div class="section-header">
+                <h2>Category Scores</h2>
+                <button class="expand-toggle" id="toggle-categories">Expand All</button>
+            </div>
+            <div class="category-grid">
+                
+        <div class="category-card">
+            <div class="category-header">
+                <div class="category-header-left">
+                    <span class="category-name">Prompt Security</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 12px;">
+                    <span class="category-score">28/100</span>
+                    <svg class="accordion-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+        </svg>
+                </div>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: 28.125%"></div>
+            </div>
+            <div class="category-content">
+                <ul class="controls-list">
+                    
+            <li class="control-item">
+                <div class="control-info">
+                    <span class="control-name">PS-01: Prompt Sanitization</span>
+                    
+                </div>
+                <span class="control-status status-detected">Advanced</span>
+            </li>
+            
+            <li class="control-item">
+                <div class="control-info">
+                    <span class="control-name">PS-02: Rate Limiting</span>
+                    
+                </div>
+                <span class="control-status status-missing">Missing</span>
+            </li>
+            
+            <li class="control-item">
+                <div class="control-info">
+                    <span class="control-name">PS-03: Input Validation</span>
+                    
+                </div>
+                <span class="control-status status-detected">Advanced</span>
+            </li>
+            
+            <li class="control-item">
+                <div class="control-info">
+                    <span class="control-name">PS-04: Output Filtering</span>
+                    
+                </div>
+                <span class="control-status status-detected">Advanced</span>
+            </li>
+            
+            <li class="control-item">
+                <div class="control-info">
+                    <span class="control-name">PS-05: Context Window Protection</span>
+                    
+                </div>
+                <span class="control-status status-missing">Missing</span>
+            </li>
+            
+            <li class="control-item">
+                <div class="control-info">
+                    <span class="control-name">PS-06: Red Team Testing</span>
+                    
+                </div>
+                <span class="control-status status-missing">Missing</span>
+            </li>
+            
+            <li class="control-item">
+                <div class="control-info">
+                    <span class="control-name">PS-07: Prompt Anomaly Detection</span>
+                    
+                </div>
+                <span class="control-status status-missing">Missing</span>
+            </li>
+            
+            <li class="control-item">
+                <div class="control-info">
+                    <span class="control-name">PS-08: System Prompt Protection</span>
+                    
+                </div>
+                <span class="control-status status-missing">Missing</span>
+            </li>
+            
+                </ul>
+                <div class="category-stats">
+                    <span class="stat-item"><span class="stat-dot detected"></span> 3 Detected</span>
+                    <span class="stat-item"><span class="stat-dot partial"></span> 0 Partial</span>
+                    <span class="stat-item"><span class="stat-dot missing"></span> 5 Missing</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="category-card">
+            <div class="category-header">
+                <div class="category-header-left">
+                    <span class="category-name">Model Security</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 12px;">
+                    <span class="category-score">25/100</span>
+                    <svg class="accordion-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+        </svg>
+                </div>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: 25.0%"></div>
+            </div>
+            <div class="category-content">
+                <ul class="controls-list">
+                    
+            <li class="control-item">
+                <div class="control-info">
+                    <span class="control-name">MS-01: Access Control</span>
+                    
+                </div>
+                <span class="control-status status-missing">Missing</span>
+            </li>
+            
+            <li class="control-item">
+                <div class="control-info">
+                    <span class="control-name">MS-02: Model Versioning</span>
+                    
+                </div>
+                <span class="control-status status-missing">Missing</span>
+            </li>
+            
+            <li class="control-item">
+                <div class="control-info">
+                    <span class="control-name">MS-03: Dependency Scanning</span>
+                    
+                </div>
+                <span class="control-status status-missing">Missing</span>
+            </li>
+            
+            <li class="control-item">
+                <div class="control-info">
+                    <span class="control-name">MS-04: API Security</span>
+                    
+                </div>
+                <span class="control-status status-missing">Missing</span>
+            </li>
+            
+            <li class="control-item">
+                <div class="control-info">
+                    <span class="control-name">MS-05: Model Source Verification</span>
+                    
+                </div>
+                <span class="control-status status-detected">Advanced</span>
+            </li>
+            
+            <li class="control-item">
+                <div class="control-info">
+                    <span class="control-name">MS-06: Differential Privacy</span>
+                    
+                </div>
+                <span class="control-status status-detected">Intermediate</span>
+            </li>
+            
+            <li class="control-item">
+                <div class="control-info">
+                    <span class="control-name">MS-07: Model Watermarking</span>
+                    
+                </div>
+                <span class="control-status status-missing">Missing</span>
+            </li>
+            
+            <li class="control-item">
+                <div class="control-info">
+                    <span class="control-name">MS-08: Secure Model Loading</span>
+                    
+                </div>
+                <span class="control-status status-detected">Advanced</span>
+            </li>
+            
+                </ul>
+                <div class="category-stats">
+                    <span class="stat-item"><span class="stat-dot detected"></span> 3 Detected</span>
+                    <span class="stat-item"><span class="stat-dot partial"></span> 0 Partial</span>
+                    <span class="stat-item"><span class="stat-dot missing"></span> 5 Missing</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="category-card">
+            <div class="category-header">
+                <div class="category-header-left">
+                    <span class="category-name">Data Privacy</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 12px;">
+                    <span class="category-score">31/100</span>
+                    <svg class="accordion-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+        </svg>
+                </div>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: 31.25%"></div>
+            </div>
+            <div class="category-content">
+                <ul class="controls-list">
+                    
+            <li class="control-item">
+                <div class="control-info">
+                    <span class="control-name">DP-01: PII Detection</span>
+                    
+                </div>
+                <span class="control-status status-detected">Intermediate</span>
+            </li>
+            
+            <li class="control-item">
+                <div class="control-info">
+                    <span class="control-name">DP-02: Data Redaction</span>
+                    
+                </div>
+                <span class="control-status status-detected">Advanced</span>
+            </li>
+            
+            <li class="control-item">
+                <div class="control-info">
+                    <span class="control-name">DP-03: Data Encryption</span>
+                    
+                </div>
+                <span class="control-status status-detected">Intermediate</span>
+            </li>
+            
+            <li class="control-item">
+                <div class="control-info">
+                    <span class="control-name">DP-04: Audit Logging</span>
+                    
+                </div>
+                <span class="control-status status-detected">Advanced</span>
+            </li>
+            
+            <li class="control-item">
+                <div class="control-info">
+                    <span class="control-name">DP-05: Consent Management</span>
+                    
+                </div>
+                <span class="control-status status-missing">Missing</span>
+            </li>
+            
+            <li class="control-item">
+                <div class="control-info">
+                    <span class="control-name">DP-06: NER PII Detection</span>
+                    
+                </div>
+                <span class="control-status status-missing">Missing</span>
+            </li>
+            
+            <li class="control-item">
+                <div class="control-info">
+                    <span class="control-name">DP-07: Data Retention Policy</span>
+                    
+                </div>
+                <span class="control-status status-missing">Missing</span>
+            </li>
+            
+            <li class="control-item">
+                <div class="control-info">
+                    <span class="control-name">DP-08: GDPR Compliance</span>
+                    
+                </div>
+                <span class="control-status status-missing">Missing</span>
+            </li>
+            
+                </ul>
+                <div class="category-stats">
+                    <span class="stat-item"><span class="stat-dot detected"></span> 4 Detected</span>
+                    <span class="stat-item"><span class="stat-dot partial"></span> 0 Partial</span>
+                    <span class="stat-item"><span class="stat-dot missing"></span> 4 Missing</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="category-card">
+            <div class="category-header">
+                <div class="category-header-left">
+                    <span class="category-name">OWASP LLM Top 10</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 12px;">
+                    <span class="category-score">45/100</span>
+                    <svg class="accordion-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+        </svg>
+                </div>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: 45.0%"></div>
+            </div>
+            <div class="category-content">
+                <ul class="controls-list">
+                    
+            <li class="control-item">
+                <div class="control-info">
+                    <span class="control-name">OWASP-01: LLM01: Prompt Injection Defense</span>
+                    
+                </div>
+                <span class="control-status status-detected">Advanced</span>
+            </li>
+            
+            <li class="control-item">
+                <div class="control-info">
+                    <span class="control-name">OWASP-02: LLM02: Insecure Output Handling</span>
+                    
+                </div>
+                <span class="control-status status-detected">Intermediate</span>
+            </li>
+            
+            <li class="control-item">
+                <div class="control-info">
+                    <span class="control-name">OWASP-03: LLM03: Training Data Poisoning</span>
+                    
+                </div>
+                <span class="control-status status-partial">Partial</span>
+            </li>
+            
+            <li class="control-item">
+                <div class="control-info">
+                    <span class="control-name">OWASP-04: LLM04: Model Denial of Service</span>
+                    
+                </div>
+                <span class="control-status status-missing">Missing</span>
+            </li>
+            
+            <li class="control-item">
+                <div class="control-info">
+                    <span class="control-name">OWASP-05: LLM05: Supply Chain Vulnerabilities</span>
+                    
+                </div>
+                <span class="control-status status-detected">Intermediate</span>
+            </li>
+            
+            <li class="control-item">
+                <div class="control-info">
+                    <span class="control-name">OWASP-06: LLM06: Sensitive Information Disclosure</span>
+                    
+                </div>
+                <span class="control-status status-detected">Advanced</span>
+            </li>
+            
+            <li class="control-item">
+                <div class="control-info">
+                    <span class="control-name">OWASP-07: LLM07: Insecure Plugin Design</span>
+                    
+                </div>
+                <span class="control-status status-detected">Advanced</span>
+            </li>
+            
+            <li class="control-item">
+                <div class="control-info">
+                    <span class="control-name">OWASP-08: LLM08: Excessive Agency</span>
+                    
+                </div>
+                <span class="control-status status-partial">Partial</span>
+            </li>
+            
+            <li class="control-item">
+                <div class="control-info">
+                    <span class="control-name">OWASP-09: LLM09: Overreliance</span>
+                    
+                </div>
+                <span class="control-status status-detected">Advanced</span>
+            </li>
+            
+            <li class="control-item">
+                <div class="control-info">
+                    <span class="control-name">OWASP-10: LLM10: Model Theft</span>
+                    
+                </div>
+                <span class="control-status status-missing">Missing</span>
+            </li>
+            
+                </ul>
+                <div class="category-stats">
+                    <span class="stat-item"><span class="stat-dot detected"></span> 6 Detected</span>
+                    <span class="stat-item"><span class="stat-dot partial"></span> 2 Partial</span>
+                    <span class="stat-item"><span class="stat-dot missing"></span> 2 Missing</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="category-card">
+            <div class="category-header">
+                <div class="category-header-left">
+                    <span class="category-name">Blue Team Operations</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 12px;">
+                    <span class="category-score">21/100</span>
+                    <svg class="accordion-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+        </svg>
+                </div>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: 21.428571428571427%"></div>
+            </div>
+            <div class="category-content">
+                <ul class="controls-list">
+                    
+            <li class="control-item">
+                <div class="control-info">
+                    <span class="control-name">BT-01: Model Monitoring</span>
+                    
+                </div>
+                <span class="control-status status-detected">Advanced</span>
+            </li>
+            
+            <li class="control-item">
+                <div class="control-info">
+                    <span class="control-name">BT-02: Drift Detection</span>
+                    
+                </div>
+                <span class="control-status status-missing">Missing</span>
+            </li>
+            
+            <li class="control-item">
+                <div class="control-info">
+                    <span class="control-name">BT-03: Anomaly Detection</span>
+                    
+                </div>
+                <span class="control-status status-missing">Missing</span>
+            </li>
+            
+            <li class="control-item">
+                <div class="control-info">
+                    <span class="control-name">BT-04: Adversarial Attack Detection</span>
+                    
+                </div>
+                <span class="control-status status-missing">Missing</span>
+            </li>
+            
+            <li class="control-item">
+                <div class="control-info">
+                    <span class="control-name">BT-05: AI Incident Response</span>
+                    
+                </div>
+                <span class="control-status status-missing">Missing</span>
+            </li>
+            
+            <li class="control-item">
+                <div class="control-info">
+                    <span class="control-name">BT-06: Model Drift Monitoring</span>
+                    
+                </div>
+                <span class="control-status status-missing">Missing</span>
+            </li>
+            
+            <li class="control-item">
+                <div class="control-info">
+                    <span class="control-name">BT-07: Data Quality Monitoring</span>
+                    
+                </div>
+                <span class="control-status status-detected">Advanced</span>
+            </li>
+            
+                </ul>
+                <div class="category-stats">
+                    <span class="stat-item"><span class="stat-dot detected"></span> 2 Detected</span>
+                    <span class="stat-item"><span class="stat-dot partial"></span> 0 Partial</span>
+                    <span class="stat-item"><span class="stat-dot missing"></span> 5 Missing</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="category-card">
+            <div class="category-header">
+                <div class="category-header-left">
+                    <span class="category-name">AI Governance</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 12px;">
+                    <span class="category-score">0/100</span>
+                    <svg class="accordion-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+        </svg>
+                </div>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: 0.0%"></div>
+            </div>
+            <div class="category-content">
+                <ul class="controls-list">
+                    
+            <li class="control-item">
+                <div class="control-info">
+                    <span class="control-name">GV-01: Model Explainability</span>
+                    
+                </div>
+                <span class="control-status status-missing">Missing</span>
+            </li>
+            
+            <li class="control-item">
+                <div class="control-info">
+                    <span class="control-name">GV-02: Bias Detection</span>
+                    
+                </div>
+                <span class="control-status status-missing">Missing</span>
+            </li>
+            
+            <li class="control-item">
+                <div class="control-info">
+                    <span class="control-name">GV-03: Model Documentation</span>
+                    
+                </div>
+                <span class="control-status status-missing">Missing</span>
+            </li>
+            
+            <li class="control-item">
+                <div class="control-info">
+                    <span class="control-name">GV-04: Compliance Tracking</span>
+                    
+                </div>
+                <span class="control-status status-missing">Missing</span>
+            </li>
+            
+            <li class="control-item">
+                <div class="control-info">
+                    <span class="control-name">GV-05: Human Oversight</span>
+                    
+                </div>
+                <span class="control-status status-missing">Missing</span>
+            </li>
+            
+                </ul>
+                <div class="category-stats">
+                    <span class="stat-item"><span class="stat-dot detected"></span> 0 Detected</span>
+                    <span class="stat-item"><span class="stat-dot partial"></span> 0 Partial</span>
+                    <span class="stat-item"><span class="stat-dot missing"></span> 5 Missing</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="category-card">
+            <div class="category-header">
+                <div class="category-header-left">
+                    <span class="category-name">Supply Chain Security</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 12px;">
+                    <span class="category-score">25/100</span>
+                    <svg class="accordion-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+        </svg>
+                </div>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: 25.0%"></div>
+            </div>
+            <div class="category-content">
+                <ul class="controls-list">
+                    
+            <li class="control-item">
+                <div class="control-info">
+                    <span class="control-name">SC-01: Dependency Scanning</span>
+                    
+                </div>
+                <span class="control-status status-missing">Missing</span>
+            </li>
+            
+            <li class="control-item">
+                <div class="control-info">
+                    <span class="control-name">SC-02: Model Provenance Tracking</span>
+                    
+                </div>
+                <span class="control-status status-missing">Missing</span>
+            </li>
+            
+            <li class="control-item">
+                <div class="control-info">
+                    <span class="control-name">SC-03: Model Integrity Verification</span>
+                    
+                </div>
+                <span class="control-status status-detected">Advanced</span>
+            </li>
+            
+                </ul>
+                <div class="category-stats">
+                    <span class="stat-item"><span class="stat-dot detected"></span> 1 Detected</span>
+                    <span class="stat-item"><span class="stat-dot partial"></span> 0 Partial</span>
+                    <span class="stat-item"><span class="stat-dot missing"></span> 2 Missing</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="category-card">
+            <div class="category-header">
+                <div class="category-header-left">
+                    <span class="category-name">Hallucination Mitigation</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 12px;">
+                    <span class="category-score">35/100</span>
+                    <svg class="accordion-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+        </svg>
+                </div>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: 35.0%"></div>
+            </div>
+            <div class="category-content">
+                <ul class="controls-list">
+                    
+            <li class="control-item">
+                <div class="control-info">
+                    <span class="control-name">HM-01: RAG Implementation</span>
+                    
+                </div>
+                <span class="control-status status-detected">Advanced</span>
+            </li>
+            
+            <li class="control-item">
+                <div class="control-info">
+                    <span class="control-name">HM-02: Confidence Scoring</span>
+                    
+                </div>
+                <span class="control-status status-missing">Missing</span>
+            </li>
+            
+            <li class="control-item">
+                <div class="control-info">
+                    <span class="control-name">HM-03: Source Attribution</span>
+                    
+                </div>
+                <span class="control-status status-detected">Intermediate</span>
+            </li>
+            
+            <li class="control-item">
+                <div class="control-info">
+                    <span class="control-name">HM-04: Temperature Control</span>
+                    
+                </div>
+                <span class="control-status status-missing">Missing</span>
+            </li>
+            
+            <li class="control-item">
+                <div class="control-info">
+                    <span class="control-name">HM-05: Fact Checking</span>
+                    
+                </div>
+                <span class="control-status status-detected">Intermediate</span>
+            </li>
+            
+                </ul>
+                <div class="category-stats">
+                    <span class="stat-item"><span class="stat-dot detected"></span> 3 Detected</span>
+                    <span class="stat-item"><span class="stat-dot partial"></span> 0 Partial</span>
+                    <span class="stat-item"><span class="stat-dot missing"></span> 2 Missing</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="category-card">
+            <div class="category-header">
+                <div class="category-header-left">
+                    <span class="category-name">Ethical AI & Bias</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 12px;">
+                    <span class="category-score">12/100</span>
+                    <svg class="accordion-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+        </svg>
+                </div>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: 12.5%"></div>
+            </div>
+            <div class="category-content">
+                <ul class="controls-list">
+                    
+            <li class="control-item">
+                <div class="control-info">
+                    <span class="control-name">EA-01: Fairness Metrics</span>
+                    
+                </div>
+                <span class="control-status status-missing">Missing</span>
+            </li>
+            
+            <li class="control-item">
+                <div class="control-info">
+                    <span class="control-name">EA-02: Model Explainability</span>
+                    
+                </div>
+                <span class="control-status status-detected">Intermediate</span>
+            </li>
+            
+            <li class="control-item">
+                <div class="control-info">
+                    <span class="control-name">EA-03: Bias Testing</span>
+                    
+                </div>
+                <span class="control-status status-missing">Missing</span>
+            </li>
+            
+            <li class="control-item">
+                <div class="control-info">
+                    <span class="control-name">EA-04: Model Cards</span>
+                    
+                </div>
+                <span class="control-status status-missing">Missing</span>
+            </li>
+            
+                </ul>
+                <div class="category-stats">
+                    <span class="stat-item"><span class="stat-dot detected"></span> 1 Detected</span>
+                    <span class="stat-item"><span class="stat-dot partial"></span> 0 Partial</span>
+                    <span class="stat-item"><span class="stat-dot missing"></span> 3 Missing</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="category-card">
+            <div class="category-header">
+                <div class="category-header-left">
+                    <span class="category-name">Incident Response</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 12px;">
+                    <span class="category-score">0/100</span>
+                    <svg class="accordion-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+        </svg>
+                </div>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: 0.0%"></div>
+            </div>
+            <div class="category-content">
+                <ul class="controls-list">
+                    
+            <li class="control-item">
+                <div class="control-info">
+                    <span class="control-name">IR-01: Monitoring Integration</span>
+                    
+                </div>
+                <span class="control-status status-missing">Missing</span>
+            </li>
+            
+            <li class="control-item">
+                <div class="control-info">
+                    <span class="control-name">IR-02: Audit Logging</span>
+                    
+                </div>
+                <span class="control-status status-missing">Missing</span>
+            </li>
+            
+            <li class="control-item">
+                <div class="control-info">
+                    <span class="control-name">IR-03: Rollback Capability</span>
+                    
+                </div>
+                <span class="control-status status-missing">Missing</span>
+            </li>
+            
+                </ul>
+                <div class="category-stats">
+                    <span class="stat-item"><span class="stat-dot detected"></span> 0 Detected</span>
+                    <span class="stat-item"><span class="stat-dot partial"></span> 0 Partial</span>
+                    <span class="stat-item"><span class="stat-dot missing"></span> 3 Missing</span>
+                </div>
+            </div>
+        </div>
+        
+            </div>
+        </div>
+        
+        
+        <div class="recommendations">
+            <div class="section-header">
+                <h2>Recommendations</h2>
+                <button class="expand-toggle" id="toggle-recommendations">Collapse All</button>
+            </div>
+            
+            <div class="rec-accordion critical">
+                <div class="rec-accordion-header">
+                    <div class="rec-accordion-title">
+                        <h3>Critical Priority</h3>
+                        <span class="rec-count critical">62 items</span>
+                    </div>
+                    <svg class="accordion-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+        </svg>
+                </div>
+                <div class="rec-accordion-content">
+                    <div class="rec-list">
+                        
+                <div class="rec-item">
+                    <div class="rec-header">
+                        <span class="rec-title">Rate Limiting</span>
+                        <span class="rec-category">prompt_security</span>
+                    </div>
+                    <p class="rec-description">Detection failed: 'bool' object has no attribute 'lower'</p>
+                </div>
+                
+                <div class="rec-item">
+                    <div class="rec-header">
+                        <span class="rec-title">Context Window Protection</span>
+                        <span class="rec-category">prompt_security</span>
+                    </div>
+                    <p class="rec-description">Detection failed: 'bool' object has no attribute 'lower'</p>
+                </div>
+                
+                <div class="rec-item">
+                    <div class="rec-header">
+                        <span class="rec-title">Red Team Testing</span>
+                        <span class="rec-category">prompt_security</span>
+                    </div>
+                    <p class="rec-description">Detection failed: 'ConfigAnalyzer' object has no attribute 'file_exists'</p>
+                </div>
+                
+                <div class="rec-item">
+                    <div class="rec-header">
+                        <span class="rec-title">Prompt Anomaly Detection</span>
+                        <span class="rec-category">prompt_security</span>
+                    </div>
+                    <p class="rec-description">Implement statistical analysis on prompt patterns</p>
+                </div>
+                
+                <div class="rec-item">
+                    <div class="rec-header">
+                        <span class="rec-title">Prompt Anomaly Detection</span>
+                        <span class="rec-category">prompt_security</span>
+                    </div>
+                    <p class="rec-description">Use ML-based anomaly detection for unusual inputs</p>
+                </div>
+                
+                <div class="rec-item">
+                    <div class="rec-header">
+                        <span class="rec-title">Prompt Anomaly Detection</span>
+                        <span class="rec-category">prompt_security</span>
+                    </div>
+                    <p class="rec-description">Set up alerts for prompt anomaly detection</p>
+                </div>
+                
+                <div class="rec-item">
+                    <div class="rec-header">
+                        <span class="rec-title">System Prompt Protection</span>
+                        <span class="rec-category">prompt_security</span>
+                    </div>
+                    <p class="rec-description">Detection failed: 'bool' object has no attribute 'lower'</p>
+                </div>
+                
+                <div class="rec-item">
+                    <div class="rec-header">
+                        <span class="rec-title">Access Control</span>
+                        <span class="rec-category">model_security</span>
+                    </div>
+                    <p class="rec-description">Detection failed: 'bool' object has no attribute 'lower'</p>
+                </div>
+                
+                <div class="rec-item">
+                    <div class="rec-header">
+                        <span class="rec-title">Model Versioning</span>
+                        <span class="rec-category">model_security</span>
+                    </div>
+                    <p class="rec-description">Detection failed: 'bool' object has no attribute 'lower'</p>
+                </div>
+                
+                <div class="rec-item">
+                    <div class="rec-header">
+                        <span class="rec-title">Dependency Scanning</span>
+                        <span class="rec-category">model_security</span>
+                    </div>
+                    <p class="rec-description">Detection failed: 'bool' object has no attribute 'lower'</p>
+                </div>
+                
+                <div class="rec-item">
+                    <div class="rec-header">
+                        <span class="rec-title">API Security</span>
+                        <span class="rec-category">model_security</span>
+                    </div>
+                    <p class="rec-description">Detection failed: 'bool' object has no attribute 'lower'</p>
+                </div>
+                
+                <div class="rec-item">
+                    <div class="rec-header">
+                        <span class="rec-title">Model Watermarking</span>
+                        <span class="rec-category">model_security</span>
+                    </div>
+                    <p class="rec-description">Implement watermarking for model outputs</p>
+                </div>
+                
+                <div class="rec-item">
+                    <div class="rec-header">
+                        <span class="rec-title">Model Watermarking</span>
+                        <span class="rec-category">model_security</span>
+                    </div>
+                    <p class="rec-description">Use cryptographic watermarks for model weights</p>
+                </div>
+                
+                <div class="rec-item">
+                    <div class="rec-header">
+                        <span class="rec-title">Model Watermarking</span>
+                        <span class="rec-category">model_security</span>
+                    </div>
+                    <p class="rec-description">Track watermark verification for model theft detection</p>
+                </div>
+                
+                <div class="rec-item">
+                    <div class="rec-header">
+                        <span class="rec-title">Consent Management</span>
+                        <span class="rec-category">data_privacy</span>
+                    </div>
+                    <p class="rec-description">Detection failed: 'bool' object has no attribute 'lower'</p>
+                </div>
+                
+                <div class="rec-item">
+                    <div class="rec-header">
+                        <span class="rec-title">NER PII Detection</span>
+                        <span class="rec-category">data_privacy</span>
+                    </div>
+                    <p class="rec-description">Use Presidio or SpaCy for NER-based PII detection</p>
+                </div>
+                
+                <div class="rec-item">
+                    <div class="rec-header">
+                        <span class="rec-title">NER PII Detection</span>
+                        <span class="rec-category">data_privacy</span>
+                    </div>
+                    <p class="rec-description">Implement custom NER models for domain-specific PII</p>
+                </div>
+                
+                <div class="rec-item">
+                    <div class="rec-header">
+                        <span class="rec-title">NER PII Detection</span>
+                        <span class="rec-category">data_privacy</span>
+                    </div>
+                    <p class="rec-description">Run PII detection on all inputs and outputs</p>
+                </div>
+                
+                <div class="rec-item">
+                    <div class="rec-header">
+                        <span class="rec-title">Data Retention Policy</span>
+                        <span class="rec-category">data_privacy</span>
+                    </div>
+                    <p class="rec-description">Detection failed: 'bool' object has no attribute 'lower'</p>
+                </div>
+                
+                <div class="rec-item">
+                    <div class="rec-header">
+                        <span class="rec-title">GDPR Compliance</span>
+                        <span class="rec-category">data_privacy</span>
+                    </div>
+                    <p class="rec-description">Detection failed: 'bool' object has no attribute 'lower'</p>
+                </div>
+                
+                <div class="rec-item">
+                    <div class="rec-header">
+                        <span class="rec-title">LLM04: Model Denial of Service</span>
+                        <span class="rec-category">owasp_llm</span>
+                    </div>
+                    <p class="rec-description">Detection failed: 'bool' object has no attribute 'lower'</p>
+                </div>
+                
+                <div class="rec-item">
+                    <div class="rec-header">
+                        <span class="rec-title">LLM10: Model Theft</span>
+                        <span class="rec-category">owasp_llm</span>
+                    </div>
+                    <p class="rec-description">Implement rate limiting on API endpoints</p>
+                </div>
+                
+                <div class="rec-item">
+                    <div class="rec-header">
+                        <span class="rec-title">LLM10: Model Theft</span>
+                        <span class="rec-category">owasp_llm</span>
+                    </div>
+                    <p class="rec-description">Add query logging and anomaly detection</p>
+                </div>
+                
+                <div class="rec-item">
+                    <div class="rec-header">
+                        <span class="rec-title">LLM10: Model Theft</span>
+                        <span class="rec-category">owasp_llm</span>
+                    </div>
+                    <p class="rec-description">Monitor for extraction patterns</p>
+                </div>
+                
+                <div class="rec-item">
+                    <div class="rec-header">
+                        <span class="rec-title">Drift Detection</span>
+                        <span class="rec-category">blue_team</span>
+                    </div>
+                    <p class="rec-description">Implement drift detection with evidently or alibi-detect</p>
+                </div>
+                
+                <div class="rec-item">
+                    <div class="rec-header">
+                        <span class="rec-title">Drift Detection</span>
+                        <span class="rec-category">blue_team</span>
+                    </div>
+                    <p class="rec-description">Monitor input data distribution changes</p>
+                </div>
+                
+                <div class="rec-item">
+                    <div class="rec-header">
+                        <span class="rec-title">Drift Detection</span>
+                        <span class="rec-category">blue_team</span>
+                    </div>
+                    <p class="rec-description">Set up automated alerts for drift events</p>
+                </div>
+                
+                <div class="rec-item">
+                    <div class="rec-header">
+                        <span class="rec-title">Anomaly Detection</span>
+                        <span class="rec-category">blue_team</span>
+                    </div>
+                    <p class="rec-description">Implement anomaly detection on model inputs</p>
+                </div>
+                
+                <div class="rec-item">
+                    <div class="rec-header">
+                        <span class="rec-title">Anomaly Detection</span>
+                        <span class="rec-category">blue_team</span>
+                    </div>
+                    <p class="rec-description">Monitor for unusual query patterns</p>
+                </div>
+                
+                <div class="rec-item">
+                    <div class="rec-header">
+                        <span class="rec-title">Anomaly Detection</span>
+                        <span class="rec-category">blue_team</span>
+                    </div>
+                    <p class="rec-description">Use statistical methods or ML-based detection</p>
+                </div>
+                
+                <div class="rec-item">
+                    <div class="rec-header">
+                        <span class="rec-title">Adversarial Attack Detection</span>
+                        <span class="rec-category">blue_team</span>
+                    </div>
+                    <p class="rec-description">Implement adversarial input detection</p>
+                </div>
+                
+                <div class="rec-item">
+                    <div class="rec-header">
+                        <span class="rec-title">Adversarial Attack Detection</span>
+                        <span class="rec-category">blue_team</span>
+                    </div>
+                    <p class="rec-description">Use adversarial robustness toolkits</p>
+                </div>
+                
+                <div class="rec-item">
+                    <div class="rec-header">
+                        <span class="rec-title">Adversarial Attack Detection</span>
+                        <span class="rec-category">blue_team</span>
+                    </div>
+                    <p class="rec-description">Add input perturbation analysis</p>
+                </div>
+                
+                <div class="rec-item">
+                    <div class="rec-header">
+                        <span class="rec-title">AI Incident Response</span>
+                        <span class="rec-category">blue_team</span>
+                    </div>
+                    <p class="rec-description">Detection failed: 'bool' object has no attribute 'lower'</p>
+                </div>
+                
+                <div class="rec-item">
+                    <div class="rec-header">
+                        <span class="rec-title">Model Drift Monitoring</span>
+                        <span class="rec-category">blue_team</span>
+                    </div>
+                    <p class="rec-description">Use Evidently or alibi-detect for drift monitoring</p>
+                </div>
+                
+                <div class="rec-item">
+                    <div class="rec-header">
+                        <span class="rec-title">Model Drift Monitoring</span>
+                        <span class="rec-category">blue_team</span>
+                    </div>
+                    <p class="rec-description">Set up automated alerts for significant drift</p>
+                </div>
+                
+                <div class="rec-item">
+                    <div class="rec-header">
+                        <span class="rec-title">Model Drift Monitoring</span>
+                        <span class="rec-category">blue_team</span>
+                    </div>
+                    <p class="rec-description">Implement automatic retraining pipelines</p>
+                </div>
+                
+                <div class="rec-item">
+                    <div class="rec-header">
+                        <span class="rec-title">Model Explainability</span>
+                        <span class="rec-category">governance</span>
+                    </div>
+                    <p class="rec-description">Use SHAP or LIME for model explanations</p>
+                </div>
+                
+                <div class="rec-item">
+                    <div class="rec-header">
+                        <span class="rec-title">Model Explainability</span>
+                        <span class="rec-category">governance</span>
+                    </div>
+                    <p class="rec-description">Provide decision explanations in outputs</p>
+                </div>
+                
+                <div class="rec-item">
+                    <div class="rec-header">
+                        <span class="rec-title">Model Explainability</span>
+                        <span class="rec-category">governance</span>
+                    </div>
+                    <p class="rec-description">Implement feature attribution tracking</p>
+                </div>
+                
+                <div class="rec-item">
+                    <div class="rec-header">
+                        <span class="rec-title">Bias Detection</span>
+                        <span class="rec-category">governance</span>
+                    </div>
+                    <p class="rec-description">Use Fairlearn or AIF360 for bias detection</p>
+                </div>
+                
+                <div class="rec-item">
+                    <div class="rec-header">
+                        <span class="rec-title">Bias Detection</span>
+                        <span class="rec-category">governance</span>
+                    </div>
+                    <p class="rec-description">Implement fairness metrics tracking</p>
+                </div>
+                
+                <div class="rec-item">
+                    <div class="rec-header">
+                        <span class="rec-title">Bias Detection</span>
+                        <span class="rec-category">governance</span>
+                    </div>
+                    <p class="rec-description">Test for demographic parity and equalized odds</p>
+                </div>
+                
+                <div class="rec-item">
+                    <div class="rec-header">
+                        <span class="rec-title">Model Documentation</span>
+                        <span class="rec-category">governance</span>
+                    </div>
+                    <p class="rec-description">Detection failed: 'bool' object has no attribute 'lower'</p>
+                </div>
+                
+                <div class="rec-item">
+                    <div class="rec-header">
+                        <span class="rec-title">Compliance Tracking</span>
+                        <span class="rec-category">governance</span>
+                    </div>
+                    <p class="rec-description">Detection failed: 'bool' object has no attribute 'lower'</p>
+                </div>
+                
+                <div class="rec-item">
+                    <div class="rec-header">
+                        <span class="rec-title">Human Oversight</span>
+                        <span class="rec-category">governance</span>
+                    </div>
+                    <p class="rec-description">Detection failed: 'bool' object has no attribute 'lower'</p>
+                </div>
+                
+                <div class="rec-item">
+                    <div class="rec-header">
+                        <span class="rec-title">Dependency Scanning</span>
+                        <span class="rec-category">supply_chain</span>
+                    </div>
+                    <p class="rec-description">Detection failed: 'bool' object has no attribute 'lower'</p>
+                </div>
+                
+                <div class="rec-item">
+                    <div class="rec-header">
+                        <span class="rec-title">Model Provenance Tracking</span>
+                        <span class="rec-category">supply_chain</span>
+                    </div>
+                    <p class="rec-description">Use MLflow, DVC, or Weights & Biases for model tracking</p>
+                </div>
+                
+                <div class="rec-item">
+                    <div class="rec-header">
+                        <span class="rec-title">Model Provenance Tracking</span>
+                        <span class="rec-category">supply_chain</span>
+                    </div>
+                    <p class="rec-description">Implement model versioning with metadata</p>
+                </div>
+                
+                <div class="rec-item">
+                    <div class="rec-header">
+                        <span class="rec-title">Model Provenance Tracking</span>
+                        <span class="rec-category">supply_chain</span>
+                    </div>
+                    <p class="rec-description">Maintain model registry with provenance information</p>
+                </div>
+                
+                <div class="rec-item">
+                    <div class="rec-header">
+                        <span class="rec-title">Confidence Scoring</span>
+                        <span class="rec-category">hallucination</span>
+                    </div>
+                    <p class="rec-description">Detection failed: 'bool' object has no attribute 'lower'</p>
+                </div>
+                
+                <div class="rec-item">
+                    <div class="rec-header">
+                        <span class="rec-title">Temperature Control</span>
+                        <span class="rec-category">hallucination</span>
+                    </div>
+                    <p class="rec-description">Detection failed: 'bool' object has no attribute 'lower'</p>
+                </div>
+                
+                <div class="rec-item">
+                    <div class="rec-header">
+                        <span class="rec-title">Fairness Metrics</span>
+                        <span class="rec-category">ethical_ai</span>
+                    </div>
+                    <p class="rec-description">Use Fairlearn or AIF360 for fairness metrics</p>
+                </div>
+                
+                <div class="rec-item">
+                    <div class="rec-header">
+                        <span class="rec-title">Fairness Metrics</span>
+                        <span class="rec-category">ethical_ai</span>
+                    </div>
+                    <p class="rec-description">Implement demographic parity testing</p>
+                </div>
+                
+                <div class="rec-item">
+                    <div class="rec-header">
+                        <span class="rec-title">Fairness Metrics</span>
+                        <span class="rec-category">ethical_ai</span>
+                    </div>
+                    <p class="rec-description">Monitor fairness metrics in production</p>
+                </div>
+                
+                <div class="rec-item">
+                    <div class="rec-header">
+                        <span class="rec-title">Bias Testing</span>
+                        <span class="rec-category">ethical_ai</span>
+                    </div>
+                    <p class="rec-description">Implement adversarial testing for bias</p>
+                </div>
+                
+                <div class="rec-item">
+                    <div class="rec-header">
+                        <span class="rec-title">Bias Testing</span>
+                        <span class="rec-category">ethical_ai</span>
+                    </div>
+                    <p class="rec-description">Test across demographic groups</p>
+                </div>
+                
+                <div class="rec-item">
+                    <div class="rec-header">
+                        <span class="rec-title">Bias Testing</span>
+                        <span class="rec-category">ethical_ai</span>
+                    </div>
+                    <p class="rec-description">Use TextAttack or CheckList for NLP bias testing</p>
+                </div>
+                
+                <div class="rec-item">
+                    <div class="rec-header">
+                        <span class="rec-title">Model Cards</span>
+                        <span class="rec-category">ethical_ai</span>
+                    </div>
+                    <p class="rec-description">Detection failed: 'ConfigAnalyzer' object has no attribute 'file_exists'</p>
+                </div>
+                
+                <div class="rec-item">
+                    <div class="rec-header">
+                        <span class="rec-title">Monitoring Integration</span>
+                        <span class="rec-category">incident_response</span>
+                    </div>
+                    <p class="rec-description">Detection failed: 'bool' object has no attribute 'lower'</p>
+                </div>
+                
+                <div class="rec-item">
+                    <div class="rec-header">
+                        <span class="rec-title">Audit Logging</span>
+                        <span class="rec-category">incident_response</span>
+                    </div>
+                    <p class="rec-description">Detection failed: 'bool' object has no attribute 'lower'</p>
+                </div>
+                
+                <div class="rec-item">
+                    <div class="rec-header">
+                        <span class="rec-title">Rollback Capability</span>
+                        <span class="rec-category">incident_response</span>
+                    </div>
+                    <p class="rec-description">Detection failed: 'bool' object has no attribute 'lower'</p>
+                </div>
+                
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        
+        
+        <div class="footer">
+            <p>Generated by aisentry CLI | Audit ID: efeb8095 | 61 Controls Evaluated</p>
+        </div>
+        
+    </div>
+    <script>
+        
+        // Accordion functionality for categories
+        document.querySelectorAll('.category-header').forEach(header => {
+            header.addEventListener('click', () => {
+                const card = header.parentElement;
+                card.classList.toggle('open');
+            });
+        });
+
+        // Accordion functionality for recommendations
+        document.querySelectorAll('.rec-accordion-header').forEach(header => {
+            header.addEventListener('click', () => {
+                const accordion = header.parentElement;
+                accordion.classList.toggle('open');
+            });
+        });
+
+        // Evidence toggle
+        document.querySelectorAll('.evidence-toggle').forEach(toggle => {
+            toggle.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const list = toggle.nextElementSibling;
+                list.classList.toggle('show');
+                toggle.textContent = list.classList.contains('show') ? 'Hide Evidence' : 'Show Evidence';
+            });
+        });
+
+        // Expand/Collapse all categories
+        document.getElementById('toggle-categories')?.addEventListener('click', (e) => {
+            const cards = document.querySelectorAll('.category-card');
+            const allOpen = [...cards].every(card => card.classList.contains('open'));
+            cards.forEach(card => {
+                if (allOpen) {
+                    card.classList.remove('open');
+                } else {
+                    card.classList.add('open');
+                }
+            });
+            e.target.textContent = allOpen ? 'Expand All' : 'Collapse All';
+        });
+
+        // Expand/Collapse all recommendations
+        document.getElementById('toggle-recommendations')?.addEventListener('click', (e) => {
+            const accordions = document.querySelectorAll('.rec-accordion');
+            const allOpen = [...accordions].every(acc => acc.classList.contains('open'));
+            accordions.forEach(acc => {
+                if (allOpen) {
+                    acc.classList.remove('open');
+                } else {
+                    acc.classList.add('open');
+                }
+            });
+            e.target.textContent = allOpen ? 'Expand All' : 'Collapse All';
+        });
+
+        // Open critical recommendations by default
+        document.querySelectorAll('.rec-accordion.critical, .rec-accordion.high').forEach(acc => {
+            acc.classList.add('open');
+        });
+        
+    </script>
+</body>
+</html>
